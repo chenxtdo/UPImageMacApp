@@ -1,6 +1,8 @@
 # 一款小软件（用于上传图片生成markdown格式的外链接）
-> 模仿iPic应用开发的
-> 上传图片到图床，然后直接生成markdown的图片链接到剪贴板
+> 模仿iPic应用开发，感谢[Mac App 基础开发教程](http://www.macdev.io/)学习指导，感谢[谷歌](https://www.google.com/)的问题解答 
+####上传图片到图床，然后直接生成markdown的图片链接到剪贴板
+
+
 
 
 ###如果你觉得好，请Star✨下
