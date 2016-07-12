@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DD346CE91D3395BE00BFC862 /* AppServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD346CE81D3395BE00BFC862 /* AppServer.swift */; };
+		DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */; };
+		DD7B7E621D322CC700B68805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E611D322CC700B68805 /* Assets.xcassets */; };
+		DD7B7E731D322CEE00B68805 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E701D322CEE00B68805 /* Networking.swift */; };
+		DD7B7E741D322CEE00B68805 /* DragDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */; };
+		DD7B7E751D322CEE00B68805 /* UploadImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */; };
+		DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */; };
+		DD7B7E791D322D2200B68805 /* ImagePreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */; };
+		DD7B7E7B1D322D7200B68805 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E7A1D322D7200B68805 /* MainMenu.xib */; };
+		E8A90FE2D57C2726D9D64662 /* Pods_UPImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B212080ECE2120F8728E6D /* Pods_UPImage.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1616B4D0FDD7348645DB5419 /* Pods-UPImage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UPImage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UPImage/Pods-UPImage.debug.xcconfig"; sourceTree = "<group>"; };
+		3BA9D9564996CAE5BE948F11 /* Pods-UPImage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UPImage.release.xcconfig"; path = "Pods/Target Support Files/Pods-UPImage/Pods-UPImage.release.xcconfig"; sourceTree = "<group>"; };
+		DD346CE81D3395BE00BFC862 /* AppServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppServer.swift; sourceTree = "<group>"; };
+		DD7B7E5C1D322CC700B68805 /* U图床.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "U图床.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DD7B7E611D322CC700B68805 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DD7B7E661D322CC700B68805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD7B7E701D322CEE00B68805 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDestinationView.swift; sourceTree = "<group>"; };
+		DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageServer.swift; sourceTree = "<group>"; };
+		DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreferencesViewController.swift; sourceTree = "<group>"; };
+		DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePreferencesViewController.xib; sourceTree = "<group>"; };
+		DD7B7E7A1D322D7200B68805 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		F2B212080ECE2120F8728E6D /* Pods_UPImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UPImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD7B7E591D322CC700B68805 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8A90FE2D57C2726D9D64662 /* Pods_UPImage.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8678AFDE00AA4AA14BB417A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1616B4D0FDD7348645DB5419 /* Pods-UPImage.debug.xcconfig */,
+				3BA9D9564996CAE5BE948F11 /* Pods-UPImage.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DD7B7E531D322CC700B68805 = {
+			isa = PBXGroup;
+			children = (
+				DD7B7E5E1D322CC700B68805 /* UPImage */,
+				DD7B7E5D1D322CC700B68805 /* Products */,
+				8678AFDE00AA4AA14BB417A0 /* Pods */,
+				F5DF376CCCFA2E6993D6955B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DD7B7E5D1D322CC700B68805 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD7B7E5C1D322CC700B68805 /* U图床.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DD7B7E5E1D322CC700B68805 /* UPImage */ = {
+			isa = PBXGroup;
+			children = (
+				DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */,
+				DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */,
+				DD7B7E701D322CEE00B68805 /* Networking.swift */,
+				DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */,
+				DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */,
+				DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */,
+				DD7B7E7A1D322D7200B68805 /* MainMenu.xib */,
+				DD7B7E611D322CC700B68805 /* Assets.xcassets */,
+				DD7B7E661D322CC700B68805 /* Info.plist */,
+				DD346CE81D3395BE00BFC862 /* AppServer.swift */,
+			);
+			path = UPImage;
+			sourceTree = "<group>";
+		};
+		F5DF376CCCFA2E6993D6955B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F2B212080ECE2120F8728E6D /* Pods_UPImage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD7B7E5B1D322CC700B68805 /* U图床 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD7B7E691D322CC700B68805 /* Build configuration list for PBXNativeTarget "U图床" */;
+			buildPhases = (
+				6A8B62D9AF77E000A69C2630 /* 📦 Check Pods Manifest.lock */,
+				DD7B7E581D322CC700B68805 /* Sources */,
+				DD7B7E591D322CC700B68805 /* Frameworks */,
+				DD7B7E5A1D322CC700B68805 /* Resources */,
+				50EC8073D39A9D4A030E7A35 /* 📦 Embed Pods Frameworks */,
+				1E2B0980C6A11CB92A9DFC83 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "U图床";
+			productName = UPImage;
+			productReference = DD7B7E5C1D322CC700B68805 /* U图床.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DD7B7E541D322CC700B68805 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = chenxt;
+				TargetAttributes = {
+					DD7B7E5B1D322CC700B68805 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = DD7B7E571D322CC700B68805 /* Build configuration list for PBXProject "U图床" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DD7B7E531D322CC700B68805;
+			productRefGroup = DD7B7E5D1D322CC700B68805 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD7B7E5B1D322CC700B68805 /* U图床 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DD7B7E5A1D322CC700B68805 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD7B7E621D322CC700B68805 /* Assets.xcassets in Resources */,
+				DD7B7E791D322D2200B68805 /* ImagePreferencesViewController.xib in Resources */,
+				DD7B7E7B1D322D7200B68805 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E2B0980C6A11CB92A9DFC83 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UPImage/Pods-UPImage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50EC8073D39A9D4A030E7A35 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UPImage/Pods-UPImage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A8B62D9AF77E000A69C2630 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD7B7E581D322CC700B68805 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD7B7E731D322CEE00B68805 /* Networking.swift in Sources */,
+				DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */,
+				DD346CE91D3395BE00BFC862 /* AppServer.swift in Sources */,
+				DD7B7E741D322CEE00B68805 /* DragDestinationView.swift in Sources */,
+				DD7B7E751D322CEE00B68805 /* UploadImageServer.swift in Sources */,
+				DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DD7B7E671D322CC700B68805 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DD7B7E681D322CC700B68805 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DD7B7E6A1D322CC700B68805 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1616B4D0FDD7348645DB5419 /* Pods-UPImage.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UPImage/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenxt.upi;
+				PRODUCT_NAME = "U图床";
+			};
+			name = Debug;
+		};
+		DD7B7E6B1D322CC700B68805 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BA9D9564996CAE5BE948F11 /* Pods-UPImage.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UPImage/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chenxt.upi;
+				PRODUCT_NAME = "U图床";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD7B7E571D322CC700B68805 /* Build configuration list for PBXProject "U图床" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD7B7E671D322CC700B68805 /* Debug */,
+				DD7B7E681D322CC700B68805 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD7B7E691D322CC700B68805 /* Build configuration list for PBXNativeTarget "U图床" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD7B7E6A1D322CC700B68805 /* Debug */,
+				DD7B7E6B1D322CC700B68805 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DD7B7E541D322CC700B68805 /* Project object */;
+}

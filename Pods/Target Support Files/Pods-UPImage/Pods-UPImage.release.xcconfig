@@ -1,0 +1,11 @@
+CODE_SIGN_IDENTITY =
+EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking" "$PODS_CONFIGURATION_BUILD_DIR/Alamofire" "$PODS_CONFIGURATION_BUILD_DIR/HappyDNS" "$PODS_CONFIGURATION_BUILD_DIR/MASPreferences" "$PODS_CONFIGURATION_BUILD_DIR/Qiniu"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/../Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking/AFNetworking.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Alamofire/Alamofire.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/HappyDNS/HappyDNS.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/MASPreferences/MASPreferences.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Qiniu/Qiniu.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "AFNetworking" -framework "Alamofire" -framework "HappyDNS" -framework "MASPreferences" -framework "Qiniu"
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}/Pods
