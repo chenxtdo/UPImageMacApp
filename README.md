@@ -55,3 +55,8 @@ ___
 
 **现在应该能满足基本需求，功能不断完善中**
 
+
+
+##License
+This project is under MIT License. See LICENSE file for more information.
+
