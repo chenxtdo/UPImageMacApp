@@ -114,6 +114,8 @@ var bucket: String {
 }
 
 func QiniuUpload(pboard: NSPasteboard) {
+	statusItem.button?.image = NSImage(named: "loading-\(0)")
+	statusItem.button?.image?.template = true
 	
 	var param: [String: AnyObject]?
 	
@@ -139,7 +141,10 @@ func QiniuUpload(pboard: NSPasteboard) {
 		} else {
 			HttpRequest(Resource(path: uploadUrl, method: .GET, param: param, headers: nil), completion: { (result) in
 				result.failure({ (error) in
-					NotificationMessage("服务器炸了", informative: "我会尽快修复，请通过email: chenxtdo@gmail.com  联系我")
+					NotificationMessage("服务器炸了", informative: "我会尽快修复，请通过email: chenxtdo@gmail.com  联系我，或点击使用说明中下载最新版")
+					
+					statusItem.button?.image = NSImage(named: "StatusIcon")
+					statusItem.button?.image?.template = true
 					return
 				})
 					.success({ (value) in
@@ -171,7 +176,9 @@ func QiniuUpload(pboard: NSPasteboard) {
 		
 		HttpRequest(Resource(path: uploadUrl, method: .GET, param: param, headers: nil), completion: { (result) in
 			result.failure({ (error) in
-				NotificationMessage("服务器炸了", informative: "我会尽快修复，请通过email: chenxtdo@gmail.com  联系我")
+				NotificationMessage("服务器炸了", informative: "我会尽快修复，请通过email: chenxtdo@gmail.com  联系我，或点击使用说明中下载最新版")
+				statusItem.button?.image = NSImage(named: "StatusIcon")
+				statusItem.button?.image?.template = true
 				
 				return
 			})
@@ -189,12 +196,20 @@ func QiniuUpload(pboard: NSPasteboard) {
 
 func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 	let upManager = QNUploadManager()
+	let opt = QNUploadOption(progressHandler: { (key, percent) in
+		
+		statusItem.button?.image = NSImage(named: "loading-\(Int(percent*10))")
+		statusItem.button?.image?.template = true
+		
+	})
 	
 	if let filePath = filePath {
 		
 		let fileName = "\(arc())" + NSString(string: filePath).lastPathComponent
 		
 		upManager.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
+			statusItem.button?.image = NSImage(named: "StatusIcon")
+			statusItem.button?.image?.template = true
 			guard let _ = info else {
 				QiniuToken = ""
 				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
@@ -205,11 +220,12 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
 				return
 			}
+			
 			NSPasteboard.generalPasteboard().clearContents()
 			NSPasteboard.generalPasteboard()
 			NSPasteboard.generalPasteboard().setString("![" + NSString(string: filePath).lastPathComponent + "](" + picUrlPrefix + key + ")", forType: NSStringPboardType)
 			NotificationMessage("上传图片成功", isSuccess: true)
-			}, option: nil)
+			}, option: opt)
 	}
 	
 	if let data = data {
@@ -217,6 +233,10 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 		let fileName = "\(timeInterval())" + "\(arc()).png"
 		
 		upManager.putData(data, key: fileName, token: token, complete: { (info, key, resp) in
+			
+			statusItem.button?.image = NSImage(named: "StatusIcon")
+			statusItem.button?.image?.template = true
+			
 			guard let _ = info else {
 				QiniuToken = ""
 				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
@@ -227,12 +247,13 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
 				return
 			}
+			
 			NotificationMessage("上传图片成功", isSuccess: true)
 			NSPasteboard.generalPasteboard().clearContents()
 			NSPasteboard.generalPasteboard()
 			NSPasteboard.generalPasteboard().setString("![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)", forType: NSStringPboardType)
 			
-			}, option: nil)
+			}, option: opt)
 	}
 }
 

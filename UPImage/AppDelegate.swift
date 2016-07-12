@@ -25,7 +25,7 @@ var version: Int {
 		if let version = NSUserDefaults.standardUserDefaults().valueForKey("version") {
 			return version as! Int
 		}
-		return 3
+		return 4
 	}
 	set {
 		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "version")
@@ -37,12 +37,14 @@ let updata = "checkVersion.php"
 
 var appDelegate: NSObject?
 
+var statusItem: NSStatusItem!
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	@IBOutlet weak var window: NSWindow!
 	
-	var statusItem: NSStatusItem!
+//	var statusItem: NSStatusItem!
 	
 	@IBOutlet weak var statusMenu: NSMenu!
 	

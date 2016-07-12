@@ -31,10 +31,18 @@ class DragDestinationView: NSView {
 		let pboard = sender.draggingPasteboard()
 		
 		if checkImageFile(pboard) {
+			statusItem.button?.image = NSImage(named: "upload")
+			statusItem.button?.image?.template = true
+			
 			return NSDragOperation.Copy
 		} else {
 			return NSDragOperation.None
 		}
+	}
+	
+	override func draggingExited(sender: NSDraggingInfo?) {
+		statusItem.button?.image = NSImage(named: "StatusIcon")
+		statusItem.button?.image?.template = true
 	}
 	
 	override func prepareForDragOperation(sender: NSDraggingInfo) -> Bool {

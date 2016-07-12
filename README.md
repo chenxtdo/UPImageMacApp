@@ -9,6 +9,8 @@
 
 [点击下载](http://7xqmjb.com1.z0.glb.clouddn.com/U%E5%9B%BE%E5%BA%8A0.8.dmg)
 
+
+![146833845580757.png](http://7xqmjb.com1.z0.glb.clouddn.com/146833845580757.png?imageView2/0/format/png)
 ___
 
 
@@ -23,11 +25,12 @@ ___
 2. 复制图片文件，点击状态栏上传按钮上传（CMD＋C 图片后 点击应用上传件直接上传）
 3. 用截图工具保存在剪贴板的图片，点击上传直接上传(**此处可能有BUG，现阶段通过七牛云的SDK进行上传，好像有点BUG，无法指定data的格式，也有可能操作有误。现阶段通过七牛云转码接口进行处理**)
 4. 配置自己的图床（暂时支持七牛云）
+5. 增加上传进度展示
 
 ####ToDo:
 
 1. 上传的历史列表（可以复制之前的链接）
-2. 上传进度展示（网速慢的时候我都不知道有没有在传呀。－ －！）
+2. ~~上传进度展示（网速慢的时候我都不知道有没有在传呀。－ －！）~~
 3. 多图同时上传(一次性好几张图一起来更佳爽)
 5. 图片的比例更改（目前可以通过更改七牛云的链接进行裁剪，[七牛云图片处理文档](http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html)） 
 6. 去掉SDK，通过API上传图片
@@ -50,9 +53,20 @@ ___
 
 ![14682270098979.png](http://oa3bvfelk.bkt.clouddn.com/14682270098979.png?imageView2/0/format/png)
 
-![79712016-07-08 19_34_39.gif](http://7xqmjb.com1.z0.glb.clouddn.com/79712016-07-08 19_34_39.gif)
 
-![11242.gif](http://oa3bvfelk.bkt.clouddn.com/7310511242.gif)
+
+**拖拽上传：**
+
+![2016-07-12 23_00_20.gif](http://7xqmjb.com1.z0.glb.clouddn.com/546002016-07-12 23_00_20.gif)
+
+**复制上传：**
+
+![2016-07-12 23_25_23.gif](http://7xqmjb.com1.z0.glb.clouddn.com/205612016-07-12 23_25_23.gif)
+
+
+**截图上传：**
+
+![2016-07-12 23_32_08.gif](http://7xqmjb.com1.z0.glb.clouddn.com/589982016-07-12 23_32_08.gif)
 
 
 **现在应该能满足基本需求，功能不断完善中**
