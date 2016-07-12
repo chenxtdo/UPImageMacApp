@@ -3,6 +3,8 @@
 > 上传图片到图床，然后直接生成markdown的图片链接到剪贴板
 
 
+###如果你觉得好，请Star下
+
 #### 最新版本下载（以下链接是最新的，更新请下载进行覆盖）
 
 [点击下载](http://7xqmjb.com1.z0.glb.clouddn.com/U%E5%9B%BE%E5%BA%8A0.8.dmg)
