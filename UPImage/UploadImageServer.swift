@@ -17,7 +17,6 @@ func timeInterval() -> Int {
 	return Int(NSDate(timeIntervalSinceNow: 0).timeIntervalSince1970)
 }
 
-//var pathURL = "http://7xqmjb.com1.z0.glb.clouddn.com/"
 var isUseSet: Bool {
 	get {
 		if let isUseSet = NSUserDefaults.standardUserDefaults().valueForKey("isUseSet") {
