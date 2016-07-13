@@ -12,7 +12,7 @@
 [点击下载](http://7xqmjb.com1.z0.glb.clouddn.com/U%E5%9B%BE%E5%BA%8A0.8.dmg)
 
 
-![146833845580757.png](http://7xqmjb.com1.z0.glb.clouddn.com/146833845580757.png?imageView2/0/format/png)
+
 ___
 
 
@@ -59,11 +59,11 @@ ___
 
 **拖拽上传：**
 
-![2016-07-12 23_00_20.gif](http://7xqmjb.com1.z0.glb.clouddn.com/546002016-07-12 23_00_20.gif)
+![2016-07-12 23_00_20.gif](http://oa3bvfelk.bkt.clouddn.com/637162016-07-12 23_00_20.gif)
 
 **复制上传：**
 
-![2016-07-12 23_25_23.gif](http://7xqmjb.com1.z0.glb.clouddn.com/205612016-07-12 23_25_23.gif)
+![2016-07-12 23_25_23.gif](http://oa3bvfelk.bkt.clouddn.com/641462016-07-12 23_25_23.gif)
 
 
 **截图上传：**
