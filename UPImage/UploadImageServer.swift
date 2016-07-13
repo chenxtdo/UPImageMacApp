@@ -224,6 +224,12 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 			NSPasteboard.generalPasteboard()
 			NSPasteboard.generalPasteboard().setString("![" + NSString(string: filePath).lastPathComponent + "](" + picUrlPrefix + key + ")", forType: NSStringPboardType)
 			NotificationMessage("上传图片成功", isSuccess: true)
+            let picUrl: String = "![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)"
+            NSPasteboard.generalPasteboard().setString("![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)", forType: NSStringPboardType)
+            
+            let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": picUrl]
+            adduploadImageToCache(cacheDic)
+            
 			}, option: opt)
 	}
 	
@@ -250,7 +256,11 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 			NotificationMessage("上传图片成功", isSuccess: true)
 			NSPasteboard.generalPasteboard().clearContents()
 			NSPasteboard.generalPasteboard()
+			let picUrl: String = "![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)"
 			NSPasteboard.generalPasteboard().setString("![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)", forType: NSStringPboardType)
+			
+			let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrl]
+			adduploadImageToCache(cacheDic)
 			
 			}, option: opt)
 	}

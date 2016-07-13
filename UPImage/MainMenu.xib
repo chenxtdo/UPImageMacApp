@@ -13,7 +13,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="U图床" customModuleProvider="target">
             <connections>
+                <outlet property="cacheImageMenuItem" destination="pkg-fa-emd" id="VhJ-aT-yHx"/>
                 <outlet property="statusMenu" destination="fWa-rH-t3a" id="bG6-IM-Qxm"/>
+                <outlet property="uploadMenuItem" destination="Nvv-ru-edU" id="fyR-Ve-2nU"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -741,6 +743,10 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="rh4-Gy-x2e"/>
+                <menuItem title="历史" id="pkg-fa-emd">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="c6Z-M0-WC8"/>
                 <menuItem title="设置" tag="2" id="BK2-gn-dWl">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -769,7 +775,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="91" y="673.5"/>
+            <point key="canvasLocation" x="-112" y="647.5"/>
         </menu>
     </objects>
     <resources>

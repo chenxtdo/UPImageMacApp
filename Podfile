@@ -5,8 +5,9 @@ def pods
    pod 'Qiniu'
    pod 'Alamofire'
    pod ‘MASPreferences’
+   pod 'TMCache'
 end
 
-target ‘UPImage’ do
+target ‘U图床’ do
     pods
 end

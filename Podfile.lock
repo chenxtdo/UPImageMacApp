@@ -23,11 +23,13 @@ PODS:
   - Qiniu (7.0.20):
     - AFNetworking (~> 2.0)
     - HappyDNS (~> 0.3)
+  - TMCache (2.1.0)
 
 DEPENDENCIES:
   - Alamofire
   - MASPreferences
   - Qiniu
+  - TMCache
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -35,7 +37,8 @@ SPEC CHECKSUMS:
   HappyDNS: 6f8cf46fa7c0b98a6591fe8ecb2e08d9907a6e8b
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
   Qiniu: 8958e70c02fb563c8c04d555bb5041441c5f4216
+  TMCache: 95ebcc9b3c7e90fb5fd8fc3036cba3aa781c9bed
 
-PODFILE CHECKSUM: b06de1109794f71d825cacdc129b84944b364e0f
+PODFILE CHECKSUM: 148ad815535e9b000691c2e6f5d077fbbfd39363
 
 COCOAPODS: 1.0.0

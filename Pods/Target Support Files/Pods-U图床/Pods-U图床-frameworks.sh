@@ -89,6 +89,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/HappyDNS/HappyDNS.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MASPreferences/MASPreferences.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Qiniu/Qiniu.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TMCache/TMCache.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
@@ -96,4 +97,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/HappyDNS/HappyDNS.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MASPreferences/MASPreferences.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Qiniu/Qiniu.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TMCache/TMCache.framework"
 fi
