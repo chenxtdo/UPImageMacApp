@@ -9,7 +9,7 @@
 
 #### 最新版本下载（以下链接是最新的，更新请下载进行覆盖）
 
-[点击下载](http://7xqmjb.com1.z0.glb.clouddn.com/U%E5%9B%BE%E5%BA%8A0.85.dmg)
+[点击下载](http://7xqmjb.com1.z0.glb.clouddn.com/U%E5%9B%BE%E5%BA%8A0.86.dmg)
 
 
 
@@ -67,6 +67,9 @@ ___
 **复制上传：**
 
 ![2016-07-12 23_25_23.gif](http://oa3bvfelk.bkt.clouddn.com/641462016-07-12 23_25_23.gif)
+
+
+![742212016-07-13 21_53_52.gif](http://7xqmjb.com1.z0.glb.clouddn.com/742212016-07-13 21_53_52.gif)
 
 
 **截图上传：**

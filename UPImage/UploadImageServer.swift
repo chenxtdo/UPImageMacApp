@@ -224,18 +224,18 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 			NSPasteboard.generalPasteboard()
 			NSPasteboard.generalPasteboard().setString("![" + NSString(string: filePath).lastPathComponent + "](" + picUrlPrefix + key + ")", forType: NSStringPboardType)
 			NotificationMessage("上传图片成功", isSuccess: true)
-            let picUrl: String = "![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)"
-            NSPasteboard.generalPasteboard().setString("![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)", forType: NSStringPboardType)
-            
-            let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": picUrl]
-            adduploadImageToCache(cacheDic)
-            
+			let picUrl: String = "![" + key + "](" + picUrlPrefix + key + ")"
+			NSPasteboard.generalPasteboard().setString("![" + key + "](" + picUrlPrefix + key + ")", forType: NSStringPboardType)
+			
+			let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": picUrl]
+			adduploadImageToCache(cacheDic)
+			
 			}, option: opt)
 	}
 	
 	if let data = data {
 		
-		let fileName = "\(timeInterval())" + "\(arc()).png"
+		let fileName = "\(timeInterval())" + "\(arc()).jpg"
 		
 		upManager.putData(data, key: fileName, token: token, complete: { (info, key, resp) in
 			
@@ -256,8 +256,8 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 			NotificationMessage("上传图片成功", isSuccess: true)
 			NSPasteboard.generalPasteboard().clearContents()
 			NSPasteboard.generalPasteboard()
-			let picUrl: String = "![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)"
-			NSPasteboard.generalPasteboard().setString("![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/png)", forType: NSStringPboardType)
+			let picUrl: String = "![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/jpg)"
+			NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
 			
 			let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrl]
 			adduploadImageToCache(cacheDic)

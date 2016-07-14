@@ -25,7 +25,7 @@ var version: Int {
 		if let version = NSUserDefaults.standardUserDefaults().valueForKey("version") {
 			return version as! Int
 		}
-		return 5
+		return 6
 	}
 	set {
 		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "version")
@@ -76,6 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		statusItem.button?.image = iconImage
 		statusItem.button?.action = #selector(showMenu)
 		statusItem.button?.target = self
+		
 	}
 	
 	func applicationWillTerminate(aNotification: NSNotification) {
@@ -96,6 +97,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			let i = NSImage(pasteboard: pboard)
 			i?.scalingImage()
 			uploadMenuItem.image = i
+			
+//			dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
+//
+//				let data = NSData(contentsOfURL: NSURL(string: "http://n1.itc.cn/img8/wb/recom/2016/04/22/146128838989398028.GIF")!)
+//
+//				dispatch_async(dispatch_get_main_queue(), {
+//					print("chenggong")
+//					NSPasteboard.generalPasteboard().clearContents()
+//					NSPasteboard.generalPasteboard().setData(data, forType: "public.tiff")
+//
+//				})
+//
+//			}
 		}
 		
 		let object = TMCache.sharedCache().objectForKey("imageCache")
