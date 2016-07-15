@@ -30,8 +30,8 @@ var isUseSet: Bool {
 	
 }
 
-var uploadUrl = "getToken.php"
-var setQiniuUrl = "setQiniuInfo.php"
+var uploadUrl = "getToken"
+var setQiniuUrl = "setQNConfig"
 var picUrlPrefix = "http://7xqmjb.com1.z0.glb.clouddn.com/"
 
 var QiniuToken: String {

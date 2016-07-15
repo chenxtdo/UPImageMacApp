@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-var kRootServerURL = "http://chenxt.applinzi.com/"
+var kRootServerURL = "http://www.lzqup.com/"
 
 public enum APIResult<Value> {
 	case Success(Value)

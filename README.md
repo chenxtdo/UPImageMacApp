@@ -9,7 +9,7 @@
 
 #### 最新版本下载（以下链接是最新的，更新请下载进行覆盖）
 
-[点击下载](http://7xqmjb.com1.z0.glb.clouddn.com/U%E5%9B%BE%E5%BA%8A0.86.dmg)
+[点击下载](http://7xqmjb.com1.z0.glb.clouddn.com/U%E5%9B%BE%E5%BA%8A0.9.dmg)
 
 
 

@@ -25,7 +25,7 @@ var version: Int {
 		if let version = NSUserDefaults.standardUserDefaults().valueForKey("version") {
 			return version as! Int
 		}
-		return 6
+		return 7
 	}
 	set {
 		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "version")
@@ -33,7 +33,7 @@ var version: Int {
 	
 }
 
-let updata = "checkVersion.php"
+let updata = "checkVersion"
 
 var appDelegate: NSObject?
 
@@ -98,18 +98,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			i?.scalingImage()
 			uploadMenuItem.image = i
 			
-//			dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) {
-//
-//				let data = NSData(contentsOfURL: NSURL(string: "http://n1.itc.cn/img8/wb/recom/2016/04/22/146128838989398028.GIF")!)
-//
-//				dispatch_async(dispatch_get_main_queue(), {
-//					print("chenggong")
-//					NSPasteboard.generalPasteboard().clearContents()
-//					NSPasteboard.generalPasteboard().setData(data, forType: "public.tiff")
-//
-//				})
-//
-//			}
 		}
 		
 		let object = TMCache.sharedCache().objectForKey("imageCache")
@@ -138,7 +126,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			NSApp.terminate(nil)
 			
 		case 4:
-			NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://www.jianshu.com/p/66d453d99c71")!)
+			NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://blog.lzqup.com/tools/2016/07/10/Tools-UPImage.html")!)
 		case 5:
 			checkVersion()
 		default:
@@ -150,7 +138,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func btnClick(sender: NSButton) {
 		switch sender.tag {
 		case 1:
-			NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://www.jianshu.com/p/66d453d99c71")!)
+			NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://blog.lzqup.com/tools/2016/07/10/Tools-UPImage.html")!)
 			self.window.close()
 		case 2:
 			self.window.close()
