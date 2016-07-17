@@ -754,13 +754,6 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="KdW-8y-Z4B"/>
-                <menuItem title="检查更新" tag="5" id="p5h-rO-bRt">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="statusMenuClicked:" target="Voe-Tx-rLC" id="PgF-20-0df"/>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="n64-O9-nTe"/>
                 <menuItem title="使用说明" tag="4" id="fgO-Bp-tzH">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>

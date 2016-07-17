@@ -2,6 +2,7 @@
 > 模仿iPic应用开发，感谢[Mac App 基础开发教程](http://www.macdev.io/)学习指导，感谢[谷歌](https://www.google.com/)的问题解答 
 ####上传图片到图床，然后直接生成markdown的图片链接到剪贴板
 
+<video style="width: 100%;height: 100%" controls>       <source src="http://7xqmjb.com1.z0.glb.clouddn.com/Screen%20Capture%201.webm" type="video/webm">  </video>
 
 
 
@@ -65,8 +66,8 @@ ___
 ![2016-07-12 23_00_20.gif](http://oa3bvfelk.bkt.clouddn.com/637162016-07-12 23_00_20.gif)
 
 **复制上传：**
+![233512016-07-17 12_46_43.gif](http://oa3bvfelk.bkt.clouddn.com/233512016-07-17 12_46_43.gif)
 
-![2016-07-12 23_25_23.gif](http://oa3bvfelk.bkt.clouddn.com/641462016-07-12 23_25_23.gif)
 
 
 ![742212016-07-13 21_53_52.gif](http://7xqmjb.com1.z0.glb.clouddn.com/742212016-07-13 21_53_52.gif)
@@ -75,6 +76,10 @@ ___
 **截图上传：**
 
 ![2016-07-12 23_32_08.gif](http://7xqmjb.com1.z0.glb.clouddn.com/589982016-07-12 23_32_08.gif)
+
+
+**使用上传历史**
+![414832016-07-17 12_40_59.gif](http://oa3bvfelk.bkt.clouddn.com/414832016-07-17 12_40_59.gif)
 
 
 **现在应该能满足基本需求，功能不断完善中**
