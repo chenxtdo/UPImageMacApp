@@ -2,7 +2,8 @@
 > 模仿iPic应用开发，感谢[Mac App 基础开发教程](http://www.macdev.io/)学习指导，感谢[谷歌](https://www.google.com/)的问题解答 
 ####上传图片到图床，然后直接生成markdown的图片链接到剪贴板
 
-<video style="width: 100%;height: 100%" controls>       <source src="http://7xqmjb.com1.z0.glb.clouddn.com/Screen%20Capture%201.webm" type="video/webm">  </video>
+#附上
+[使用视频](http://7xqmjb.com1.z0.glb.clouddn.com/Screen%20Capture%201.webm)
 
 
 
