@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9A4BF54F701FBCE2EA077E1F /* Pods_U__.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E82128049C12F67B731AF4D /* Pods_U__.framework */; };
 		DD346CE91D3395BE00BFC862 /* AppServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD346CE81D3395BE00BFC862 /* AppServer.swift */; };
+		DD369FDB1D3CA0310080C369 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD369FD91D3CA0310080C369 /* GeneralViewController.swift */; };
+		DD369FDC1D3CA0310080C369 /* GeneralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */; };
 		DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */; };
 		DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */; };
 		DD7B7E621D322CC700B68805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E611D322CC700B68805 /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 		6E82128049C12F67B731AF4D /* Pods_U__.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_U__.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7472013CBB30ECD5BCCCD68D /* Pods-U图床.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-U图床.debug.xcconfig"; path = "Pods/Target Support Files/Pods-U图床/Pods-U图床.debug.xcconfig"; sourceTree = "<group>"; };
 		DD346CE81D3395BE00BFC862 /* AppServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppServer.swift; sourceTree = "<group>"; };
+		DD369FD91D3CA0310080C369 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
+		DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralViewController.xib; sourceTree = "<group>"; };
 		DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		DD7B7E5C1D322CC700B68805 /* U图床.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "U图床.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 		DD7B7E5E1D322CC700B68805 /* UPImage */ = {
 			isa = PBXGroup;
 			children = (
+				DD369FD91D3CA0310080C369 /* GeneralViewController.swift */,
+				DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */,
 				DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */,
 				DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */,
 				DD7B7E701D322CEE00B68805 /* Networking.swift */,
@@ -184,6 +190,7 @@
 				DD7B7E621D322CC700B68805 /* Assets.xcassets in Resources */,
 				DD7B7E791D322D2200B68805 /* ImagePreferencesViewController.xib in Resources */,
 				DD7B7E7B1D322D7200B68805 /* MainMenu.xib in Resources */,
+				DD369FDC1D3CA0310080C369 /* GeneralViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +252,7 @@
 				DD7B7E731D322CEE00B68805 /* Networking.swift in Sources */,
 				DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */,
 				DD346CE91D3395BE00BFC862 /* AppServer.swift in Sources */,
+				DD369FDB1D3CA0310080C369 /* GeneralViewController.swift in Sources */,
 				DD7B7E741D322CEE00B68805 /* DragDestinationView.swift in Sources */,
 				DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */,
 				DD7B7E751D322CEE00B68805 /* UploadImageServer.swift in Sources */,

@@ -224,10 +224,16 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 			NSPasteboard.generalPasteboard()
 			NSPasteboard.generalPasteboard().setString("![" + NSString(string: filePath).lastPathComponent + "](" + picUrlPrefix + key + ")", forType: NSStringPboardType)
 			NotificationMessage("上传图片成功", isSuccess: true)
-			let picUrl: String = "![" + key + "](" + picUrlPrefix + key + ")"
-			NSPasteboard.generalPasteboard().setString("![" + key + "](" + picUrlPrefix + key + ")", forType: NSStringPboardType)
+			var picUrl: String!
+			if linkType == 0 {
+				picUrl = "![" + key + "](" + picUrlPrefix + key + ")"
+			}
+			else {
+				picUrl = picUrlPrefix + key
+			}
+			NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
 			
-			let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": picUrl]
+			let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": picUrlPrefix + key]
 			adduploadImageToCache(cacheDic)
 			
 			}, option: opt)
@@ -256,10 +262,17 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 			NotificationMessage("上传图片成功", isSuccess: true)
 			NSPasteboard.generalPasteboard().clearContents()
 			NSPasteboard.generalPasteboard()
-			let picUrl: String = "![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/jpg)"
+			var picUrl: String!
+			if linkType == 0 {
+				picUrl = "![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/jpg)"
+			}
+			else {
+				picUrl = picUrlPrefix + key + "?imageView2/0/format/jpg"
+			}
+			
 			NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
 			
-			let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrl]
+			let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrlPrefix + key + "?imageView2/0/format/jpg"]
 			adduploadImageToCache(cacheDic)
 			
 			}, option: opt)
@@ -275,6 +288,7 @@ func NotificationMessage(message: String, informative: String? = nil, isSuccess:
 	notification.informativeText = informative
 	if isSuccess {
 		notification.contentImage = NSImage(named: "success")
+		notification.informativeText = "链接已经保存在剪贴板里，可以直接粘贴"
 	} else {
 		notification.contentImage = NSImage(named: "Failure")
 	}

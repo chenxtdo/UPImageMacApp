@@ -1,19 +1,13 @@
-# 一款小软件（用于上传图片生成markdown格式的外链接）
+# 一款Mac小软件（用于上传图片到图床生成外链接(支持生成markdown链接)）
 > 模仿iPic应用开发，感谢[Mac App 基础开发教程](http://www.macdev.io/)学习指导，感谢[谷歌](https://www.google.com/)的问题解答 
-####上传图片到图床，然后直接生成markdown的图片链接到剪贴板
-
-#附上
-[使用视频](http://7xqmjb.com1.z0.glb.clouddn.com/Screen%20Capture%201.webm)
+####上传图片到图床，然后直接生成图片链接到剪贴板(支持生成markdown链接)
+#### 大大省去了写论坛，博客插图的麻烦事，配合[Chrome插件Markdown here](http://markdown-here.com/)在一切可以写富文本的地方如微信公众号文章，方便快捷得插图
 
 
 
 ###如果你觉得好，请Star✨下
 
-#### 最新版本下载（以下链接是最新的，更新请下载进行覆盖）
-
-[点击下载](http://7xqmjb.com1.z0.glb.clouddn.com/U%E5%9B%BE%E5%BA%8A0.9.dmg)
-
-
+#### 最新版本下载见最下面
 
 ___
 
@@ -60,7 +54,9 @@ ___
 
 ![14682270098979.png](http://oa3bvfelk.bkt.clouddn.com/14682270098979.png?imageView2/0/format/png)
 
+**公众号，邮件等可以富文本的地方插图**
 
+![656852016-07-18 15_58_25.gif](http://7xqmjb.com1.z0.glb.clouddn.com/656852016-07-18 15_58_25.gif)
 
 **拖拽上传：**
 
@@ -85,7 +81,7 @@ ___
 
 **现在应该能满足基本需求，功能不断完善中**
 
-
+[下载方式点击此处](http://lzqup.com)
 
 ##License
 This project is under MIT License. See LICENSE file for more information.

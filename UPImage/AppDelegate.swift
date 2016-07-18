@@ -55,7 +55,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	lazy var preferencesWindowController: NSWindowController = {
 		
 		let imageViewController = ImagePreferencesViewController()
-		let controllers = [imageViewController]
+		let generalViewController = GeneralViewController()
+		let controllers = [generalViewController, imageViewController]
 		let wc = MASPreferencesWindowController(viewControllers: controllers, title: "设置")
 		imageViewController.window = wc.window
 		return wc
@@ -170,7 +171,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func cacheImageClick(sender: NSMenuItem) {
 		
 		NSPasteboard.generalPasteboard().clearContents()
-		let picUrl = imagesCacheArr[sender.tag]["url"] as! String
+		
+		var picUrl = imagesCacheArr[sender.tag]["url"] as! String
+		
+		let fileName = NSString(string: picUrl).lastPathComponent
+		
+		if linkType == 0 {
+			picUrl = "![" + fileName + "]("  + picUrl + ")"
+		}
 		
 		NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
 		
