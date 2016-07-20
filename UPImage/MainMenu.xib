@@ -13,6 +13,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="U图床" customModuleProvider="target">
             <connections>
+                <outlet property="autoUpItem" destination="zra-zw-k7S" id="Kcb-px-S7r"/>
                 <outlet property="cacheImageMenuItem" destination="pkg-fa-emd" id="VhJ-aT-yHx"/>
                 <outlet property="statusMenu" destination="fWa-rH-t3a" id="bG6-IM-Qxm"/>
                 <outlet property="uploadMenuItem" destination="Nvv-ru-edU" id="fyR-Ve-2nU"/>

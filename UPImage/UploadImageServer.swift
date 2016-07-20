@@ -126,6 +126,8 @@ func QiniuUpload(pboard: NSPasteboard) {
 	}
 	
 	let files: NSArray? = pboard.propertyListForType(NSFilenamesPboardType) as? NSArray
+    
+    
 	
 	if let files = files {
 		statusItem.button?.image = NSImage(named: "loading-\(0)")

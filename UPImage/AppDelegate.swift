@@ -33,6 +33,18 @@ var version: Int {
 	
 }
 
+var autoUp: Bool {
+	get {
+		if let autoUp = NSUserDefaults.standardUserDefaults().valueForKey("autoUp") {
+			return autoUp as! Bool
+		}
+		return false
+	}
+	set {
+		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "autoUp")
+	}
+}
+
 let updata = "checkVersion"
 
 var appDelegate: NSObject?
@@ -51,6 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet weak var statusMenu: NSMenu!
 	@IBOutlet weak var cacheImageMenu: NSMenu!
 	
+    @IBOutlet weak var autoUpItem: NSMenuItem!
 	@IBOutlet weak var uploadMenuItem: NSMenuItem!
 	
 	@IBOutlet weak var cacheImageMenuItem: NSMenuItem!
@@ -71,6 +84,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		}
 		
 		pasteboardObserver.addSubscriber(self)
+		
+		if autoUp {
+			
+			pasteboardObserver.startObserving()
+            autoUpItem.state = 1
+			
+		} 
 		
 		window.center()
 		appDelegate = self
@@ -141,10 +161,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			if sender.state == 0 {
 				sender.state = 1
 				pasteboardObserver.startObserving()
+                autoUp = true
 			}
 			else {
 				sender.state = 0
 				pasteboardObserver.stopObserving()
+                autoUp = false
 			}
 			
 		default:
