@@ -44,6 +44,8 @@ var imagesCacheArr: [[String: AnyObject]] = Array()
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
+	let pasteboardObserver = PasteboardObserver()
+	
 	@IBOutlet weak var window: NSWindow!
 	
 	@IBOutlet weak var statusMenu: NSMenu!
@@ -67,6 +69,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		if UUID == "" {
 			UUID = NSUUID().UUIDString
 		}
+		
+		pasteboardObserver.addSubscriber(self)
+		
 		window.center()
 		appDelegate = self
 		statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
@@ -130,6 +135,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://blog.lzqup.com/tools/2016/07/10/Tools-UPImage.html")!)
 		case 5:
 			checkVersion()
+			
+		case 6:
+			
+			if sender.state == 0 {
+				sender.state = 1
+				pasteboardObserver.startObserving()
+			}
+			else {
+				sender.state = 0
+				pasteboardObserver.stopObserving()
+			}
+			
 		default:
 			break
 		}
@@ -161,7 +178,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				let i = imagesArr[index]["image"] as? NSImage
 				i?.scalingImage()
 				item.image = i
-				menu.addItem(item)
+				menu.insertItem(item, atIndex: 0)
 			}
 		}
 		
@@ -177,10 +194,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		let fileName = NSString(string: picUrl).lastPathComponent
 		
 		if linkType == 0 {
-			picUrl = "![" + fileName + "]("  + picUrl + ")"
+			picUrl = "![" + fileName + "](" + picUrl + ")"
 		}
 		
 		NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
+		NotificationMessage("图片链接获取成功", isSuccess: true)
 		
 	}
 	
@@ -201,10 +219,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 }
 
-extension AppDelegate: NSUserNotificationCenterDelegate {
+extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubscriber {
 	// 强行通知
 	func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
 		return true
+	}
+	
+	override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String: AnyObject]?, context: UnsafeMutablePointer<Void>) {
+		
+		print(change)
+		
+	}
+	
+	func pasteboardChanged(pasteboard: NSPasteboard) {
+		QiniuUpload(pasteboard)
+		
 	}
 	
 }

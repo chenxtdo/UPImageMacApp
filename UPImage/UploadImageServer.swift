@@ -113,8 +113,6 @@ var bucket: String {
 }
 
 func QiniuUpload(pboard: NSPasteboard) {
-	statusItem.button?.image = NSImage(named: "loading-\(0)")
-	statusItem.button?.image?.template = true
 	
 	var param: [String: AnyObject]?
 	
@@ -130,6 +128,9 @@ func QiniuUpload(pboard: NSPasteboard) {
 	let files: NSArray? = pboard.propertyListForType(NSFilenamesPboardType) as? NSArray
 	
 	if let files = files {
+		statusItem.button?.image = NSImage(named: "loading-\(0)")
+		statusItem.button?.image?.template = true
+		
 		guard let _ = NSImage(contentsOfFile: files.firstObject as! String) else {
 			return
 		}
@@ -166,6 +167,9 @@ func QiniuUpload(pboard: NSPasteboard) {
 	guard let _ = NSImage(data: data) else {
 		return
 	}
+	
+	statusItem.button?.image = NSImage(named: "loading-\(0)")
+	statusItem.button?.image?.template = true
 	
 	if QiniuToken != "" {
 		

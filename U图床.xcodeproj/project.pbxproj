@@ -20,6 +20,7 @@
 		DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */; };
 		DD7B7E791D322D2200B68805 /* ImagePreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */; };
 		DD7B7E7B1D322D7200B68805 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E7A1D322D7200B68805 /* MainMenu.xib */; };
+		DDE7BB1F1D3F4295009031F3 /* PasteboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePreferencesViewController.xib; sourceTree = "<group>"; };
 		DD7B7E7A1D322D7200B68805 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		DDA29F581D39FD2300C9F885 /* U图床.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "U图床.entitlements"; sourceTree = "<group>"; };
+		DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardObserver.swift; sourceTree = "<group>"; };
 		F2B212080ECE2120F8728E6D /* Pods_UPImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UPImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 				DD7B7E661D322CC700B68805 /* Info.plist */,
 				DD346CE81D3395BE00BFC862 /* AppServer.swift */,
 				DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */,
+				DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */,
 			);
 			path = UPImage;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */,
 				DD7B7E751D322CEE00B68805 /* UploadImageServer.swift in Sources */,
 				DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */,
+				DDE7BB1F1D3F4295009031F3 /* PasteboardObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
