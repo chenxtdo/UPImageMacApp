@@ -9,7 +9,11 @@
 import Foundation
 import Alamofire
 
-var kRootServerURL = "http://www.lzqup.com/"
+#if DEBUG
+	var kRootServerURL = "http://localhost:8888/"
+#else
+	var kRootServerURL = "http://www.lzqup.com/"
+#endif
 
 public enum APIResult<Value> {
 	case Success(Value)

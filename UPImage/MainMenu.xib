@@ -737,8 +737,7 @@
         </window>
         <menu id="fWa-rH-t3a">
             <items>
-                <menuItem title="上传" tag="1" id="Nvv-ru-edU">
-                    <modifierMask key="keyEquivalentModifierMask"/>
+                <menuItem title="上传" tag="1" keyEquivalent="u" id="Nvv-ru-edU">
                     <connections>
                         <action selector="statusMenuClicked:" target="Voe-Tx-rLC" id="1Ke-iR-9CX"/>
                     </connections>

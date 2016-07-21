@@ -9,6 +9,7 @@
 import Cocoa
 import MASPreferences
 import TMCache
+import Carbon
 
 func checkImageFile(pboard: NSPasteboard) -> Bool {
 	
@@ -63,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet weak var statusMenu: NSMenu!
 	@IBOutlet weak var cacheImageMenu: NSMenu!
 	
-    @IBOutlet weak var autoUpItem: NSMenuItem!
+	@IBOutlet weak var autoUpItem: NSMenuItem!
 	@IBOutlet weak var uploadMenuItem: NSMenuItem!
 	
 	@IBOutlet weak var cacheImageMenuItem: NSMenuItem!
@@ -78,6 +79,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}()
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
+        
+        registerHotKeys()
 		
 		if UUID == "" {
 			UUID = NSUUID().UUIDString
@@ -88,9 +91,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		if autoUp {
 			
 			pasteboardObserver.startObserving()
-            autoUpItem.state = 1
+			autoUpItem.state = 1
 			
-		} 
+		}
 		
 		window.center()
 		appDelegate = self
@@ -161,12 +164,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			if sender.state == 0 {
 				sender.state = 1
 				pasteboardObserver.startObserving()
-                autoUp = true
+				autoUp = true
 			}
 			else {
 				sender.state = 0
 				pasteboardObserver.stopObserving()
-                autoUp = false
+				autoUp = false
 			}
 			
 		default:
@@ -255,6 +258,35 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 	
 	func pasteboardChanged(pasteboard: NSPasteboard) {
 		QiniuUpload(pasteboard)
+		
+	}
+	
+	func registerHotKeys() {
+//        gMyHotKeyRef
+        var gMyHotKeyRef : EventHotKeyRef = nil
+		var gMyHotKeyID = EventHotKeyID()
+		var eventType = EventTypeSpec()
+		
+		eventType.eventClass = OSType(kEventClassKeyboard)
+		eventType.eventKind = OSType(kEventHotKeyPressed)
+		
+		gMyHotKeyID.signature = OSType(33)
+		
+		gMyHotKeyID.id = UInt32(kVK_ANSI_U);
+		
+		RegisterEventHotKey(UInt32(kVK_ANSI_U), UInt32(cmdKey), gMyHotKeyID, GetApplicationEventTarget(), 0, &gMyHotKeyRef)
+		
+		// Install handler.
+		InstallEventHandler(GetApplicationEventTarget(), { (nextHanlder, theEvent, userData) -> OSStatus in
+			var hkCom = EventHotKeyID()
+			GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, sizeof(EventHotKeyID), nil, &hkCom)
+			
+            let pboard = NSPasteboard.generalPasteboard()
+            QiniuUpload(pboard)
+            
+			return 32
+			/// Check that hkCom in indeed your hotkey ID and handle it.
+			}, 1, &eventType, nil, nil)
 		
 	}
 	
