@@ -79,8 +79,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}()
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-        
-        registerHotKeys()
+		
+		registerHotKeys()
+		
+		// 重置Token
+		if timeQiniuToken == 0 {
+			
+			timeQiniuToken = timeInterval()
+			QiniuToken = ""
+		}
 		
 		if UUID == "" {
 			UUID = NSUUID().UUIDString
@@ -155,7 +162,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			NSApp.terminate(nil)
 			
 		case 4:
-			NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://blog.lzqup.com/tools/2016/07/10/Tools-UPImage.html")!)
+			NSWorkspace.sharedWorkspace().openURL(NSURL(string: kRootServerURL)!)
 		case 5:
 			checkVersion()
 			
@@ -263,7 +270,7 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 	
 	func registerHotKeys() {
 //        gMyHotKeyRef
-        var gMyHotKeyRef : EventHotKeyRef = nil
+		var gMyHotKeyRef: EventHotKeyRef = nil
 		var gMyHotKeyID = EventHotKeyID()
 		var eventType = EventTypeSpec()
 		
@@ -281,9 +288,9 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 			var hkCom = EventHotKeyID()
 			GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, sizeof(EventHotKeyID), nil, &hkCom)
 			
-            let pboard = NSPasteboard.generalPasteboard()
-            QiniuUpload(pboard)
-            
+			let pboard = NSPasteboard.generalPasteboard()
+			QiniuUpload(pboard)
+			
 			return 32
 			/// Check that hkCom in indeed your hotkey ID and handle it.
 			}, 1, &eventType, nil, nil)

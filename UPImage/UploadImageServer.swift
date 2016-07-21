@@ -47,6 +47,19 @@ var QiniuToken: String {
 	
 }
 
+var timeQiniuToken: Int {
+	get {
+		if let timeQiniuToken = NSUserDefaults.standardUserDefaults().valueForKey("timeQiniuToken") {
+			return timeQiniuToken as! Int
+		}
+		return 0
+	}
+	set {
+		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "timeQiniuToken")
+	}
+	
+}
+
 var UUID: String {
 	get {
 		if let UUID = NSUserDefaults.standardUserDefaults().valueForKey("UUID") {
@@ -116,6 +129,7 @@ func QiniuUpload(pboard: NSPasteboard) {
 	
 	var param: [String: AnyObject]?
 	
+	// 是否自定义
 	if isUseSet {
 		param = ["id": UUID]
 		picUrlPrefix = urlPrefix
@@ -126,8 +140,12 @@ func QiniuUpload(pboard: NSPasteboard) {
 	}
 	
 	let files: NSArray? = pboard.propertyListForType(NSFilenamesPboardType) as? NSArray
-    
-    
+	
+	// Token时效验证机制，59分钟重置
+	if timeInterval() - timeQiniuToken > 60 * 59 {
+		QiniuToken = ""
+		timeQiniuToken = timeInterval()
+	}
 	
 	if let files = files {
 		statusItem.button?.image = NSImage(named: "loading-\(0)")
@@ -153,9 +171,7 @@ func QiniuUpload(pboard: NSPasteboard) {
 						guard let token = value.valueForKeyPath("data")?.valueForKeyPath("token") as? String else {
 							return
 						}
-						
 						QiniuToken = token
-						
 						QiniuSDKUpload(files.firstObject as? String, data: nil, token: token)
 				})
 			})
@@ -215,17 +231,11 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 		upManager.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
 			statusItem.button?.image = NSImage(named: "StatusIcon")
 			statusItem.button?.image?.template = true
-			guard let _ = info else {
+			guard let _ = info, let _ = resp else {
 				QiniuToken = ""
 				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
 				return
 			}
-			guard let _ = resp else {
-				QiniuToken = ""
-				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
-				return
-			}
-			
 			NSPasteboard.generalPasteboard().clearContents()
 			NSPasteboard.generalPasteboard()
 			NSPasteboard.generalPasteboard().setString("![" + NSString(string: filePath).lastPathComponent + "](" + picUrlPrefix + key + ")", forType: NSStringPboardType)
@@ -254,17 +264,11 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 			statusItem.button?.image = NSImage(named: "StatusIcon")
 			statusItem.button?.image?.template = true
 			
-			guard let _ = info else {
+			guard let _ = info, let _ = resp else {
 				QiniuToken = ""
 				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
 				return
 			}
-			guard let _ = resp else {
-				QiniuToken = ""
-				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
-				return
-			}
-			
 			NotificationMessage("上传图片成功", isSuccess: true)
 			NSPasteboard.generalPasteboard().clearContents()
 			NSPasteboard.generalPasteboard()
