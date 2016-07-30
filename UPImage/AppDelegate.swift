@@ -82,6 +82,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		registerHotKeys()
 		
+		
+		
 		// 重置Token
 		if timeQiniuToken == 0 {
 			
