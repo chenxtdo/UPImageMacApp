@@ -59,6 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	let pasteboardObserver = PasteboardObserver()
 	
+	@IBOutlet weak var MarkdownItem: NSMenuItem!
 	@IBOutlet weak var window: NSWindow!
 	
 	@IBOutlet weak var statusMenu: NSMenu!
@@ -82,8 +83,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		registerHotKeys()
 		
-		
-		
 		// 重置Token
 		if timeQiniuToken == 0 {
 			
@@ -95,6 +94,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			UUID = NSUUID().UUIDString
 		}
 		
+		if linkType == 0 {
+			MarkdownItem.state = 1
+		} else {
+			MarkdownItem.state = 0
+		}
+		
 		pasteboardObserver.addSubscriber(self)
 		
 		if autoUp {
@@ -103,6 +108,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			autoUpItem.state = 1
 			
 		}
+		
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(notification), name: "MarkdownState", object: nil)
 		
 		window.center()
 		appDelegate = self
@@ -114,6 +121,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		statusItem.button?.image = iconImage
 		statusItem.button?.action = #selector(showMenu)
 		statusItem.button?.target = self
+		
+	}
+	
+	func notification(notification: NSNotification) {
+		
+		if notification.object?.intValue == 0 {
+			MarkdownItem.state = 1
+		}
+		else {
+			MarkdownItem.state = 0
+		}
 		
 	}
 	
@@ -179,6 +197,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				sender.state = 0
 				pasteboardObserver.stopObserving()
 				autoUp = false
+			}
+			
+		case 7:
+			if sender.state == 0 {
+				sender.state = 1
+				linkType = 0
+				guard let imagesCache = imagesCacheArr.first else {
+					return
+				}
+				NSPasteboard.generalPasteboard().clearContents()
+				var picUrl = imagesCache["url"] as! String
+				let fileName = NSString(string: picUrl).lastPathComponent
+				picUrl = "![" + fileName + "](" + picUrl + ")"
+				NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
+				
+			}
+			else {
+				sender.state = 0
+				linkType = 1
+				guard let imagesCache = imagesCacheArr.first else {
+					return
+				}
+				NSPasteboard.generalPasteboard().clearContents()
+				let picUrl = imagesCache["url"] as! String
+				NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
+				
 			}
 			
 		default:
@@ -271,29 +315,62 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 	}
 	
 	func registerHotKeys() {
-//        gMyHotKeyRef
+		
 		var gMyHotKeyRef: EventHotKeyRef = nil
-		var gMyHotKeyID = EventHotKeyID()
+		var gMyHotKeyIDU = EventHotKeyID()
+		var gMyHotKeyIDM = EventHotKeyID()
 		var eventType = EventTypeSpec()
 		
 		eventType.eventClass = OSType(kEventClassKeyboard)
 		eventType.eventKind = OSType(kEventHotKeyPressed)
+		gMyHotKeyIDU.signature = OSType(32)
+		gMyHotKeyIDU.id = UInt32(kVK_ANSI_U);
+		gMyHotKeyIDM.signature = OSType(46);
+		gMyHotKeyIDM.id = UInt32(kVK_ANSI_M);
 		
-		gMyHotKeyID.signature = OSType(33)
+		RegisterEventHotKey(UInt32(kVK_ANSI_U), UInt32(cmdKey), gMyHotKeyIDU, GetApplicationEventTarget(), 0, &gMyHotKeyRef)
 		
-		gMyHotKeyID.id = UInt32(kVK_ANSI_U);
-		
-		RegisterEventHotKey(UInt32(kVK_ANSI_U), UInt32(cmdKey), gMyHotKeyID, GetApplicationEventTarget(), 0, &gMyHotKeyRef)
+		RegisterEventHotKey(UInt32(kVK_ANSI_M), UInt32(controlKey), gMyHotKeyIDM, GetApplicationEventTarget(), 0, &gMyHotKeyRef)
 		
 		// Install handler.
 		InstallEventHandler(GetApplicationEventTarget(), { (nextHanlder, theEvent, userData) -> OSStatus in
 			var hkCom = EventHotKeyID()
 			GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, sizeof(EventHotKeyID), nil, &hkCom)
+//			print(hkCom.id)
+//			print(userData)
+			switch hkCom.id {
+			case UInt32(kVK_ANSI_U):
+				let pboard = NSPasteboard.generalPasteboard()
+				QiniuUpload(pboard)
+			case UInt32(kVK_ANSI_M):
+				if linkType == 0 {
+					linkType = 1
+					NSNotificationCenter.defaultCenter().postNotificationName("MarkdownState", object: 1)
+					guard let imagesCache = imagesCacheArr.first else {
+						return 33
+					}
+					NSPasteboard.generalPasteboard().clearContents()
+					let picUrl = imagesCache["url"] as! String
+					NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
+					
+				}
+				else {
+					linkType = 0
+					NSNotificationCenter.defaultCenter().postNotificationName("MarkdownState", object: 0)
+					guard let imagesCache = imagesCacheArr.first else {
+						return 33
+					}
+					NSPasteboard.generalPasteboard().clearContents()
+					var picUrl = imagesCache["url"] as! String
+					let fileName = NSString(string: picUrl).lastPathComponent
+					picUrl = "![" + fileName + "](" + picUrl + ")"
+					NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
+				}
+			default:
+				break
+			}
 			
-			let pboard = NSPasteboard.generalPasteboard()
-			QiniuUpload(pboard)
-			
-			return 32
+			return 33
 			/// Check that hkCom in indeed your hotkey ID and handle it.
 			}, 1, &eventType, nil, nil)
 		

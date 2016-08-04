@@ -6,7 +6,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralViewController" customModule="U图床" customModuleProvider="target">
             <connections>
-                <outlet property="linkTypeBtn" destination="i7Q-37-Ynl" id="gwf-mE-fVr"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -32,43 +31,11 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xoh-7K-UoQ">
-                    <rect key="frame" x="28" y="75" width="95" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="图片链接格式：" id="xWi-dY-IHO">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i7Q-37-Ynl">
-                    <rect key="frame" x="129" y="70" width="100" height="26"/>
-                    <popUpButtonCell key="cell" type="push" title="Markdown" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="3CK-NK-8Yq" id="rIu-eg-f6h">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="menu"/>
-                        <menu key="menu" id="Fn6-Xq-zqw">
-                            <items>
-                                <menuItem title="Markdown" state="on" id="3CK-NK-8Yq">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="正常" id="s2n-qV-zWf">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                            </items>
-                        </menu>
-                    </popUpButtonCell>
-                    <connections>
-                        <action selector="btnClick:" target="-2" id="u78-Cc-y1G"/>
-                    </connections>
-                </popUpButton>
             </subviews>
             <constraints>
-                <constraint firstItem="i7Q-37-Ynl" firstAttribute="leading" secondItem="Xoh-7K-UoQ" secondAttribute="trailing" constant="10" id="G3q-nc-w49"/>
                 <constraint firstItem="Mnm-Uf-4z3" firstAttribute="top" secondItem="IZg-Gy-KAp" secondAttribute="bottom" constant="8" id="JG1-ZB-Z38"/>
                 <constraint firstItem="Mnm-Uf-4z3" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Qph-hY-FhM"/>
-                <constraint firstItem="Xoh-7K-UoQ" firstAttribute="top" secondItem="Mnm-Uf-4z3" secondAttribute="bottom" constant="60" id="Snm-dv-jR4"/>
                 <constraint firstItem="IZg-Gy-KAp" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="30" id="TCQ-my-94l"/>
-                <constraint firstItem="i7Q-37-Ynl" firstAttribute="centerY" secondItem="Xoh-7K-UoQ" secondAttribute="centerY" id="qwI-PK-QtJ"/>
-                <constraint firstItem="Xoh-7K-UoQ" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="30" id="uK4-iv-LB1"/>
                 <constraint firstItem="IZg-Gy-KAp" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="z1q-2C-pnX"/>
             </constraints>
             <point key="canvasLocation" x="-20" y="264"/>

@@ -24,7 +24,6 @@ var linkType: Int {
 
 class GeneralViewController: NSViewController, MASPreferencesViewController {
 	
-	@IBOutlet weak var linkTypeBtn: NSPopUpButton!
 	override var identifier: String? { get { return "general" } set { super.identifier = newValue } }
 	var toolbarItemLabel: String? { get { return "基本" } }
 	var toolbarItemImage: NSImage? { get { return NSImage(named: NSImageNamePreferencesGeneral) } }
@@ -32,13 +31,6 @@ class GeneralViewController: NSViewController, MASPreferencesViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do view setup here.
-		linkTypeBtn.selectItemAtIndex(linkType)
-	}
-	
-	@IBAction func btnClick(sender: NSPopUpButton) {
-		
-        linkType = sender.indexOfSelectedItem
-		
 	}
 	
 }

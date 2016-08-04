@@ -13,6 +13,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="U图床" customModuleProvider="target">
             <connections>
+                <outlet property="MarkdownItem" destination="jTH-pG-yA9" id="ivg-YL-QoO"/>
                 <outlet property="autoUpItem" destination="zra-zw-k7S" id="Kcb-px-S7r"/>
                 <outlet property="cacheImageMenuItem" destination="pkg-fa-emd" id="VhJ-aT-yHx"/>
                 <outlet property="statusMenu" destination="fWa-rH-t3a" id="bG6-IM-Qxm"/>
@@ -742,6 +743,13 @@
                         <action selector="statusMenuClicked:" target="Voe-Tx-rLC" id="1Ke-iR-9CX"/>
                     </connections>
                 </menuItem>
+                <menuItem isSeparatorItem="YES" id="qx2-sA-ByH"/>
+                <menuItem title="Markdown" tag="7" keyEquivalent="m" id="jTH-pG-yA9">
+                    <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                    <connections>
+                        <action selector="statusMenuClicked:" target="Voe-Tx-rLC" id="GDp-xi-EKO"/>
+                    </connections>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="rh4-Gy-x2e"/>
                 <menuItem title="历史" id="pkg-fa-emd">
                     <modifierMask key="keyEquivalentModifierMask"/>
@@ -775,7 +783,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-112" y="647.5"/>
+            <point key="canvasLocation" x="-118" y="682.5"/>
         </menu>
     </objects>
     <resources>

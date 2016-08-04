@@ -66,6 +66,16 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 			"bucket": (bucketTextField.cell?.title)!,
 			"id": UUID];
 		
+		urlPrefixTextField.cell?.title = (urlPrefixTextField.cell?.title.stringByReplacingOccurrencesOfString(" ", withString: ""))!
+		
+		if !(urlPrefixTextField.cell?.title.hasPrefix("http://"))! && !(urlPrefixTextField.cell?.title.hasPrefix("https://"))! {
+			urlPrefixTextField.cell?.title = "http://" + (urlPrefixTextField.cell?.title)!
+		}
+		
+		if !(urlPrefixTextField.cell?.title.hasSuffix("/"))! {
+			urlPrefixTextField.cell?.title = (urlPrefixTextField.cell?.title)! + "/"
+		}
+		
 		HttpRequest(Resource(path: setQiniuUrl, method: .GET, param: param, headers: nil)) { [weak self](result) in
 			result.failure({ (error) in
 				self?.showAlert("配置失败", informative: "我会尽快修复，请通过email: chenxtdo@gmail.com  联系我")
@@ -89,7 +99,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		arlert.messageText = message
 		arlert.informativeText = informative
 		arlert.addButtonWithTitle("确定")
-        arlert.icon = NSImage(named: "Icon_32x32")
+		arlert.icon = NSImage(named: "Icon_32x32")
 		arlert.beginSheetModalForWindow(self.window!, completionHandler: { (response) in
 			
 		})

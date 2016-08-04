@@ -172,6 +172,7 @@ func QiniuUpload(pboard: NSPasteboard) {
 							return
 						}
 						QiniuToken = token
+						print("2" + token)
 						QiniuSDKUpload(files.firstObject as? String, data: nil, token: token)
 				})
 			})
