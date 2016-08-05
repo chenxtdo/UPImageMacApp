@@ -71,6 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet weak var cacheImageMenuItem: NSMenuItem!
 	lazy var preferencesWindowController: NSWindowController = {
 		
+		
 		let imageViewController = ImagePreferencesViewController()
 		let generalViewController = GeneralViewController()
 		let controllers = [generalViewController, imageViewController]
