@@ -8,7 +8,6 @@
 
 import Foundation
 import Qiniu
-import Alamofire
 
 func arc() -> UInt32 { return arc4random() % 100000 }
 
