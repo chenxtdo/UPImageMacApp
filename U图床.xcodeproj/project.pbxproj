@@ -14,12 +14,12 @@
 		DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */; };
 		DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */; };
 		DD7B7E621D322CC700B68805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E611D322CC700B68805 /* Assets.xcassets */; };
-		DD7B7E731D322CEE00B68805 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E701D322CEE00B68805 /* Networking.swift */; };
 		DD7B7E741D322CEE00B68805 /* DragDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */; };
 		DD7B7E751D322CEE00B68805 /* UploadImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */; };
 		DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */; };
 		DD7B7E791D322D2200B68805 /* ImagePreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */; };
 		DD7B7E7B1D322D7200B68805 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E7A1D322D7200B68805 /* MainMenu.xib */; };
+		DDC182ED1D5C1A9900D40AA3 /* GCQiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC182EC1D5C1A9900D40AA3 /* GCQiniuUploadManager.m */; };
 		DDE7BB1F1D3F4295009031F3 /* PasteboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,13 +37,15 @@
 		DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD7B7E611D322CC700B68805 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD7B7E661D322CC700B68805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD7B7E701D322CEE00B68805 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDestinationView.swift; sourceTree = "<group>"; };
 		DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageServer.swift; sourceTree = "<group>"; };
 		DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreferencesViewController.swift; sourceTree = "<group>"; };
 		DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePreferencesViewController.xib; sourceTree = "<group>"; };
 		DD7B7E7A1D322D7200B68805 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		DDA29F581D39FD2300C9F885 /* U图床.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "U图床.entitlements"; sourceTree = "<group>"; };
+		DDC182E91D5C1A6600D40AA3 /* OC-birdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OC-birdge.h"; sourceTree = "<group>"; };
+		DDC182EB1D5C1A9900D40AA3 /* GCQiniuUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCQiniuUploadManager.h; sourceTree = "<group>"; };
+		DDC182EC1D5C1A9900D40AA3 /* GCQiniuUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCQiniuUploadManager.m; sourceTree = "<group>"; };
 		DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardObserver.swift; sourceTree = "<group>"; };
 		F2B212080ECE2120F8728E6D /* Pods_UPImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UPImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -93,11 +95,11 @@
 		DD7B7E5E1D322CC700B68805 /* UPImage */ = {
 			isa = PBXGroup;
 			children = (
+				DDC182EA1D5C1A9900D40AA3 /* GCQiniuUploadManager */,
 				DD369FD91D3CA0310080C369 /* GeneralViewController.swift */,
 				DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */,
 				DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */,
 				DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */,
-				DD7B7E701D322CEE00B68805 /* Networking.swift */,
 				DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */,
 				DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */,
 				DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */,
@@ -107,8 +109,18 @@
 				DD346CE81D3395BE00BFC862 /* AppServer.swift */,
 				DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */,
 				DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */,
+				DDC182E91D5C1A6600D40AA3 /* OC-birdge.h */,
 			);
 			path = UPImage;
+			sourceTree = "<group>";
+		};
+		DDC182EA1D5C1A9900D40AA3 /* GCQiniuUploadManager */ = {
+			isa = PBXGroup;
+			children = (
+				DDC182EB1D5C1A9900D40AA3 /* GCQiniuUploadManager.h */,
+				DDC182EC1D5C1A9900D40AA3 /* GCQiniuUploadManager.m */,
+			);
+			path = GCQiniuUploadManager;
 			sourceTree = "<group>";
 		};
 		F5DF376CCCFA2E6993D6955B /* Frameworks */ = {
@@ -252,11 +264,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD7B7E731D322CEE00B68805 /* Networking.swift in Sources */,
 				DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */,
 				DD346CE91D3395BE00BFC862 /* AppServer.swift in Sources */,
 				DD369FDB1D3CA0310080C369 /* GeneralViewController.swift in Sources */,
 				DD7B7E741D322CEE00B68805 /* DragDestinationView.swift in Sources */,
+				DDC182ED1D5C1A9900D40AA3 /* GCQiniuUploadManager.m in Sources */,
 				DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */,
 				DD7B7E751D322CEE00B68805 /* UploadImageServer.swift in Sources */,
 				DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */,
@@ -366,6 +378,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenxt.upi;
 				PRODUCT_NAME = "U图床";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "UPImage/OC-birdge.h";
 			};
 			name = Debug;
 		};
@@ -385,6 +398,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenxt.upi;
 				PRODUCT_NAME = "U图床";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "UPImage/OC-birdge.h";
 			};
 			name = Release;
 		};

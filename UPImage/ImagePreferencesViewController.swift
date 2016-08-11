@@ -26,6 +26,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 	
 	@IBOutlet weak var urlPrefixTextField: NSTextField!
 	
+	@IBOutlet weak var checkButton: NSButton!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -41,18 +42,15 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		secretKeyTextField.cell?.title = secretKey
 		bucketTextField.cell?.title = bucket
 		urlPrefixTextField.cell?.title = urlPrefix
-		// Do view setup here.
 	}
 	@IBAction func setDefault(sender: AnyObject) {
 		isUseSet = false
 		statusLabel.cell?.title = "目前使用默认图床"
 		statusLabel.textColor = .redColor()
-		QiniuToken = ""
 		
 	}
 	
 	@IBAction func setQiniuConfig(sender: AnyObject) {
-		QiniuToken = ""
 		if (accessKeyTextField.cell?.title.characters.count == 0 ||
 			secretKeyTextField.cell?.title.characters.count == 0 ||
 			bucketTextField.cell?.title.characters.count == 0 ||
@@ -60,11 +58,6 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 				showAlert("有配置信息未填写", informative: "请仔细填写")
 				return
 		}
-		
-		let param: [String: AnyObject] = ["accessKey": (accessKeyTextField.cell?.title)!,
-			"secretKey": (secretKeyTextField.cell?.title)!,
-			"bucket": (bucketTextField.cell?.title)!,
-			"id": UUID];
 		
 		urlPrefixTextField.cell?.title = (urlPrefixTextField.cell?.title.stringByReplacingOccurrencesOfString(" ", withString: ""))!
 		
@@ -76,22 +69,36 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 			urlPrefixTextField.cell?.title = (urlPrefixTextField.cell?.title)! + "/"
 		}
 		
-		HttpRequest(Resource(path: setQiniuUrl, method: .GET, param: param, headers: nil)) { [weak self](result) in
-			result.failure({ (error) in
-				self?.showAlert("配置失败", informative: "我会尽快修复，请通过email: chenxtdo@gmail.com  联系我")
-			}).success({ (value) in
-				self?.showAlert("配置成功", informative: "提示：配置成功不代表信息填写正确，请通过上传图片验证")
-				self?.statusLabel.cell?.title = "目前使用自定义图床"
-				self?.statusLabel.textColor = .magentaColor()
-				isUseSet = true
+		let ack = (accessKeyTextField.cell?.title)!
+		let sek = (secretKeyTextField.cell?.title)!
+		let bck = (bucketTextField.cell?.title)!
+		
+		GCQiniuUploadManager.sharedInstance().registerWithScope(bck, accessKey: ack, secretKey: sek)
+		GCQiniuUploadManager.sharedInstance().createToken()
+		let ts = "1"
+		checkButton.title = "验证中"
+		checkButton.enabled = false
+		GCQiniuUploadManager.sharedInstance().uploadData(ts.dataUsingEncoding(NSUTF8StringEncoding), progress: { (progress) in
+			
+		}) { [weak self](error, string, code) in
+			self?.checkButton.enabled = true
+			self?.checkButton.title = "验证配置"
+			if error == nil {
+				self?.showAlert("验证成功", informative: "配置成功。")
 				accessKey = (self?.accessKeyTextField.cell?.title)!
 				secretKey = (self?.secretKeyTextField.cell?.title)!
 				bucket = (self?.bucketTextField.cell?.title)!
 				urlPrefix = (self?.urlPrefixTextField.cell?.title)!
+				self?.statusLabel.cell?.title = "目前使用自定义图床"
+				self?.statusLabel.textColor = .magentaColor()
+				isUseSet = true
 				
-			})
+			}
+			else {
+				self?.showAlert("验证失败", informative: "验证失败，请仔细填写信息。")
+			}
+			
 		}
-		
 	}
 	
 	func showAlert(message: String, informative: String) {
@@ -99,7 +106,13 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		arlert.messageText = message
 		arlert.informativeText = informative
 		arlert.addButtonWithTitle("确定")
-		arlert.icon = NSImage(named: "Icon_32x32")
+		if message == "验证成功" {
+			arlert.icon = NSImage(named: "Icon_32x32")
+		}
+		else {
+			arlert.icon = NSImage(named: "Failure")
+		}
+		
 		arlert.beginSheetModalForWindow(self.window!, completionHandler: { (response) in
 			
 		})

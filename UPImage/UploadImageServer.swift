@@ -47,32 +47,6 @@ var QiniuToken: String {
 	
 }
 
-var timeQiniuToken: Int {
-	get {
-		if let timeQiniuToken = NSUserDefaults.standardUserDefaults().valueForKey("timeQiniuToken") {
-			return timeQiniuToken as! Int
-		}
-		return 0
-	}
-	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "timeQiniuToken")
-	}
-	
-}
-
-var UUID: String {
-	get {
-		if let UUID = NSUserDefaults.standardUserDefaults().valueForKey("UUID") {
-			return UUID as! String
-		}
-		return ""
-	}
-	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "UUID")
-	}
-	
-}
-
 var urlPrefix: String {
 	get {
 		if let urlPrefix = NSUserDefaults.standardUserDefaults().valueForKey("urlPrefix") {
@@ -127,25 +101,21 @@ var bucket: String {
 
 func QiniuUpload(pboard: NSPasteboard) {
 	
-	var param: [String: AnyObject]?
-	
 	// 是否自定义
 	if isUseSet {
-		param = ["id": UUID]
+		GCQiniuUploadManager.sharedInstance().registerWithScope(bucket, accessKey: accessKey, secretKey: secretKey)
+		GCQiniuUploadManager.sharedInstance().createToken()
+		QiniuToken = GCQiniuUploadManager.sharedInstance().uploadToken
 		picUrlPrefix = urlPrefix
 		
 	} else {
 		picUrlPrefix = "http://7xqmjb.com1.z0.glb.clouddn.com/"
-		param = nil
+		GCQiniuUploadManager.sharedInstance().registerWithScope("photos", accessKey: "bCsVdizvx9fPFfkh9kYi_7PreydtorjvK2lddieO", secretKey: "Ldso9d43oRq7rKvbM78DA9YsCajO-KWsVw9FS0db")
+		GCQiniuUploadManager.sharedInstance().createToken()
+		QiniuToken = GCQiniuUploadManager.sharedInstance().uploadToken
 	}
 	
 	let files: NSArray? = pboard.propertyListForType(NSFilenamesPboardType) as? NSArray
-	
-	// Token时效验证机制，59分钟重置
-	if timeInterval() - timeQiniuToken > 60 * 59 {
-		QiniuToken = ""
-		timeQiniuToken = timeInterval()
-	}
 	
 	if let files = files {
 		statusItem.button?.image = NSImage(named: "loading-\(0)")
@@ -154,30 +124,7 @@ func QiniuUpload(pboard: NSPasteboard) {
 		guard let _ = NSImage(contentsOfFile: files.firstObject as! String) else {
 			return
 		}
-		
-		if QiniuToken != "" {
-			
-			QiniuSDKUpload(files.firstObject as? String, data: nil, token: QiniuToken)
-		} else {
-			HttpRequest(Resource(path: uploadUrl, method: .GET, param: param, headers: nil), completion: { (result) in
-				result.failure({ (error) in
-					NotificationMessage("服务器炸了", informative: "我会尽快修复，请通过email: chenxtdo@gmail.com  联系我，或点击使用说明中下载最新版")
-					
-					statusItem.button?.image = NSImage(named: "StatusIcon")
-					statusItem.button?.image?.template = true
-					return
-				})
-					.success({ (value) in
-						guard let token = value.valueForKeyPath("data")?.valueForKeyPath("token") as? String else {
-							return
-						}
-						QiniuToken = token
-						print("2" + token)
-						QiniuSDKUpload(files.firstObject as? String, data: nil, token: token)
-				})
-			})
-		}
-		
+		QiniuSDKUpload(files.firstObject as? String, data: nil, token: QiniuToken)
 	}
 	
 	guard let data = pboard.pasteboardItems?.first?.dataForType("public.tiff") else {
@@ -190,29 +137,7 @@ func QiniuUpload(pboard: NSPasteboard) {
 	statusItem.button?.image = NSImage(named: "loading-\(0)")
 	statusItem.button?.image?.template = true
 	
-	if QiniuToken != "" {
-		
-		QiniuSDKUpload(nil, data: data, token: QiniuToken)
-		
-	} else {
-		
-		HttpRequest(Resource(path: uploadUrl, method: .GET, param: param, headers: nil), completion: { (result) in
-			result.failure({ (error) in
-				NotificationMessage("服务器炸了", informative: "我会尽快修复，请通过email: chenxtdo@gmail.com  联系我，或点击使用说明中下载最新版")
-				statusItem.button?.image = NSImage(named: "StatusIcon")
-				statusItem.button?.image?.template = true
-				
-				return
-			})
-				.success({ (value) in
-					guard let token = value.valueForKeyPath("data")?.valueForKeyPath("token") as? String else {
-						return
-					}
-					QiniuToken = token
-					QiniuSDKUpload(nil, data: data, token: token)
-			})
-		})
-	}
+	QiniuSDKUpload(nil, data: data, token: QiniuToken)
 	
 }
 

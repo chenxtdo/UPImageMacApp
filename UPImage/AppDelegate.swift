@@ -21,19 +21,6 @@ func checkImageFile(pboard: NSPasteboard) -> Bool {
 	return true
 }
 
-var version: Int {
-	get {
-		if let version = NSUserDefaults.standardUserDefaults().valueForKey("version") {
-			return version as! Int
-		}
-		return 7
-	}
-	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "version")
-	}
-	
-}
-
 var autoUp: Bool {
 	get {
 		if let autoUp = NSUserDefaults.standardUserDefaults().valueForKey("autoUp") {
@@ -45,8 +32,6 @@ var autoUp: Bool {
 		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "autoUp")
 	}
 }
-
-let updata = "checkVersion"
 
 var appDelegate: NSObject?
 
@@ -71,7 +56,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet weak var cacheImageMenuItem: NSMenuItem!
 	lazy var preferencesWindowController: NSWindowController = {
 		
-		
 		let imageViewController = ImagePreferencesViewController()
 		let generalViewController = GeneralViewController()
 		let controllers = [generalViewController, imageViewController]
@@ -85,15 +69,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		registerHotKeys()
 		
 		// 重置Token
-		if timeQiniuToken == 0 {
-			
-			timeQiniuToken = timeInterval()
-			QiniuToken = ""
-		}
-		
-		if UUID == "" {
-			UUID = NSUUID().UUIDString
-		}
 		
 		if linkType == 0 {
 			MarkdownItem.state = 1
@@ -183,9 +158,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			NSApp.terminate(nil)
 			
 		case 4:
-			NSWorkspace.sharedWorkspace().openURL(NSURL(string: kRootServerURL)!)
+			NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://lzqup.com")!)
 		case 5:
-			checkVersion()
+			break
 			
 		case 6:
 			
@@ -281,21 +256,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 	}
 	
-	func checkVersion() {
-		HttpRequest(Resource(path: updata, method: .GET, param: ["version": version], headers: nil)) { (result) in
-			result.failure({ (error) in
-				if error.code == 110 {
-					NotificationMessage("已经使用的是最新版本", informative: "更新一些实用的功能，请随时保持关注", isSuccess: true)
-				}
-			}).success({ [weak self](value) in
-				
-				self?.window.makeKeyAndOrderFront(nil)
-				
-				NSApp.activateIgnoringOtherApps(true)
-			})
-		}
-	}
-	
 }
 
 extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubscriber {
@@ -337,8 +297,6 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 		InstallEventHandler(GetApplicationEventTarget(), { (nextHanlder, theEvent, userData) -> OSStatus in
 			var hkCom = EventHotKeyID()
 			GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, sizeof(EventHotKeyID), nil, &hkCom)
-//			print(hkCom.id)
-//			print(userData)
 			switch hkCom.id {
 			case UInt32(kVK_ANSI_U):
 				let pboard = NSPasteboard.generalPasteboard()

@@ -15,33 +15,33 @@
             <rect key="frame" x="0.0" y="0.0" width="252" height="282"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IZg-Gy-KAp">
-                    <rect key="frame" x="89" y="177" width="75" height="75"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="75" id="IzK-Xr-ecW"/>
-                        <constraint firstAttribute="width" constant="75" id="ggv-an-41r"/>
-                    </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Icon_128x128" id="e1d-fY-Ayo"/>
-                </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mnm-Uf-4z3">
-                    <rect key="frame" x="98" y="152" width="56" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="感谢使用" id="tZ4-yv-nPe">
+                    <rect key="frame" x="105" y="245" width="43" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="支持我" id="tZ4-yv-nPe">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kwx-A5-mg1">
+                    <rect key="frame" x="51" y="75" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="7ee-jF-916"/>
+                        <constraint firstAttribute="height" constant="150" id="H24-63-rOe"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="90343Slice 1" id="EWQ-B6-rwc"/>
+                </imageView>
             </subviews>
             <constraints>
-                <constraint firstItem="Mnm-Uf-4z3" firstAttribute="top" secondItem="IZg-Gy-KAp" secondAttribute="bottom" constant="8" id="JG1-ZB-Z38"/>
+                <constraint firstItem="Kwx-A5-mg1" firstAttribute="top" secondItem="Mnm-Uf-4z3" secondAttribute="bottom" constant="20" id="5zn-hb-x9V"/>
                 <constraint firstItem="Mnm-Uf-4z3" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Qph-hY-FhM"/>
-                <constraint firstItem="IZg-Gy-KAp" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="30" id="TCQ-my-94l"/>
-                <constraint firstItem="IZg-Gy-KAp" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="z1q-2C-pnX"/>
+                <constraint firstItem="Mnm-Uf-4z3" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="p7M-rb-bEQ"/>
+                <constraint firstItem="Kwx-A5-mg1" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="pcT-2h-Gul"/>
             </constraints>
             <point key="canvasLocation" x="-20" y="264"/>
         </customView>
     </objects>
     <resources>
-        <image name="Icon_128x128" width="128" height="128"/>
+        <image name="90343Slice 1" width="503" height="560"/>
     </resources>
 </document>

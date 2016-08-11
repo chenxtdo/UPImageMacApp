@@ -3,7 +3,6 @@ use_frameworks!
 
 def pods
    pod 'Qiniu'
-   pod 'Alamofire'
    pod ‘MASPreferences’
    pod 'TMCache'
 end
