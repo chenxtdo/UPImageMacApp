@@ -55,3 +55,6 @@ ___
 
 [下载演示地址点击此处](http://lzqup.com)
 
+# License
+MIT
+
