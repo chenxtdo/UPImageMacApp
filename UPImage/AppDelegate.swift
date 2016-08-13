@@ -305,7 +305,7 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 				if linkType == 0 {
 					linkType = 1
 					NSNotificationCenter.defaultCenter().postNotificationName("MarkdownState", object: 1)
-					guard let imagesCache = imagesCacheArr.first else {
+					guard let imagesCache = imagesCacheArr.last else {
 						return 33
 					}
 					NSPasteboard.generalPasteboard().clearContents()
@@ -316,7 +316,7 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 				else {
 					linkType = 0
 					NSNotificationCenter.defaultCenter().postNotificationName("MarkdownState", object: 0)
-					guard let imagesCache = imagesCacheArr.first else {
+					guard let imagesCache = imagesCacheArr.last else {
 						return 33
 					}
 					NSPasteboard.generalPasteboard().clearContents()
