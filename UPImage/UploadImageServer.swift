@@ -151,7 +151,7 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 	
 	if let filePath = filePath {
 		
-		let fileName = "\(arc())" + NSString(string: filePath).lastPathComponent
+		let fileName = getDateString() + "\(arc())" + NSString(string: filePath).lastPathComponent
 		
 		upManager.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
 			statusItem.button?.image = NSImage(named: "StatusIcon")
@@ -182,7 +182,7 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 	
 	if let data = data {
 		
-		let fileName = "\(timeInterval())" + "\(arc()).jpg"
+		let fileName = getDateString() + "\(timeInterval())" + "\(arc()).jpg"
 		
 		upManager.putData(data, key: fileName, token: token, complete: { (info, key, resp) in
 			
