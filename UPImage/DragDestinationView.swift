@@ -10,8 +10,8 @@ import Cocoa
 
 class DragDestinationView: NSView {
 	
-	override func drawRect(dirtyRect: NSRect) {
-		super.drawRect(dirtyRect)
+	override func draw(_ dirtyRect: NSRect) {
+		super.draw(dirtyRect)
 		
 		// Drawing code here.
 	}
@@ -19,7 +19,7 @@ class DragDestinationView: NSView {
 	override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
 		// 注册接受文件拖入的类型
-		registerForDraggedTypes([NSFilenamesPboardType])
+		register(forDraggedTypes: [NSFilenamesPboardType])
 		
 	}
 	
@@ -27,30 +27,30 @@ class DragDestinationView: NSView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+	override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
 		let pboard = sender.draggingPasteboard()
 		
 		if checkImageFile(pboard) {
 			statusItem.button?.image = NSImage(named: "upload")
-			statusItem.button?.image?.template = true
+			statusItem.button?.image?.isTemplate = true
 			
-			return NSDragOperation.Copy
+			return NSDragOperation.copy
 		} else {
-			return NSDragOperation.None
+			return NSDragOperation()
 		}
 	}
 	
-	override func draggingExited(sender: NSDraggingInfo?) {
+	override func draggingExited(_ sender: NSDraggingInfo?) {
 		statusItem.button?.image = NSImage(named: "StatusIcon")
-		statusItem.button?.image?.template = true
+		statusItem.button?.image?.isTemplate = true
 	}
 	
-	override func prepareForDragOperation(sender: NSDraggingInfo) -> Bool {
+	override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
 		let pboard = sender.draggingPasteboard()
 		return checkImageFile(pboard)
 	}
 	
-	override func performDragOperation(sender: NSDraggingInfo) -> Bool {
+	override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
 		let pboard = sender.draggingPasteboard()
 		QiniuUpload(pboard)
 		return true

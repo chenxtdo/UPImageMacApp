@@ -10,23 +10,23 @@ import Cocoa
 
 @objc protocol PasteboardObserverSubscriber: NSObjectProtocol {
 	
-	func pasteboardChanged(pasteboard: NSPasteboard)
+	func pasteboardChanged(_ pasteboard: NSPasteboard)
 	
 }
 
 enum PasteboardObserverState {
-	case Disabled
-	case Enabled
-	case Paused
+	case disabled
+	case enabled
+	case paused
 }
 
 class PasteboardObserver: NSObject {
-	var pasteboard: NSPasteboard = NSPasteboard.generalPasteboard()
+	var pasteboard: NSPasteboard = NSPasteboard.general()
 	
 	var subscribers: NSMutableSet = NSMutableSet()
-	var serialQueue: dispatch_queue_t = dispatch_queue_create("org.okolodev.PrettyPasteboard", DISPATCH_QUEUE_SERIAL)
+	var serialQueue: DispatchQueue = DispatchQueue(label: "org.okolodev.PrettyPasteboard", attributes: [])
 	var changeCount: Int = -1
-	var state: PasteboardObserverState = PasteboardObserverState.Disabled
+	var state: PasteboardObserverState = PasteboardObserverState.disabled
 	
 	override init() {
 		super.init()
@@ -40,24 +40,24 @@ class PasteboardObserver: NSObject {
 	// Observing
 	
 	func startObserving() {
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-			self.changeState(PasteboardObserverState.Enabled)
+		DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: { () -> Void in
+			self.changeState(PasteboardObserverState.enabled)
 			self.observerLoop()
 		});
 	}
 	
 	func stopObserving() {
-		self.changeState(PasteboardObserverState.Disabled)
+		self.changeState(PasteboardObserverState.disabled)
 	}
 	
 	func pauseObserving() {
-		self.changeState(PasteboardObserverState.Paused)
+		self.changeState(PasteboardObserverState.paused)
 	}
 	
 	func continueObserving() {
-		if (self.state == PasteboardObserverState.Paused) {
+		if (self.state == PasteboardObserverState.paused) {
 			self.changeCount = self.pasteboard.changeCount;
-			self.state = PasteboardObserverState.Enabled
+			self.state = PasteboardObserverState.enabled
 		}
 	}
 	
@@ -76,28 +76,28 @@ class PasteboardObserver: NSObject {
 	
 	func pasteboardContentChanged() {
 		self.pauseObserving()
-		for anySubscriber: AnyObject in self.subscribers {
-			if let subscriber = anySubscriber as? protocol<PasteboardObserverSubscriber> {
+		for anySubscriber in self.subscribers {
+			if let subscriber = anySubscriber as? PasteboardObserverSubscriber {
 				subscriber.pasteboardChanged(self.pasteboard)
 			}
 		}
 		self.continueObserving()
 	}
 	
-	func changeState(newState: PasteboardObserverState) {
-		dispatch_sync(self.serialQueue, { () -> Void in
+	func changeState(_ newState: PasteboardObserverState) {
+		self.serialQueue.sync(execute: { () -> Void in
 			self.state = newState;
 		});
 	}
 	
 	func isEnabled() -> Bool {
-		return self.state == PasteboardObserverState.Enabled;
+		return self.state == PasteboardObserverState.enabled;
 	}
 	
 	// Subscribers
 	
-	func addSubscriber(subscriber: PasteboardObserverSubscriber) {
-		self.subscribers.addObject(subscriber)
+	func addSubscriber(_ subscriber: PasteboardObserverSubscriber) {
+		self.subscribers.add(subscriber)
 	}
 	
 	func removeSubscribers() {

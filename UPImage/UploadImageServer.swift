@@ -13,18 +13,18 @@ func arc() -> UInt32 { return arc4random() % 100000 }
 
 func timeInterval() -> Int {
 	
-	return Int(NSDate(timeIntervalSinceNow: 0).timeIntervalSince1970)
+	return Int(Date(timeIntervalSinceNow: 0).timeIntervalSince1970)
 }
 
 var isUseSet: Bool {
 	get {
-		if let isUseSet = NSUserDefaults.standardUserDefaults().valueForKey("isUseSet") {
+		if let isUseSet = UserDefaults.standard.value(forKey: "isUseSet") {
 			return isUseSet as! Bool
 		}
 		return false
 	}
 	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "isUseSet")
+		UserDefaults.standard.setValue(newValue, forKey: "isUseSet")
 	}
 	
 }
@@ -35,90 +35,90 @@ var picUrlPrefix = "http://7xqmjb.com1.z0.glb.clouddn.com/"
 
 var QiniuToken: String {
 	get {
-		if let QiniuToken = NSUserDefaults.standardUserDefaults().valueForKey("QiniuToken") {
+		if let QiniuToken = UserDefaults.standard.value(forKey: "QiniuToken") {
 			return QiniuToken as! String
 		}
 		return ""
 	}
 	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "QiniuToken")
+		UserDefaults.standard.setValue(newValue, forKey: "QiniuToken")
 	}
 	
 }
 
 var urlPrefix: String {
 	get {
-		if let urlPrefix = NSUserDefaults.standardUserDefaults().valueForKey("urlPrefix") {
+		if let urlPrefix = UserDefaults.standard.value(forKey: "urlPrefix") {
 			return urlPrefix as! String
 		}
 		return ""
 	}
 	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "urlPrefix")
+		UserDefaults.standard.setValue(newValue, forKey: "urlPrefix")
 	}
 	
 }
 
 var accessKey: String {
 	get {
-		if let accessKey = NSUserDefaults.standardUserDefaults().valueForKey("accessKey") {
+		if let accessKey = UserDefaults.standard.value(forKey: "accessKey") {
 			return accessKey as! String
 		}
 		return ""
 	}
 	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "accessKey")
+		UserDefaults.standard.setValue(newValue, forKey: "accessKey")
 	}
 	
 }
 
 var secretKey: String {
 	get {
-		if let secretKey = NSUserDefaults.standardUserDefaults().valueForKey("secretKey") {
+		if let secretKey = UserDefaults.standard.value(forKey: "secretKey") {
 			return secretKey as! String
 		}
 		return ""
 	}
 	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "secretKey")
+		UserDefaults.standard.setValue(newValue, forKey: "secretKey")
 	}
 	
 }
 
 var bucket: String {
 	get {
-		if let bucket = NSUserDefaults.standardUserDefaults().valueForKey("bucket") {
+		if let bucket = UserDefaults.standard.value(forKey: "bucket") {
 			return bucket as! String
 		}
 		return ""
 	}
 	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "bucket")
+		UserDefaults.standard.setValue(newValue, forKey: "bucket")
 	}
 	
 }
 
-func QiniuUpload(pboard: NSPasteboard) {
+func QiniuUpload(_ pboard: NSPasteboard) {
 	
 	// 是否自定义
 	if isUseSet {
-		GCQiniuUploadManager.sharedInstance().registerWithScope(bucket, accessKey: accessKey, secretKey: secretKey)
+		GCQiniuUploadManager.sharedInstance().register(withScope: bucket, accessKey: accessKey, secretKey: secretKey)
 		GCQiniuUploadManager.sharedInstance().createToken()
 		QiniuToken = GCQiniuUploadManager.sharedInstance().uploadToken
 		picUrlPrefix = urlPrefix
 		
 	} else {
 		picUrlPrefix = "http://7xqmjb.com1.z0.glb.clouddn.com/"
-		GCQiniuUploadManager.sharedInstance().registerWithScope("photos", accessKey: "bCsVdizvx9fPFfkh9kYi_7PreydtorjvK2lddieO", secretKey: "Ldso9d43oRq7rKvbM78DA9YsCajO-KWsVw9FS0db")
+		GCQiniuUploadManager.sharedInstance().register(withScope: "photos", accessKey: "bCsVdizvx9fPFfkh9kYi_7PreydtorjvK2lddieO", secretKey: "Ldso9d43oRq7rKvbM78DA9YsCajO-KWsVw9FS0db")
 		GCQiniuUploadManager.sharedInstance().createToken()
 		QiniuToken = GCQiniuUploadManager.sharedInstance().uploadToken
 	}
 	
-	let files: NSArray? = pboard.propertyListForType(NSFilenamesPboardType) as? NSArray
+	let files: NSArray? = pboard.propertyList(forType: NSFilenamesPboardType) as? NSArray
 	
 	if let files = files {
 		statusItem.button?.image = NSImage(named: "loading-\(0)")
-		statusItem.button?.image?.template = true
+		statusItem.button?.image?.isTemplate = true
 		
 		guard let _ = NSImage(contentsOfFile: files.firstObject as! String) else {
 			return
@@ -126,7 +126,7 @@ func QiniuUpload(pboard: NSPasteboard) {
 		QiniuSDKUpload(files.firstObject as? String, data: nil, token: QiniuToken)
 	}
 	
-	guard let data = pboard.pasteboardItems?.first?.dataForType("public.tiff") else {
+	guard let data = pboard.pasteboardItems?.first?.data(forType: "public.tiff") else {
 		return
 	}
 	guard let _ = NSImage(data: data) else {
@@ -134,18 +134,18 @@ func QiniuUpload(pboard: NSPasteboard) {
 	}
 	
 	statusItem.button?.image = NSImage(named: "loading-\(0)")
-	statusItem.button?.image?.template = true
+	statusItem.button?.image?.isTemplate = true
 	
 	QiniuSDKUpload(nil, data: data, token: QiniuToken)
 	
 }
 
-func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
+func QiniuSDKUpload(_ filePath: String?, data: Data?, token: String) {
 	let upManager = QNUploadManager()
 	let opt = QNUploadOption(progressHandler: { (key, percent) in
 		
 		statusItem.button?.image = NSImage(named: "loading-\(Int(percent*10))")
-		statusItem.button?.image?.template = true
+		statusItem.button?.image?.isTemplate = true
 		
 	})
 	
@@ -153,28 +153,34 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 		
 		let fileName = getDateString() + "\(arc())" + NSString(string: filePath).lastPathComponent
 		
-		upManager.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
+		upManager?.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
 			statusItem.button?.image = NSImage(named: "StatusIcon")
-			statusItem.button?.image?.template = true
+			statusItem.button?.image?.isTemplate = true
 			guard let _ = info, let _ = resp else {
 				QiniuToken = ""
 				NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
 				return
 			}
-			NSPasteboard.generalPasteboard().clearContents()
-			NSPasteboard.generalPasteboard()
-			NSPasteboard.generalPasteboard().setString("![" + NSString(string: filePath).lastPathComponent + "](" + picUrlPrefix + key + ")", forType: NSStringPboardType)
+			NSPasteboard.general().clearContents()
+			NSPasteboard.general()
+            var s = "![" + NSString(string: filePath).lastPathComponent
+            s = s + "]("
+            s = s + picUrlPrefix + key! + ")";
+//            let s = "![" + NSString(string: filePath).lastPathComponent + "](" + picUrlPrefix + key + ")";
+			NSPasteboard.general().setString(s, forType: NSStringPboardType)
+            
 			NotificationMessage("上传图片成功", isSuccess: true)
 			var picUrl: String!
 			if linkType == 0 {
-				picUrl = "![" + key + "](" + picUrlPrefix + key + ")"
+				picUrl = "![" + key! + "](" + picUrlPrefix + key! + ")"
 			}
 			else {
-				picUrl = picUrlPrefix + key
+				picUrl = picUrlPrefix + key!
 			}
-			NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
+			NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
+            let cU = picUrlPrefix + key!
 			
-			let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": picUrlPrefix + key]
+			let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": cU as! AnyObject]
 			adduploadImageToCache(cacheDic)
 			
 			}, option: opt)
@@ -184,10 +190,10 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 		
 		let fileName = getDateString() + "\(timeInterval())" + "\(arc()).jpg"
 		
-		upManager.putData(data, key: fileName, token: token, complete: { (info, key, resp) in
+		upManager?.put(data, key: fileName, token: token, complete: { (info, key, resp) in
 			
 			statusItem.button?.image = NSImage(named: "StatusIcon")
-			statusItem.button?.image?.template = true
+			statusItem.button?.image?.isTemplate = true
 			
 			guard let _ = info, let _ = resp else {
 				QiniuToken = ""
@@ -195,29 +201,30 @@ func QiniuSDKUpload(filePath: String?, data: NSData?, token: String) {
 				return
 			}
 			NotificationMessage("上传图片成功", isSuccess: true)
-			NSPasteboard.generalPasteboard().clearContents()
-			NSPasteboard.generalPasteboard()
+			NSPasteboard.general().clearContents()
+			NSPasteboard.general()
 			var picUrl: String!
 			if linkType == 0 {
-				picUrl = "![" + key + "](" + picUrlPrefix + key + "?imageView2/0/format/jpg)"
+				picUrl = "![" + key! + "](" + picUrlPrefix + key! + "?imageView2/0/format/jpg)"
 			}
 			else {
-				picUrl = picUrlPrefix + key + "?imageView2/0/format/jpg"
+				picUrl = picUrlPrefix + key! + "?imageView2/0/format/jpg"
 			}
 			
-			NSPasteboard.generalPasteboard().setString(picUrl, forType: NSStringPboardType)
+			NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
+            let cU = picUrlPrefix + key! + "?imageView2/0/format/jpg"
 			
-			let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrlPrefix + key + "?imageView2/0/format/jpg"]
+			let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": cU as AnyObject]
 			adduploadImageToCache(cacheDic)
 			
 			}, option: opt)
 	}
 }
 
-func NotificationMessage(message: String, informative: String? = nil, isSuccess: Bool = false) {
+func NotificationMessage(_ message: String, informative: String? = nil, isSuccess: Bool = false) {
 	
 	let notification = NSUserNotification()
-	let notificationCenter = NSUserNotificationCenter.defaultUserNotificationCenter()
+	let notificationCenter = NSUserNotificationCenter.default
 	notificationCenter.delegate = appDelegate as? NSUserNotificationCenterDelegate
 	notification.title = message
 	notification.informativeText = informative

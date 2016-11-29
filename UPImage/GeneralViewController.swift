@@ -11,13 +11,13 @@ import MASPreferences
 
 var linkType: Int {
 	get {
-		if let version = NSUserDefaults.standardUserDefaults().valueForKey("linkType") {
+		if let version = UserDefaults.standard.value(forKey: "linkType") {
 			return version as! Int
 		}
 		return 0
 	}
 	set {
-		NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "linkType")
+		UserDefaults.standard.setValue(newValue, forKey: "linkType")
 	}
 	
 }
