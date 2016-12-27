@@ -12,6 +12,8 @@ import TMCache
 class AppCache: NSObject{
     
     static let shared = AppCache()
+    
+    var imagesCacheArr: [[String: AnyObject]] = Array()
     public var linkType : LinkType {
             get {
                 if let linkType = UserDefaults.standard.value(forKey: "linkType") as? Int {
@@ -26,7 +28,21 @@ class AppCache: NSObject{
             }
     }
     
-    var autoUp: Bool {
+    public var useDefServer : Bool  {
+        get {
+            if let useDefServer = UserDefaults.standard.value(forKey: "useDefServer") {
+                return useDefServer as! Bool
+            }
+            return true
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "useDefServer")
+        }
+        
+    }
+
+    
+    public var autoUp: Bool {
         get {
             if let autoUp = UserDefaults.standard.value(forKey: "autoUp") {
                 return autoUp as! Bool
@@ -50,7 +66,7 @@ class AppCache: NSObject{
     
     public func getQNConfig()->[String:String]{
         
-        if ImageServer.shared.useDefServer {
+        if useDefServer {
             return QN_Def_Config
         }
         

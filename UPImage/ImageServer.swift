@@ -42,24 +42,6 @@ class ImageServer: NSObject {
     fileprivate var liveTime: Int!
     fileprivate var QNToken : String!
     fileprivate let upManager = QNUploadManager()
-    
-   
-    
-    public var useDefServer : Bool  {
-        get {
-            if let useDefServer = UserDefaults.standard.value(forKey: "useDefServer") {
-                return useDefServer as! Bool
-            }
-            return true
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: "useDefServer")
-        }
-        
-    }
-
-    
-    
     fileprivate override init() {super.init()}
     
 
@@ -144,9 +126,16 @@ extension ImageServer{
             QiniuSDKUpload(files.firstObject as? String, data: nil, token: QNToken)
         }
         else {
-            guard let data = pboard.pasteboardItems?.first?.data(forType: "public.tiff") else {
+            guard let type = pboard.pasteboardItems?.first?.types.first else {
                 return
             }
+           
+            
+            guard ["public.tiff","public.png"].contains(type) else {
+                return
+            }
+            
+            let data = (pboard.pasteboardItems?.first?.data(forType: type))!
             guard let _ = NSImage(data: data) else {
                 return
             }
