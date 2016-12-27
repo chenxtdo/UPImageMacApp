@@ -14,23 +14,18 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 	override var identifier: String? { get { return "image" } set { super.identifier = newValue } }
 	var toolbarItemLabel: String? { get { return "图床" } }
 	var toolbarItemImage: NSImage? { get { return NSImage(named: NSImageNameUser) } }
-	
 	var window: NSWindow?
-	
 	@IBOutlet weak var statusLabel: NSTextField!
 	@IBOutlet weak var accessKeyTextField: NSTextField!
-	
 	@IBOutlet weak var secretKeyTextField: NSTextField!
-	
 	@IBOutlet weak var bucketTextField: NSTextField!
-	
 	@IBOutlet weak var urlPrefixTextField: NSTextField!
-	
 	@IBOutlet weak var checkButton: NSButton!
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if isUseSet {
+		if ImageServer.shared.useDefServer {
 			statusLabel.cell?.title = "目前使用自定义图床"
 			statusLabel.textColor = .magenta
 		} else {
@@ -38,13 +33,17 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 			statusLabel.textColor = .red
 		}
 		
-		accessKeyTextField.cell?.title = accessKey
-		secretKeyTextField.cell?.title = secretKey
-		bucketTextField.cell?.title = bucket
-		urlPrefixTextField.cell?.title = urlPrefix
+        if let configDic =  AppCache.shared.getQNUseConfig() {
+            accessKeyTextField.cell?.title = configDic["accessKey"]!
+            secretKeyTextField.cell?.title = configDic["secretKey"]!
+            bucketTextField.cell?.title = configDic["scope"]!
+            urlPrefixTextField.cell?.title = configDic["picUrlPrefix"]!
+        }
+        
+		
 	}
 	@IBAction func setDefault(_ sender: AnyObject) {
-		isUseSet = false
+		ImageServer.shared.useDefServer = false
 		statusLabel.cell?.title = "目前使用默认图床"
 		statusLabel.textColor = .red
 		
@@ -73,32 +72,28 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		let sek = (secretKeyTextField.cell?.title)!
 		let bck = (bucketTextField.cell?.title)!
 		
-		GCQiniuUploadManager.sharedInstance().register(withScope: bck, accessKey: ack, secretKey: sek)
-		GCQiniuUploadManager.sharedInstance().createToken()
-		let ts = "1"
 		checkButton.title = "验证中"
 		checkButton.isEnabled = false
-		GCQiniuUploadManager.sharedInstance().uploadData(ts.data(using: String.Encoding.utf8), progress: { (progress) in
-			
-		}) { [weak self](error, string, code) in
-			self?.checkButton.isEnabled = true
-			self?.checkButton.title = "验证配置"
-			if error == nil {
-				self?.showAlert("验证成功", informative: "配置成功。")
-				accessKey = (self?.accessKeyTextField.cell?.title)!
-				secretKey = (self?.secretKeyTextField.cell?.title)!
-				bucket = (self?.bucketTextField.cell?.title)!
-				urlPrefix = (self?.urlPrefixTextField.cell?.title)!
-				self?.statusLabel.cell?.title = "目前使用自定义图床"
-				self?.statusLabel.textColor = .magenta
-				isUseSet = true
-				
-			}
-			else {
-				self?.showAlert("验证失败", informative: "验证失败，请仔细填写信息。")
-			}
-			
-		}
+        ImageServer.shared.register(configDic: ["accessKey":ack,"secretKey":sek,"scope":bck])
+        ImageServer.shared.createToken()
+        ImageServer.shared.verifyQNConfig {[weak self] (result) in
+            self?.checkButton.isEnabled = true
+            self?.checkButton.title = "验证配置"
+            result.Success(success: {_ in
+                self?.statusLabel.cell?.title = "目前使用自定义图床"
+                self?.statusLabel.textColor = .magenta
+                self?.showAlert("验证成功", informative: "配置成功。")
+                let QN_Config = ["picUrlPrefix" : (self?.urlPrefixTextField.cell?.title)!,
+                                 "accessKey" :(self?.accessKeyTextField.cell?.title)!,
+                                 "scope":(self?.bucketTextField.cell?.title)!,
+                                 "secretKey":(self?.secretKeyTextField.cell?.title)!]
+                AppCache.shared.setQNConfig(configDic: QN_Config);
+                ImageServer.shared.useDefServer = true
+               
+            }).Failure(failure: { _ in
+                self?.showAlert("验证失败", informative: "验证失败，请仔细填写信息。")
+            })
+        }
 	}
 	
 	func showAlert(_ message: String, informative: String) {
@@ -112,7 +107,6 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		else {
 			arlert.icon = NSImage(named: "Failure")
 		}
-		
 		arlert.beginSheetModal(for: self.window!, completionHandler: { (response) in
 			
 		})

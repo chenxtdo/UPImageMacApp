@@ -8,18 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		9A4BF54F701FBCE2EA077E1F /* Pods_U__.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E82128049C12F67B731AF4D /* Pods_U__.framework */; };
-		DD346CE91D3395BE00BFC862 /* AppServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD346CE81D3395BE00BFC862 /* AppServer.swift */; };
+		DD0386E71E123C3E00864E9C /* AppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0386E61E123C3E00864E9C /* AppCache.swift */; };
 		DD369FDB1D3CA0310080C369 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD369FD91D3CA0310080C369 /* GeneralViewController.swift */; };
 		DD369FDC1D3CA0310080C369 /* GeneralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */; };
 		DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */; };
 		DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */; };
 		DD7B7E621D322CC700B68805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E611D322CC700B68805 /* Assets.xcassets */; };
 		DD7B7E741D322CEE00B68805 /* DragDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */; };
-		DD7B7E751D322CEE00B68805 /* UploadImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */; };
 		DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */; };
 		DD7B7E791D322D2200B68805 /* ImagePreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */; };
 		DD7B7E7B1D322D7200B68805 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E7A1D322D7200B68805 /* MainMenu.xib */; };
-		DDC182ED1D5C1A9900D40AA3 /* GCQiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC182EC1D5C1A9900D40AA3 /* GCQiniuUploadManager.m */; };
+		DDB6C2311E120378009B7EDD /* ImageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB6C2301E120378009B7EDD /* ImageServer.swift */; };
 		DDE7BB1F1D3F4295009031F3 /* PasteboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +28,7 @@
 		3BA9D9564996CAE5BE948F11 /* Pods-UPImage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UPImage.release.xcconfig"; path = "Pods/Target Support Files/Pods-UPImage/Pods-UPImage.release.xcconfig"; sourceTree = "<group>"; };
 		6E82128049C12F67B731AF4D /* Pods_U__.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_U__.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7472013CBB30ECD5BCCCD68D /* Pods-U图床.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-U图床.debug.xcconfig"; path = "Pods/Target Support Files/Pods-U图床/Pods-U图床.debug.xcconfig"; sourceTree = "<group>"; };
-		DD346CE81D3395BE00BFC862 /* AppServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppServer.swift; sourceTree = "<group>"; };
+		DD0386E61E123C3E00864E9C /* AppCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCache.swift; sourceTree = "<group>"; };
 		DD369FD91D3CA0310080C369 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralViewController.xib; sourceTree = "<group>"; };
 		DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
@@ -38,14 +37,12 @@
 		DD7B7E611D322CC700B68805 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD7B7E661D322CC700B68805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDestinationView.swift; sourceTree = "<group>"; };
-		DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageServer.swift; sourceTree = "<group>"; };
 		DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreferencesViewController.swift; sourceTree = "<group>"; };
 		DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePreferencesViewController.xib; sourceTree = "<group>"; };
 		DD7B7E7A1D322D7200B68805 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		DDA29F581D39FD2300C9F885 /* U图床.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "U图床.entitlements"; sourceTree = "<group>"; };
+		DDB6C2301E120378009B7EDD /* ImageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageServer.swift; sourceTree = "<group>"; };
 		DDC182E91D5C1A6600D40AA3 /* OC-birdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OC-birdge.h"; sourceTree = "<group>"; };
-		DDC182EB1D5C1A9900D40AA3 /* GCQiniuUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCQiniuUploadManager.h; sourceTree = "<group>"; };
-		DDC182EC1D5C1A9900D40AA3 /* GCQiniuUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCQiniuUploadManager.m; sourceTree = "<group>"; };
 		DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardObserver.swift; sourceTree = "<group>"; };
 		F2B212080ECE2120F8728E6D /* Pods_UPImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UPImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,32 +92,22 @@
 		DD7B7E5E1D322CC700B68805 /* UPImage */ = {
 			isa = PBXGroup;
 			children = (
-				DDC182EA1D5C1A9900D40AA3 /* GCQiniuUploadManager */,
 				DD369FD91D3CA0310080C369 /* GeneralViewController.swift */,
 				DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */,
 				DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */,
 				DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */,
 				DD7B7E711D322CEE00B68805 /* DragDestinationView.swift */,
-				DD7B7E721D322CEE00B68805 /* UploadImageServer.swift */,
 				DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */,
 				DD7B7E7A1D322D7200B68805 /* MainMenu.xib */,
 				DD7B7E611D322CC700B68805 /* Assets.xcassets */,
 				DD7B7E661D322CC700B68805 /* Info.plist */,
-				DD346CE81D3395BE00BFC862 /* AppServer.swift */,
 				DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */,
 				DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */,
 				DDC182E91D5C1A6600D40AA3 /* OC-birdge.h */,
+				DDB6C2301E120378009B7EDD /* ImageServer.swift */,
+				DD0386E61E123C3E00864E9C /* AppCache.swift */,
 			);
 			path = UPImage;
-			sourceTree = "<group>";
-		};
-		DDC182EA1D5C1A9900D40AA3 /* GCQiniuUploadManager */ = {
-			isa = PBXGroup;
-			children = (
-				DDC182EB1D5C1A9900D40AA3 /* GCQiniuUploadManager.h */,
-				DDC182EC1D5C1A9900D40AA3 /* GCQiniuUploadManager.m */,
-			);
-			path = GCQiniuUploadManager;
 			sourceTree = "<group>";
 		};
 		F5DF376CCCFA2E6993D6955B /* Frameworks */ = {
@@ -167,7 +154,7 @@
 				TargetAttributes = {
 					DD7B7E5B1D322CC700B68805 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = UH22S2GG33;
+						DevelopmentTeam = AA62KG453H;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -267,14 +254,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */,
-				DD346CE91D3395BE00BFC862 /* AppServer.swift in Sources */,
 				DD369FDB1D3CA0310080C369 /* GeneralViewController.swift in Sources */,
+				DDB6C2311E120378009B7EDD /* ImageServer.swift in Sources */,
 				DD7B7E741D322CEE00B68805 /* DragDestinationView.swift in Sources */,
-				DDC182ED1D5C1A9900D40AA3 /* GCQiniuUploadManager.m in Sources */,
 				DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */,
-				DD7B7E751D322CEE00B68805 /* UploadImageServer.swift in Sources */,
 				DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */,
 				DDE7BB1F1D3F4295009031F3 /* PasteboardObserver.swift in Sources */,
+				DD0386E71E123C3E00864E9C /* AppCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +358,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = UH22S2GG33;
+				DEVELOPMENT_TEAM = AA62KG453H;
 				INFOPLIST_FILE = UPImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -392,10 +378,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "U图床.entitlements";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = UH22S2GG33;
+				DEVELOPMENT_TEAM = AA62KG453H;
 				INFOPLIST_FILE = UPImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

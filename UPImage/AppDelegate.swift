@@ -55,7 +55,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	@IBOutlet weak var cacheImageMenuItem: NSMenuItem!
 	lazy var preferencesWindowController: NSWindowController = {
-		
 		let imageViewController = ImagePreferencesViewController()
 		let generalViewController = GeneralViewController()
 		let controllers = [generalViewController, imageViewController]
@@ -69,12 +68,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		registerHotKeys()
 		
 		// 重置Token
-		
-		if linkType == 0 {
-			MarkdownItem.state = 1
-		} else {
-			MarkdownItem.state = 0
-		}
+        switch AppCache.shared.linkType {
+        case .markdown:
+            MarkdownItem.state = 1
+        case .url:
+            MarkdownItem.state = 0
+        }
 		
 		pasteboardObserver.addSubscriber(self)
 		
@@ -148,7 +147,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			// 上传
 		case 1:
 			let pboard = NSPasteboard.general()
-			QiniuUpload(pboard)
+			ImageServer.shared.QiniuUpload(pboard)
 			// 设置
 		case 2:
 			preferencesWindowController.showWindow(nil)
@@ -164,7 +163,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			break
 			
 		case 6:
-			
 			if sender.state == 0 {
 				sender.state = 1
 				pasteboardObserver.startObserving()
@@ -175,33 +173,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				pasteboardObserver.stopObserving()
 				autoUp = false
 			}
-			
 		case 7:
-			if sender.state == 0 {
-				sender.state = 1
-				linkType = 0
-				guard let imagesCache = imagesCacheArr.first else {
-					return
-				}
-				NSPasteboard.general().clearContents()
-				var picUrl = imagesCache["url"] as! String
-				let fileName = NSString(string: picUrl).lastPathComponent
-				picUrl = "![" + fileName + "](" + picUrl + ")"
-				NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
-				
-			}
-			else {
-				sender.state = 0
-				linkType = 1
-				guard let imagesCache = imagesCacheArr.first else {
-					return
-				}
-				NSPasteboard.general().clearContents()
-				let picUrl = imagesCache["url"] as! String
-				NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
-				
-			}
-			
+            sender.state = 1 - sender.state
+            AppCache.shared.linkType = LinkType(rawValue: sender.state)!
+            guard let imagesCache = imagesCacheArr.first else {
+                return
+            }
+            let picUrl = imagesCache["url"] as! String
+            NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.linkType), forType: NSStringPboardType)
+            
 		default:
 			break
 		}
@@ -241,23 +221,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func cacheImageClick(_ sender: NSMenuItem) {
-		
 		NSPasteboard.general().clearContents()
-		
-		var picUrl = imagesCacheArr[sender.tag]["url"] as! String
-		
-		let fileName = NSString(string: picUrl).lastPathComponent
-		
-		if linkType == 0 {
-			picUrl = "![" + fileName + "](" + picUrl + ")"
-		}
-		
-		NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
+		let picUrl = imagesCacheArr[sender.tag]["url"] as! String
+		NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.linkType), forType: NSStringPboardType)
 		NotificationMessage("图片链接获取成功", isSuccess: true)
-		
 	}
 	
 }
+
 
 extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubscriber {
 	// 强行通知
@@ -267,12 +238,11 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
 		
-		print(change)
 		
 	}
 	
 	func pasteboardChanged(_ pasteboard: NSPasteboard) {
-		QiniuUpload(pasteboard)
+		ImageServer.shared.QiniuUpload(pasteboard)
 		
 	}
 	
@@ -301,31 +271,19 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 			switch hkCom.id {
 			case UInt32(kVK_ANSI_U):
 				let pboard = NSPasteboard.general()
-				QiniuUpload(pboard)
+				ImageServer.shared.QiniuUpload(pboard)
 			case UInt32(kVK_ANSI_M):
-				if linkType == 0 {
-					linkType = 1
-					NotificationCenter.default.post(name: Notification.Name(rawValue: "MarkdownState"), object: 1)
-					guard let imagesCache = imagesCacheArr.last else {
-						return 33
-					}
-					NSPasteboard.general().clearContents()
-					let picUrl = imagesCache["url"] as! String
-					NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
-					
-				}
-				else {
-					linkType = 0
-					NotificationCenter.default.post(name: Notification.Name(rawValue: "MarkdownState"), object: 0)
-					guard let imagesCache = imagesCacheArr.last else {
-						return 33
-					}
-					NSPasteboard.general().clearContents()
-					var picUrl = imagesCache["url"] as! String
-					let fileName = NSString(string: picUrl).lastPathComponent
-					picUrl = "![" + fileName + "](" + picUrl + ")"
-					NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
-				}
+                
+                AppCache.shared.linkType = LinkType(rawValue: 1 - AppCache.shared.linkType.rawValue)!
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "MarkdownState"), object:  AppCache.shared.linkType.rawValue)
+                guard let imagesCache = imagesCacheArr.last else {
+                    return 33
+                }
+                NSPasteboard.general().clearContents()
+                let picUrl = imagesCache["url"] as! String
+                NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.linkType), forType: NSStringPboardType)
+  
+                
 			default:
 				break
 			}

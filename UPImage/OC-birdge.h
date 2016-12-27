@@ -9,6 +9,7 @@
 #ifndef OC_birdge_h
 #define OC_birdge_h
 
-#import "GCQiniuUploadManager.h"
+
+#import <CommonCrypto/CommonHMAC.h>
 
 #endif /* OC_birdge_h */
