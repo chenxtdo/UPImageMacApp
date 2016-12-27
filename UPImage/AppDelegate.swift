@@ -21,17 +21,7 @@ func checkImageFile(_ pboard: NSPasteboard) -> Bool {
 	return true
 }
 
-var autoUp: Bool {
-	get {
-		if let autoUp = UserDefaults.standard.value(forKey: "autoUp") {
-			return autoUp as! Bool
-		}
-		return false
-	}
-	set {
-		UserDefaults.standard.setValue(newValue, forKey: "autoUp")
-	}
-}
+
 
 var appDelegate: NSObject?
 
@@ -77,11 +67,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		pasteboardObserver.addSubscriber(self)
 		
-		if autoUp {
-			
+		if AppCache.shared.autoUp {
 			pasteboardObserver.startObserving()
 			autoUpItem.state = 1
-			
 		}
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(notification), name: NSNotification.Name(rawValue: "MarkdownState"), object: nil)
@@ -100,15 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func notification(_ notification: Notification) {
-		
-        
-		if (notification.object as AnyObject).int64Value == 0 {
-			MarkdownItem.state = 1
-		}
-		else {
-			MarkdownItem.state = 0
-		}
-		
+			MarkdownItem.state = Int((notification.object as AnyObject) as! NSNumber)
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
@@ -163,16 +143,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			break
 			
 		case 6:
-			if sender.state == 0 {
-				sender.state = 1
-				pasteboardObserver.startObserving()
-				autoUp = true
-			}
-			else {
-				sender.state = 0
-				pasteboardObserver.stopObserving()
-				autoUp = false
-			}
+            sender.state = 1 - sender.state;
+            AppCache.shared.autoUp =  sender.state == 1 ? true : false
+            AppCache.shared.autoUp ? pasteboardObserver.startObserving() : pasteboardObserver.stopObserving()
+           
 		case 7:
             sender.state = 1 - sender.state
             AppCache.shared.linkType = LinkType(rawValue: sender.state)!
@@ -275,6 +249,7 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 			case UInt32(kVK_ANSI_M):
                 
                 AppCache.shared.linkType = LinkType(rawValue: 1 - AppCache.shared.linkType.rawValue)!
+                print(AppCache.shared.linkType.rawValue)
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "MarkdownState"), object:  AppCache.shared.linkType.rawValue)
                 guard let imagesCache = imagesCacheArr.last else {
                     return 33

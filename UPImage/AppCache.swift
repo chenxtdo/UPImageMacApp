@@ -25,6 +25,18 @@ class AppCache: NSObject{
                 UserDefaults.standard.setValue(newValue.rawValue, forKey: "linkType")
             }
     }
+    
+    var autoUp: Bool {
+        get {
+            if let autoUp = UserDefaults.standard.value(forKey: "autoUp") {
+                return autoUp as! Bool
+            }
+            return false
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "autoUp")
+        }
+    }
     fileprivate var QN_Use_Config : [String:String]?
     fileprivate let QN_Def_Config = ["picUrlPrefix" : "http://7xqmjb.com1.z0.glb.clouddn.com/",
                                      "accessKey" :"bCsVdizvx9fPFfkh9kYi_7PreydtorjvK2lddieO",
@@ -69,16 +81,16 @@ class AppCache: NSObject{
     }
 
     
-//    func adduploadImageToCache(_ dic: [String: AnyObject]) {
-//        if imagesCacheArr.count < 5 {
-//            imagesCacheArr.append(dic)
-//            TMCache.shared().setObject(imagesCacheArr as NSCoding!, forKey: "imageCache")
-//        } else {
-//            imagesCacheArr.remove(at: 0)
-//            imagesCacheArr.append(dic)
-//            TMCache.shared().setObject(imagesCacheArr as NSCoding!, forKey: "imageCache")
-//        }
-//    }
+    func adduploadImageToCache(_ dic: [String: AnyObject]) {
+        if imagesCacheArr.count < 5 {
+            imagesCacheArr.append(dic)
+            TMCache.shared().setObject(imagesCacheArr as NSCoding!, forKey: "imageCache")
+        } else {
+            imagesCacheArr.remove(at: 0)
+            imagesCacheArr.append(dic)
+            TMCache.shared().setObject(imagesCacheArr as NSCoding!, forKey: "imageCache")
+        }
+    }
 
     
 

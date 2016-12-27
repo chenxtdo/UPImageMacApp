@@ -180,7 +180,7 @@ extension ImageServer{
                 let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.linkType);
                 NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
                 let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": picUrl as AnyObject]
-                adduploadImageToCache(cacheDic)
+                AppCache.shared.adduploadImageToCache(cacheDic)
             }, option: opt)
         }
         
@@ -202,7 +202,7 @@ extension ImageServer{
                 NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
                 NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
                 let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrl as AnyObject]
-                adduploadImageToCache(cacheDic)
+                AppCache.shared.adduploadImageToCache(cacheDic)
             }, option: opt)
         }
     }
