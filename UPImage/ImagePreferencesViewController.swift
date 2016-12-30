@@ -25,7 +25,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if AppCache.shared.useDefServer {
+		if !AppCache.shared.useDefServer {
 			statusLabel.cell?.title = "目前使用自定义图床"
 			statusLabel.textColor = .magenta
 		} else {
@@ -43,7 +43,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		
 	}
 	@IBAction func setDefault(_ sender: AnyObject) {
-		AppCache.shared.useDefServer = false
+		AppCache.shared.useDefServer = true
 		statusLabel.cell?.title = "目前使用默认图床"
 		statusLabel.textColor = .red
 		
@@ -88,7 +88,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
                                  "scope":(self?.bucketTextField.cell?.title)!,
                                  "secretKey":(self?.secretKeyTextField.cell?.title)!]
                 AppCache.shared.setQNConfig(configDic: QN_Config);
-                AppCache.shared.useDefServer = true
+                AppCache.shared.useDefServer = false
                
             }).Failure(failure: { _ in
                 self?.showAlert("验证失败", informative: "验证失败，请仔细填写信息。")
