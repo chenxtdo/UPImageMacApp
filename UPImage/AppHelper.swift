@@ -88,3 +88,25 @@ func checkImageFile(_ pboard: NSPasteboard) -> Bool {
     }
     return true
 }
+
+func getImageType(_ data: Data) -> String {
+    var c: uint8 = 0
+    data.copyBytes(to: &c, count: 1)
+    switch c {
+    case 0xFF:
+        return ".jpeg"
+    case 0x89:
+        return ".png"
+    case 0x49:
+        return ".tiff"
+    case 0x4D:
+        return ".tiff"
+    case 0x52:
+        guard data.count > 12, let str = String(data: data.subdata(in: 0..<13), encoding: .ascii), str.hasPrefix("RIFF"), str.hasPrefix("WEBP") else {
+            return ""
+        }
+        return ".webp"
+    default:
+        return ""
+    }
+}
