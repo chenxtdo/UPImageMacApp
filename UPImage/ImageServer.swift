@@ -18,7 +18,7 @@ enum LinkType : Int {
         let name = NSString(string: path).lastPathComponent
         switch type {
         case .markdown:
-            return "![" + name + "](" + path + ")"
+            return "![" + name + "](" + path + mark + ")"
         case .url:
             return path
         }
@@ -27,9 +27,15 @@ enum LinkType : Int {
 }
 
 var picUrlPrefix : String {
-get {
-    return AppCache.shared.getQNConfig()["picUrlPrefix"]!;
+    get {
+        return AppCache.shared.getQNConfig()["picUrlPrefix"]!
+    }
 }
+
+var mark: String {
+    get {
+        return AppCache.shared.getQNConfig()["mark"] ?? ""
+    }
 }
 
 
@@ -189,7 +195,6 @@ extension ImageServer{
                 let picUrl = picUrlPrefix + key! + "?imageView2/0/format/jpg";
                 let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.linkType);
                 NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
-                NSPasteboard.general().setString(picUrl, forType: NSStringPboardType)
                 let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrl as AnyObject]
                 AppCache.shared.adduploadImageToCache(cacheDic)
             }, option: opt)

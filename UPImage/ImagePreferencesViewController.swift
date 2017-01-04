@@ -21,6 +21,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 	@IBOutlet weak var bucketTextField: NSTextField!
 	@IBOutlet weak var urlPrefixTextField: NSTextField!
 	@IBOutlet weak var checkButton: NSButton!
+    @IBOutlet weak var markTextField: NSTextField!
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -38,6 +39,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
             secretKeyTextField.cell?.title = configDic["secretKey"]!
             bucketTextField.cell?.title = configDic["scope"]!
             urlPrefixTextField.cell?.title = configDic["picUrlPrefix"]!
+            markTextField.cell?.title = configDic["mark"] ?? ""
         }
         
 		
@@ -83,10 +85,13 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
                 self?.statusLabel.cell?.title = "目前使用自定义图床"
                 self?.statusLabel.textColor = .magenta
                 self?.showAlert("验证成功", informative: "配置成功。")
-                let QN_Config = ["picUrlPrefix" : (self?.urlPrefixTextField.cell?.title)!,
-                                 "accessKey" :(self?.accessKeyTextField.cell?.title)!,
-                                 "scope":(self?.bucketTextField.cell?.title)!,
-                                 "secretKey":(self?.secretKeyTextField.cell?.title)!]
+                let QN_Config = [
+                    "picUrlPrefix"  : (self?.urlPrefixTextField.cell?.title)!,
+                    "accessKey"     : (self?.accessKeyTextField.cell?.title)!,
+                    "scope"         : (self?.bucketTextField.cell?.title)!,
+                    "secretKey"     : (self?.secretKeyTextField.cell?.title)!,
+                    "mark"          : (self?.markTextField.cell?.title)!
+                ]
                 AppCache.shared.setQNConfig(configDic: QN_Config);
                 AppCache.shared.useDefServer = false
                
