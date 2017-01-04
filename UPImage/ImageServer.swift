@@ -18,7 +18,8 @@ enum LinkType : Int {
         let name = NSString(string: path).lastPathComponent
         switch type {
         case .markdown:
-            return "![" + name + "](" + path + mark + ")"
+//            return "![" + name + "](" + path + mark + ")"
+            return "![" + name + "](" + path + ")"
         case .url:
             return path
         }
