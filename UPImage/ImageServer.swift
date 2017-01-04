@@ -153,54 +153,43 @@ extension ImageServer{
         
     }
     
-   fileprivate func QiniuSDKUpload(_ filePath: String?, data: Data?, token: String) {
+    fileprivate func QiniuSDKUpload(_ filePath: String?, data: Data?, token: String) {
         let opt = QNUploadOption(progressHandler: { (key, percent) in
             statusItem.button?.image = NSImage(named: "loading-\(Int(percent*10))")
             statusItem.button?.image?.isTemplate = true
         })
-        
+    
+        let hanlder: (QNResponseInfo?, String?, [AnyHashable : Any]?, NSImage) -> () = { (info, key, resp, image) in
+            statusItem.button?.image = NSImage(named: "StatusIcon")
+            statusItem.button?.image?.isTemplate = true
+            guard let _ = info, let _ = resp else {
+                NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
+                return
+            }
+            NotificationMessage("上传图片成功", isSuccess: true)
+            NSPasteboard.general().clearContents()
+            NSPasteboard.general()
+            let picUrl = picUrlPrefix + key!
+            let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.linkType);
+            NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
+            let cacheDic: [String: AnyObject] = ["image": image, "url": picUrl as AnyObject]
+            AppCache.shared.adduploadImageToCache(cacheDic)
+        }
+    
         if let filePath = filePath {
             let fileName = getDateString() + "\(arc())" + NSString(string: filePath).lastPathComponent
             upManager?.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
-                statusItem.button?.image = NSImage(named: "StatusIcon")
-                statusItem.button?.image?.isTemplate = true
-                guard let _ = info, let _ = resp else {
-                    NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
-                    return
-                }
-                NSPasteboard.general().clearContents()
-                NSPasteboard.general()
-                NotificationMessage("上传图片成功", isSuccess: true)
-                let picUrl = picUrlPrefix + key!;
-                let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.linkType);
-                NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
-                let cacheDic: [String: AnyObject] = ["image": NSImage(contentsOfFile: filePath)!, "url": picUrl as AnyObject]
-                AppCache.shared.adduploadImageToCache(cacheDic)
+                hanlder(info, key, resp, NSImage(contentsOfFile: filePath)!)
             }, option: opt)
         }
         
         if let data = data {
-            
-            let fileName = getDateString() + "\(timeInterval())" + "\(arc()).jpg"
+            let fileName = getDateString() + "\(timeInterval())" + "\(arc())" + getImageType(data)
             upManager?.put(data, key: fileName, token: token, complete: { (info, key, resp) in
-                statusItem.button?.image = NSImage(named: "StatusIcon")
-                statusItem.button?.image?.isTemplate = true
-                guard let _ = info, let _ = resp else {
-                    NotificationMessage("上传图片失败", informative: "可能是配置信息错误，或者是Token过去。请仔细检查配置信息，或重新上传")
-                    return
-                }
-                NotificationMessage("上传图片成功", isSuccess: true)
-                NSPasteboard.general().clearContents()
-                NSPasteboard.general()
-                let picUrl = picUrlPrefix + key! + "?imageView2/0/format/jpg";
-                let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.linkType);
-                NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
-                let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrl as AnyObject]
-                AppCache.shared.adduploadImageToCache(cacheDic)
+                hanlder(info, key, resp, NSImage(data: data)!)
             }, option: opt)
         }
     }
-    
 }
 
 
