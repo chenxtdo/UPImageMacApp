@@ -27,6 +27,7 @@ enum LinkType : Int {
     
 }
 
+
 var picUrlPrefix : String {
     get {
         return AppCache.shared.getQNConfig()["picUrlPrefix"]!
@@ -48,10 +49,36 @@ class ImageServer: NSObject {
     fileprivate var secretKey: String!
     fileprivate var liveTime: Int!
     fileprivate var QNToken : String!
-    fileprivate let upManager = QNUploadManager()
-    fileprivate override init() {super.init()}
+//    fileprivate let upManager = QNUploadManager()
+    var upManager :QNUploadManager
+    fileprivate override init() {
+        upManager = ImageServer.initQNManager(AppCache.shared.QNZone)
+        super.init()
+    }
     
-
+    class func initQNManager(_ zoneType : Int) -> QNUploadManager {
+            let config = QNConfiguration.build({ (builder: QNConfigurationBuilder?) in
+                var zone : QNZone!
+                switch zoneType {
+                case 1:
+                    zone = QNZone.zone0() //华东
+                case 2:
+                    zone = QNZone.zone1() //华北
+                case 3:
+                    zone = QNZone.zone2() //华南
+                case 4:
+                    zone = QNZone.zoneNa0() //北美
+                default:
+                    zone = QNZone.zone0()
+                }
+                builder?.setZone(zone);
+            })
+            
+            let manager = QNUploadManager(configuration: config);
+            
+            return manager!;
+    }
+    
     public func register( configDic:[String:String],liveTime:Int = 5 ){
         self.scope = configDic["scope"];
         self.accessKey = configDic["accessKey"];
@@ -95,8 +122,10 @@ class ImageServer: NSObject {
         return hash;
     }
     
-    public func verifyQNConfig(completion: @escaping (Result<AnyObject?>) -> Void){
-        upManager?.put("1".data(using: .utf8), key: nil, token: QNToken, complete: { (info, key, resp) in
+    public func verifyQNConfig(zone:Int? ,completion: @escaping (Result<AnyObject?>) -> Void){
+        upManager = ImageServer.initQNManager(zone ?? 1);
+        
+        upManager.put("1".data(using: .utf8), key: nil, token: QNToken, complete: { (info, key, resp) in
             guard let _ = info, let _ = resp else {
                 completion(.failure(nil))
                 return
@@ -179,14 +208,14 @@ extension ImageServer{
     
         if let filePath = filePath {
             let fileName = getDateString() + "\(arc())" + NSString(string: filePath).lastPathComponent
-            upManager?.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
+            upManager.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
                 hanlder(info, key, resp, NSImage(contentsOfFile: filePath)!)
             }, option: opt)
         }
         
         if let data = data {
             let fileName = getDateString() + "\(timeInterval())" + "\(arc())" + getImageType(data)
-            upManager?.put(data, key: fileName, token: token, complete: { (info, key, resp) in
+            upManager.put(data, key: fileName, token: token, complete: { (info, key, resp) in
                 hanlder(info, key, resp, NSImage(data: data)!)
             }, option: opt)
         }

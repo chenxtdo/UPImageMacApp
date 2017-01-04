@@ -22,6 +22,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 	@IBOutlet weak var urlPrefixTextField: NSTextField!
 	@IBOutlet weak var checkButton: NSButton!
     @IBOutlet weak var markTextField: NSTextField!
+    @IBOutlet weak var QNZonePopButton: NSPopUpButton!
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -33,6 +34,8 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 			statusLabel.cell?.title = "目前使用默认图床"
 			statusLabel.textColor = .red
 		}
+        
+        QNZonePopButton.selectItem(withTag: AppCache.shared.QNZone)
 		
         if let configDic =  AppCache.shared.getQNUseConfig() {
             accessKeyTextField.cell?.title = configDic["accessKey"]!
@@ -51,6 +54,15 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		
 	}
 	
+    @IBAction func selectQNZone(_ sender: NSMenuItem) {
+        
+        
+        QNZonePopButton.select(sender);
+        
+    }
+    
+    
+    
 	@IBAction func setQiniuConfig(_ sender: AnyObject) {
 		if (accessKeyTextField.cell?.title.characters.count == 0 ||
 			secretKeyTextField.cell?.title.characters.count == 0 ||
@@ -78,7 +90,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		checkButton.isEnabled = false
         ImageServer.shared.register(configDic: ["accessKey":ack,"secretKey":sek,"scope":bck])
         ImageServer.shared.createToken()
-        ImageServer.shared.verifyQNConfig {[weak self] (result) in
+        ImageServer.shared.verifyQNConfig(zone: QNZonePopButton.selectedItem?.tag){ [weak self] (result) in
             self?.checkButton.isEnabled = true
             self?.checkButton.title = "验证配置"
             result.Success(success: {_ in
@@ -94,6 +106,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
                 ]
                 AppCache.shared.setQNConfig(configDic: QN_Config);
                 AppCache.shared.useDefServer = false
+                AppCache.shared.QNZone = (self?.QNZonePopButton.selectedItem?.tag)!;
                
             }).Failure(failure: { _ in
                 self?.showAlert("验证失败", informative: "验证失败，请仔细填写信息。")

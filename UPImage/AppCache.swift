@@ -11,29 +11,28 @@ import TMCache
 
 class AppCache: NSObject{
     
+    
+    
+    
+    
     static let shared = AppCache()
     
     var imagesCacheArr: [[String: AnyObject]] = Array()
     public var linkType : LinkType {
             get {
                 if let linkType = UserDefaults.standard.value(forKey: "linkType") as? Int {
-                    print(linkType)
                     return LinkType(rawValue: linkType)!
                 }
                 return .markdown
             }
             set {
-                print(newValue.rawValue)
                 UserDefaults.standard.setValue(newValue.rawValue, forKey: "linkType")
             }
     }
     
     public var useDefServer : Bool  {
         get {
-            if let useDefServer = UserDefaults.standard.value(forKey: "useDefServer") {
-                return useDefServer as! Bool
-            }
-            return true
+            return UserDefaults.standard.value(forKey: "useDefServer") as? Bool ?? true
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: "useDefServer")
@@ -44,15 +43,23 @@ class AppCache: NSObject{
     
     public var autoUp: Bool {
         get {
-            if let autoUp = UserDefaults.standard.value(forKey: "autoUp") {
-                return autoUp as! Bool
-            }
-            return false
+            return UserDefaults.standard.value(forKey: "autoUp") as? Bool ?? false
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: "autoUp")
         }
     }
+    
+    public var QNZone: Int {
+        get {
+            return UserDefaults.standard.value(forKey: "QNZone") as? Int ?? 1
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "QNZone")
+        }
+    }
+    
+    
     fileprivate var QN_Use_Config : [String:String]?
     fileprivate let QN_Def_Config = ["picUrlPrefix" : "http://7xqmjb.com1.z0.glb.clouddn.com/",
                                      "accessKey" :"bCsVdizvx9fPFfkh9kYi_7PreydtorjvK2lddieO",
