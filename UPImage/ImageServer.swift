@@ -18,7 +18,7 @@ enum LinkType : Int {
         let name = NSString(string: path).lastPathComponent
         switch type {
         case .markdown:
-            return "![" + name + "](" + path + ")"
+            return "![" + name + "](" + path + mark + ")"
         case .url:
             return path
         }
@@ -27,9 +27,15 @@ enum LinkType : Int {
 }
 
 var picUrlPrefix : String {
-get {
-    return AppCache.shared.getQNConfig()["picUrlPrefix"]!;
+    get {
+        return AppCache.shared.getQNConfig()["picUrlPrefix"]!
+    }
 }
+
+var mark: String {
+    get {
+        return AppCache.shared.getQNConfig()["mark"] ?? ""
+    }
 }
 
 
