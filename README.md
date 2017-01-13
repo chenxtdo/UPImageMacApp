@@ -50,9 +50,7 @@ ___
 
 **现在应该能满足基本需求，功能不断完善中**
 
-**请到releases 中下载**
-
-
+[演示下载](http://lzqup.com)
 
 # License
 MIT
