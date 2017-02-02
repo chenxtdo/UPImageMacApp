@@ -188,7 +188,8 @@ extension ImageServer{
             statusItem.button?.image = NSImage(named: "loading-\(Int(percent*10))")
             statusItem.button?.image?.isTemplate = true
         })
-    
+        
+        
         let hanlder: (QNResponseInfo?, String?, [AnyHashable : Any]?, NSImage) -> () = { (info, key, resp, image) in
             statusItem.button?.image = NSImage(named: "StatusIcon")
             statusItem.button?.image?.isTemplate = true
@@ -214,8 +215,11 @@ extension ImageServer{
         }
         
         if let data = data {
-            let fileName = getDateString() + "\(timeInterval())" + "\(arc())" + getImageType(data)
-            upManager.put(data, key: fileName, token: token, complete: { (info, key, resp) in
+            let imageRep = NSBitmapImageRep(data: data)
+            let imageData = imageRep?.representation(using: .PNG, properties: ["":""])
+            
+            let fileName = getDateString() + "\(timeInterval())" + "\(arc())" + getImageType(imageData!)
+            upManager.put(imageData, key: fileName, token: token, complete: { (info, key, resp) in
                 hanlder(info, key, resp, NSImage(data: data)!)
             }, option: opt)
         }
