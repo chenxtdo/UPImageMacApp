@@ -214,12 +214,15 @@ extension ImageServer{
             }, option: opt)
         }
         
-        if let data = data {
-            let imageRep = NSBitmapImageRep(data: data)
-            let imageData = imageRep?.representation(using: .PNG, properties: ["":""])
+        if var data = data {
+            //进行格式转换
+            if data.imageFormat == .unknown {
+                let imageRep = NSBitmapImageRep(data: data)
+                data = (imageRep?.representation(using: .PNG, properties: ["":""]))!
+            }
             
-            let fileName = getDateString() + "\(timeInterval())" + "\(arc())" + getImageType(imageData!)
-            upManager.put(imageData, key: fileName, token: token, complete: { (info, key, resp) in
+            let fileName = getDateString() + "\(timeInterval())" + "\(arc())" + data.imageFormat.rawValue
+            upManager.put(data, key: fileName, token: token, complete: { (info, key, resp) in
                 hanlder(info, key, resp, NSImage(data: data)!)
             }, option: opt)
         }
