@@ -10,35 +10,10 @@ import Foundation
 import Qiniu
 
 
-enum LinkType : Int {
-    case url = 0
-    case markdown = 1
-    
-    static func getLink(path:String,type:LinkType) -> String{
-        let name = NSString(string: path).lastPathComponent
-        switch type {
-        case .markdown:
-            return "![" + name + "](" + path + mark + ")"
-//            return "![" + name + "](" + path + ")"
-        case .url:
-            return path
-        }
-    }
-    
-}
 
 
-var picUrlPrefix : String {
-    get {
-        return AppCache.shared.getQNConfig()["picUrlPrefix"]!
-    }
-}
 
-var mark: String {
-    get {
-        return AppCache.shared.getQNConfig()["mark"] ?? ""
-    }
-}
+
 
 
 class ImageServer: NSObject {
@@ -49,10 +24,11 @@ class ImageServer: NSObject {
     fileprivate var secretKey: String!
     fileprivate var liveTime: Int!
     fileprivate var QNToken : String!
-//    fileprivate let upManager = QNUploadManager()
-    var upManager :QNUploadManager
+    var upManager :QNUploadManager!
+    var picUrlPrefix : String!
+    var mark: String!
+    
     fileprivate override init() {
-        upManager = ImageServer.initQNManager(AppCache.shared.QNZone)
         super.init()
     }
     
@@ -79,10 +55,10 @@ class ImageServer: NSObject {
             return manager!;
     }
     
-    public func register( configDic:[String:String],liveTime:Int = 5 ){
-        self.scope = configDic["scope"];
-        self.accessKey = configDic["accessKey"];
-        self.secretKey = configDic["secretKey"];
+    public func register( config:QNConfig,liveTime:Int = 5 ){
+        self.scope = config.scope;
+        self.accessKey = config.accessKey;
+        self.secretKey = config.secretKey;
         self.liveTime = liveTime;
     }
     
@@ -147,7 +123,15 @@ class ImageServer: NSObject {
 extension ImageServer{
     
     public func QiniuUpload(_ pboard: NSPasteboard) {
-        register(configDic: AppCache.shared.getQNConfig())
+        
+        guard let qc =  AppCache.shared.qnConfig else{
+            NotificationMessage("上传图片失败", informative: "请在设置中配置图床")
+            return
+        }
+        upManager = ImageServer.initQNManager(qc.zone);
+        picUrlPrefix = qc.picUrlPrefix;
+        mark = qc.mark;
+        register(config: qc)
         createToken()
         
         let files: NSArray? = pboard.propertyList(forType: NSFilenamesPboardType) as? NSArray
@@ -165,12 +149,9 @@ extension ImageServer{
             guard let type = pboard.pasteboardItems?.first?.types.first else {
                 return
             }
-           
-            
             guard ["public.tiff","public.png"].contains(type) else {
                 return
             }
-            
             let data = (pboard.pasteboardItems?.first?.data(forType: type))!
             guard let _ = NSImage(data: data) else {
                 return
@@ -200,8 +181,8 @@ extension ImageServer{
             NotificationMessage("上传图片成功", isSuccess: true)
             NSPasteboard.general().clearContents()
             NSPasteboard.general()
-            let picUrl = picUrlPrefix + key!
-            let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.linkType);
+            let picUrl = self.picUrlPrefix + key!
+            let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.appConfig.linkType);
             NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
             let cacheDic: [String: AnyObject] = ["image": image, "url": picUrl as AnyObject]
             AppCache.shared.adduploadImageToCache(cacheDic)

@@ -11,6 +11,8 @@
 		DD0386E71E123C3E00864E9C /* AppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0386E61E123C3E00864E9C /* AppCache.swift */; };
 		DD369FDB1D3CA0310080C369 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD369FD91D3CA0310080C369 /* GeneralViewController.swift */; };
 		DD369FDC1D3CA0310080C369 /* GeneralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */; };
+		DD373A601E4A0AD0002CC39F /* QNConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD373A5F1E4A0AD0002CC39F /* QNConfig.swift */; };
+		DD373A621E4A13ED002CC39F /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD373A611E4A13ED002CC39F /* AppConfig.swift */; };
 		DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */; };
 		DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */; };
 		DD7B7E621D322CC700B68805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7B7E611D322CC700B68805 /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 		DD0386E61E123C3E00864E9C /* AppCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCache.swift; sourceTree = "<group>"; };
 		DD369FD91D3CA0310080C369 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralViewController.xib; sourceTree = "<group>"; };
+		DD373A5F1E4A0AD0002CC39F /* QNConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNConfig.swift; sourceTree = "<group>"; };
+		DD373A611E4A13ED002CC39F /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		DD7B7E5C1D322CC700B68805 /* U图床.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "U图床.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 				DDC182E91D5C1A6600D40AA3 /* OC-birdge.h */,
 				DDB6C2301E120378009B7EDD /* ImageServer.swift */,
 				DD0386E61E123C3E00864E9C /* AppCache.swift */,
+				DD373A5F1E4A0AD0002CC39F /* QNConfig.swift */,
+				DD373A611E4A13ED002CC39F /* AppConfig.swift */,
 			);
 			path = UPImage;
 			sourceTree = "<group>";
@@ -254,9 +260,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD7B7E601D322CC700B68805 /* AppDelegate.swift in Sources */,
+				DD373A621E4A13ED002CC39F /* AppConfig.swift in Sources */,
 				DD369FDB1D3CA0310080C369 /* GeneralViewController.swift in Sources */,
 				DDB6C2311E120378009B7EDD /* ImageServer.swift in Sources */,
 				DD7B7E741D322CEE00B68805 /* DragDestinationView.swift in Sources */,
+				DD373A601E4A0AD0002CC39F /* QNConfig.swift in Sources */,
 				DD4DB49C1D35EDF600FCD47C /* AppHelper.swift in Sources */,
 				DD7B7E781D322D2200B68805 /* ImagePreferencesViewController.swift in Sources */,
 				DDE7BB1F1D3F4295009031F3 /* PasteboardObserver.swift in Sources */,
@@ -361,7 +369,7 @@
 				DEVELOPMENT_TEAM = AA62KG453H;
 				INFOPLIST_FILE = UPImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenxt.upi;
@@ -384,7 +392,7 @@
 				DEVELOPMENT_TEAM = AA62KG453H;
 				INFOPLIST_FILE = UPImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenxt.upi;
 				PRODUCT_NAME = "U图床";

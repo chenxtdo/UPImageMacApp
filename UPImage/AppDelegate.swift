@@ -22,18 +22,16 @@ var statusItem: NSStatusItem!
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
-	let pasteboardObserver = PasteboardObserver()
 	
 	@IBOutlet weak var MarkdownItem: NSMenuItem!
 	@IBOutlet weak var window: NSWindow!
-	
 	@IBOutlet weak var statusMenu: NSMenu!
 	@IBOutlet weak var cacheImageMenu: NSMenu!
-	
 	@IBOutlet weak var autoUpItem: NSMenuItem!
 	@IBOutlet weak var uploadMenuItem: NSMenuItem!
-	
 	@IBOutlet weak var cacheImageMenuItem: NSMenuItem!
+    
+    let pasteboardObserver = PasteboardObserver()
 	lazy var preferencesWindowController: NSWindowController = {
 		let imageViewController = ImagePreferencesViewController()
 		let generalViewController = GeneralViewController()
@@ -44,17 +42,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}()
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		
 		registerHotKeys()
-		
         initApp()
-	
-		
 	}
+    
     func initApp()  {
-        
-        
-        switch AppCache.shared.linkType {
+        switch AppCache.shared.appConfig.linkType {
         case .markdown:
             MarkdownItem.state = 1
         case .url:
@@ -63,13 +56,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         pasteboardObserver.addSubscriber(self)
         
-        if AppCache.shared.autoUp {
+        if AppCache.shared.appConfig.autoUp {
             pasteboardObserver.startObserving()
             autoUpItem.state = 1
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(notification), name: NSNotification.Name(rawValue: "MarkdownState"), object: nil)
-        
         window.center()
         appDelegate = self
         statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
@@ -139,18 +131,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			//自动上传
 		case 6:
             sender.state = 1 - sender.state;
-            AppCache.shared.autoUp =  sender.state == 1 ? true : false
-            AppCache.shared.autoUp ? pasteboardObserver.startObserving() : pasteboardObserver.stopObserving()
+            AppCache.shared.appConfig.autoUp =  sender.state == 1 ? true : false
+            AppCache.shared.appConfig.autoUp ? pasteboardObserver.startObserving() : pasteboardObserver.stopObserving()
+            AppCache.shared.appConfig.setInCache("appConfig")
            //切换markdown
 		case 7:
             sender.state = 1 - sender.state
-            AppCache.shared.linkType = LinkType(rawValue: sender.state)!
+            AppCache.shared.appConfig.linkType = LinkType(rawValue: sender.state)!
             guard let imagesCache = AppCache.shared.imagesCacheArr.first else {
                 return
             }
             let picUrl = imagesCache["url"] as! String
-            NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.linkType), forType: NSStringPboardType)
-            
+            NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSStringPboardType)
+             AppCache.shared.appConfig.setInCache("appConfig")
 		default:
 			break
 		}
@@ -192,7 +185,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func cacheImageClick(_ sender: NSMenuItem) {
 		NSPasteboard.general().clearContents()
 		let picUrl = AppCache.shared.imagesCacheArr[sender.tag]["url"] as! String
-		NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.linkType), forType: NSStringPboardType)
+		NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSStringPboardType)
 		NotificationMessage("图片链接获取成功", isSuccess: true)
 	}
 	
@@ -243,15 +236,15 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 				ImageServer.shared.QiniuUpload(pboard)
 			case UInt32(kVK_ANSI_M):
                 
-                AppCache.shared.linkType = LinkType(rawValue: 1 - AppCache.shared.linkType.rawValue)!
-                print(AppCache.shared.linkType.rawValue)
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "MarkdownState"), object:  AppCache.shared.linkType.rawValue)
+                AppCache.shared.appConfig.linkType = LinkType(rawValue: 1 - AppCache.shared.appConfig.linkType.rawValue)!
+                print(AppCache.shared.appConfig.linkType.rawValue)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "MarkdownState"), object:  AppCache.shared.appConfig.linkType.rawValue)
                 guard let imagesCache = AppCache.shared.imagesCacheArr.last else {
                     return 33
                 }
                 NSPasteboard.general().clearContents()
                 let picUrl = imagesCache["url"] as! String
-                NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.linkType), forType: NSStringPboardType)
+                NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSStringPboardType)
   
                 
 			default:

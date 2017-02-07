@@ -27,30 +27,29 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if !AppCache.shared.useDefServer {
-			statusLabel.cell?.title = "目前使用自定义图床"
-			statusLabel.textColor = .magenta
-		} else {
-			statusLabel.cell?.title = "目前使用默认图床"
-			statusLabel.textColor = .red
-		}
         
-        QNZonePopButton.selectItem(withTag: AppCache.shared.QNZone)
-		
-        if let configDic =  AppCache.shared.getQNUseConfig() {
-            accessKeyTextField.cell?.title = configDic["accessKey"]!
-            secretKeyTextField.cell?.title = configDic["secretKey"]!
-            bucketTextField.cell?.title = configDic["scope"]!
-            urlPrefixTextField.cell?.title = configDic["picUrlPrefix"]!
-            markTextField.cell?.title = configDic["mark"] ?? ""
+        guard let qc =  AppCache.shared.qnConfig else{
+            QNZonePopButton.selectItem(withTag: 1)
+            statusLabel.cell?.title = "请配置图床"
+            return
         }
+        statusLabel.cell?.title = "配置成功。"
+        statusLabel.textColor = .magenta
+        QNZonePopButton.selectItem(withTag: qc.zone);
+        accessKeyTextField.cell?.title = qc.accessKey;
+        secretKeyTextField.cell?.title = qc.secretKey;
+        bucketTextField.cell?.title = qc.scope;
+        urlPrefixTextField.cell?.title = qc.picUrlPrefix;
+        markTextField.cell?.title = qc.mark;
+       
         
 		
 	}
 	@IBAction func setDefault(_ sender: AnyObject) {
-		AppCache.shared.useDefServer = true
-		statusLabel.cell?.title = "目前使用默认图床"
-		statusLabel.textColor = .red
+//		AppCache.shared.appConfig.useDefServer = true
+//		statusLabel.cell?.title = "目前使用默认图床"
+//		statusLabel.textColor = .red
+//        AppCache.shared.appConfig.setInCache("appConfig")
 		
 	}
 	
@@ -85,29 +84,22 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		let ack = (accessKeyTextField.cell?.title)!
 		let sek = (secretKeyTextField.cell?.title)!
 		let bck = (bucketTextField.cell?.title)!
-		
+		let qnConfig =  QNConfig(picUrlPrefix: (urlPrefixTextField.cell?.title)!, accessKey: ack, scope: bck, secretKey: sek, mark: (markTextField.cell?.title)!, zone: (QNZonePopButton.selectedItem?.tag)!)
 		checkButton.title = "验证中"
 		checkButton.isEnabled = false
-        ImageServer.shared.register(configDic: ["accessKey":ack,"secretKey":sek,"scope":bck])
+        ImageServer.shared.register(config:qnConfig)
         ImageServer.shared.createToken()
         ImageServer.shared.verifyQNConfig(zone: QNZonePopButton.selectedItem?.tag){ [weak self] (result) in
             self?.checkButton.isEnabled = true
             self?.checkButton.title = "验证配置"
             result.Success(success: {_ in
-                self?.statusLabel.cell?.title = "目前使用自定义图床"
+                self?.statusLabel.cell?.title = "配置成功。"
                 self?.statusLabel.textColor = .magenta
                 self?.showAlert("验证成功", informative: "配置成功。")
-                let QN_Config = [
-                    "picUrlPrefix"  : (self?.urlPrefixTextField.cell?.title)!,
-                    "accessKey"     : (self?.accessKeyTextField.cell?.title)!,
-                    "scope"         : (self?.bucketTextField.cell?.title)!,
-                    "secretKey"     : (self?.secretKeyTextField.cell?.title)!,
-                    "mark"          : (self?.markTextField.cell?.title)!
-                ]
-                AppCache.shared.setQNConfig(configDic: QN_Config);
-                AppCache.shared.useDefServer = false
-                AppCache.shared.QNZone = (self?.QNZonePopButton.selectedItem?.tag)!;
-               
+                qnConfig.setInCache("QN_Use_Config");
+                AppCache.shared.qnConfig = qnConfig;
+                AppCache.shared.appConfig.useDefServer = false
+                AppCache.shared.appConfig.setInCache("appConfig")
             }).Failure(failure: { _ in
                 self?.showAlert("验证失败", informative: "验证失败，请仔细填写信息。")
             })
@@ -119,12 +111,7 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		arlert.messageText = message
 		arlert.informativeText = informative
 		arlert.addButton(withTitle: "确定")
-		if message == "验证成功" {
-			arlert.icon = NSImage(named: "Icon_32x32")
-		}
-		else {
-			arlert.icon = NSImage(named: "Failure")
-		}
+        arlert.icon = message == "验证成功" ? NSImage(named: "Icon_32x32") :  NSImage(named: "Failure")
 		arlert.beginSheetModal(for: self.window!, completionHandler: { (response) in
 			
 		})
