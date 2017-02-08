@@ -54,6 +54,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             MarkdownItem.state = 0
         }
         
+        
+        
         pasteboardObserver.addSubscriber(self)
         
         if AppCache.shared.appConfig.autoUp {
@@ -80,32 +82,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
 		// Insert code here to tear down your application
+          AppCache.shared.appConfig.setInCache("appConfig")
+        
 	}
 	
 	func showMenu() {
-		
 		let pboard = NSPasteboard.general()
 		let files: NSArray? = pboard.propertyList(forType: NSFilenamesPboardType) as? NSArray
-		
 		if let files = files {
 			let i = NSImage(contentsOfFile: files.firstObject as! String)
 			i?.scalingImage()
 			uploadMenuItem.image = i
-			
 		} else {
 			let i = NSImage(pasteboard: pboard)
 			i?.scalingImage()
 			uploadMenuItem.image = i
-			
 		}
-		
 		let object = TMCache.shared().object(forKey: "imageCache")
 		if let obj = object as? [[String: AnyObject]] {
 			AppCache.shared.imagesCacheArr = obj
-			
 		}
 		cacheImageMenuItem.submenu = makeCacheImageMenu(AppCache.shared.imagesCacheArr)
-		
 		statusItem.popUpMenu(statusMenu)
 	}
 	
@@ -133,7 +130,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             sender.state = 1 - sender.state;
             AppCache.shared.appConfig.autoUp =  sender.state == 1 ? true : false
             AppCache.shared.appConfig.autoUp ? pasteboardObserver.startObserving() : pasteboardObserver.stopObserving()
-            AppCache.shared.appConfig.setInCache("appConfig")
+           
            //切换markdown
 		case 7:
             sender.state = 1 - sender.state
@@ -143,7 +140,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             let picUrl = imagesCache["url"] as! String
             NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSStringPboardType)
-             AppCache.shared.appConfig.setInCache("appConfig")
 		default:
 			break
 		}

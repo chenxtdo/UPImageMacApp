@@ -24,33 +24,30 @@ enum LinkType : Int {
 }
 
 class AppConfig: NSObject ,NSCoding ,DiskCache{
-    var linkType : LinkType
-    var autoUp : Bool
-    var useDefServer : Bool
+    var linkType : LinkType = .url //链接模式
+    var autoUp : Bool = false //是否自动上传
+    var useDefServer : Bool = true //是否配置好 ， true 未配置， false 已配置
+ 
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(linkType.rawValue, forKey: "linkType")
-        aCoder.encode(autoUp, forKey: "autoUp")
-        aCoder.encode(useDefServer, forKey: "useDefServer")
+        
+        aCoder.encode(linkType.rawValue.description, forKey: "linkType")
+        aCoder.encode(autoUp.hashValue.description, forKey: "autoUp")
+        aCoder.encode(useDefServer.hashValue.description, forKey: "useDefServer")
+     
     }
     
     required init?(coder aDecoder: NSCoder) {
-        
         guard  let _ = aDecoder.decodeObject(forKey: "linkType") else {
             return nil
         }
-        autoUp = aDecoder.decodeObject(forKey: "autoUp") as! Bool
-        linkType = LinkType(rawValue: aDecoder.decodeObject(forKey: "linkType") as! Int)!
-        useDefServer = aDecoder.decodeObject(forKey: "useDefServer") as! Bool
+        autoUp = Bool(NSNumber(value: Int(aDecoder.decodeObject(forKey: "autoUp") as! String)!))
+        linkType = LinkType(rawValue: Int(aDecoder.decodeObject(forKey: "linkType") as! String)! )!
+        useDefServer = Bool(NSNumber(value: Int(aDecoder.decodeObject(forKey: "useDefServer") as! String)!))
         super.init()
     }
     override init() {
-        
-        linkType = .url;
-        autoUp = false;
-        useDefServer = false;
         super.init();
         setInCache("appConfig");
-        
     }
 }

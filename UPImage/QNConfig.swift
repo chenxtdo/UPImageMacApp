@@ -44,8 +44,4 @@ class QNConfig: NSObject,NSCoding,DiskCache {
         self.mark = mark;
         self.zone = zone;
     }
-    
-  
-    
-    
 }

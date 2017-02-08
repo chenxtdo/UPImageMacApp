@@ -99,7 +99,6 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
                 qnConfig.setInCache("QN_Use_Config");
                 AppCache.shared.qnConfig = qnConfig;
                 AppCache.shared.appConfig.useDefServer = false
-                AppCache.shared.appConfig.setInCache("appConfig")
             }).Failure(failure: { _ in
                 self?.showAlert("验证失败", informative: "验证失败，请仔细填写信息。")
             })
