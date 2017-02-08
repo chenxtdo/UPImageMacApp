@@ -83,7 +83,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationWillTerminate(_ aNotification: Notification) {
 		// Insert code here to tear down your application
           AppCache.shared.appConfig.setInCache("appConfig")
-        
 	}
 	
 	func showMenu() {
@@ -130,7 +129,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             sender.state = 1 - sender.state;
             AppCache.shared.appConfig.autoUp =  sender.state == 1 ? true : false
             AppCache.shared.appConfig.autoUp ? pasteboardObserver.startObserving() : pasteboardObserver.stopObserving()
-           
+           AppCache.shared.appConfig.setInCache("appConfig")
            //切换markdown
 		case 7:
             sender.state = 1 - sender.state
@@ -140,6 +139,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             let picUrl = imagesCache["url"] as! String
             NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSStringPboardType)
+            AppCache.shared.appConfig.setInCache("appConfig")
 		default:
 			break
 		}
