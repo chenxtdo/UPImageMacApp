@@ -10,8 +10,7 @@ import Foundation
 import TMCache
 
 protocol DiskCache {
-//    func setInCache(_ key:String)
-//    func getInCahce(_ key:String)->Self
+
 }
 extension DiskCache where Self : NSCoding{
     func setInCache(_ key:String){
