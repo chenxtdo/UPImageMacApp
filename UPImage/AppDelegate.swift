@@ -110,7 +110,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			// 上传
 		case 1:
 			let pboard = NSPasteboard.general()
-			ImageServer.shared.QiniuUpload(pboard)
+			ImageService.shared.uploadImg(pboard)
 			// 设置
 		case 2:
 			preferencesWindowController.showWindow(nil)
@@ -200,7 +200,7 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 	}
 	
 	func pasteboardChanged(_ pasteboard: NSPasteboard) {
-		ImageServer.shared.QiniuUpload(pasteboard)
+		ImageService.shared.uploadImg(pasteboard)
 		
 	}
 	
@@ -229,7 +229,7 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 			switch hkCom.id {
 			case UInt32(kVK_ANSI_U):
 				let pboard = NSPasteboard.general()
-				ImageServer.shared.QiniuUpload(pboard)
+				ImageService.shared.uploadImg(pboard)
 			case UInt32(kVK_ANSI_M):
                 
                 AppCache.shared.appConfig.linkType = LinkType(rawValue: 1 - AppCache.shared.appConfig.linkType.rawValue)!

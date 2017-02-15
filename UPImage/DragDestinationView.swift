@@ -52,7 +52,7 @@ class DragDestinationView: NSView {
 	
 	override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
 		let pboard = sender.draggingPasteboard()
-		ImageServer.shared.QiniuUpload(pboard)
+		ImageService.shared.uploadImg(pboard)
 		return true
 	}
 }

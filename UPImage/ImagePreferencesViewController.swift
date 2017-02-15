@@ -87,9 +87,9 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		let qnConfig =  QNConfig(picUrlPrefix: (urlPrefixTextField.cell?.title)!, accessKey: ack, scope: bck, secretKey: sek, mark: (markTextField.cell?.title)!, zone: (QNZonePopButton.selectedItem?.tag)!)
 		checkButton.title = "验证中"
 		checkButton.isEnabled = false
-        ImageServer.shared.register(config:qnConfig)
-        ImageServer.shared.createToken()
-        ImageServer.shared.verifyQNConfig(zone: QNZonePopButton.selectedItem?.tag){ [weak self] (result) in
+        QNService.shared.register(config:qnConfig)
+        QNService.shared.createToken()
+        QNService.shared.verifyQNConfig(zone: QNZonePopButton.selectedItem?.tag){ [weak self] (result) in
             self?.checkButton.isEnabled = true
             self?.checkButton.title = "验证配置"
             result.Success(success: {_ in

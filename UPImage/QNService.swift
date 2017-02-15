@@ -9,16 +9,9 @@
 import Foundation
 import Qiniu
 
-
-
-
-
-
-
-
-class ImageServer: NSObject {
+class QNService: NSObject {
     
-    static let shared = ImageServer()
+    static let shared = QNService()
     fileprivate var scope : String!
     fileprivate var accessKey: String!
     fileprivate var secretKey: String!
@@ -99,7 +92,7 @@ class ImageServer: NSObject {
     }
     
     public func verifyQNConfig(zone:Int? ,completion: @escaping (Result<AnyObject?>) -> Void){
-        upManager = ImageServer.initQNManager(zone ?? 1);
+        upManager = QNService.initQNManager(zone ?? 1);
         
         upManager.put("1".data(using: .utf8), key: nil, token: QNToken, complete: { (info, key, resp) in
             guard let _ = info, let _ = resp else {
@@ -120,57 +113,23 @@ class ImageServer: NSObject {
 }
 
 // MARK: - 七牛服务，上传图片
-extension ImageServer{
-    
-    public func QiniuUpload(_ pboard: NSPasteboard) {
-        
+extension QNService{
+ 
+    public func QiniuSDKUpload(_  data: Data?) {
         guard let qc =  AppCache.shared.qnConfig else{
             NotificationMessage("上传图片失败", informative: "请在设置中配置图床")
             return
         }
-        upManager = ImageServer.initQNManager(qc.zone);
+        upManager = QNService.initQNManager(qc.zone);
         picUrlPrefix = qc.picUrlPrefix;
         mark = qc.mark;
         register(config: qc)
         createToken()
-        
-        let files: NSArray? = pboard.propertyList(forType: NSFilenamesPboardType) as? NSArray
-        
-        if let files = files {
-            statusItem.button?.image = NSImage(named: "loading-\(0)")
-            statusItem.button?.image?.isTemplate = true
-            
-            guard let _ = NSImage(contentsOfFile: files.firstObject as! String) else {
-                return
-            }
-            QiniuSDKUpload(files.firstObject as? String, data: nil, token: QNToken)
-        }
-        else {
-            guard let type = pboard.pasteboardItems?.first?.types.first else {
-                return
-            }
-            guard ["public.tiff","public.png"].contains(type) else {
-                return
-            }
-            let data = (pboard.pasteboardItems?.first?.data(forType: type))!
-            guard let _ = NSImage(data: data) else {
-                return
-            }
-            statusItem.button?.image = NSImage(named: "loading-\(0)")
-            statusItem.button?.image?.isTemplate = true
-            QiniuSDKUpload(nil, data: data, token: QNToken)
-        }
-       
-        
-    }
-    
-    fileprivate func QiniuSDKUpload(_ filePath: String?, data: Data?, token: String) {
+        let token = QNToken
         let opt = QNUploadOption(progressHandler: { (key, percent) in
             statusItem.button?.image = NSImage(named: "loading-\(Int(percent*10))")
             statusItem.button?.image?.isTemplate = true
         })
-        
-        
         let hanlder: (QNResponseInfo?, String?, [AnyHashable : Any]?, NSImage) -> () = { (info, key, resp, image) in
             statusItem.button?.image = NSImage(named: "StatusIcon")
             statusItem.button?.image?.isTemplate = true
@@ -187,21 +146,7 @@ extension ImageServer{
             let cacheDic: [String: AnyObject] = ["image": image, "url": picUrl as AnyObject]
             AppCache.shared.adduploadImageToCache(cacheDic)
         }
-    
-        if let filePath = filePath {
-            let fileName = getDateString() + "\(arc())" + NSString(string: filePath).lastPathComponent
-            upManager.putFile(filePath, key: fileName, token: token, complete: { (info, key, resp) in
-                hanlder(info, key, resp, NSImage(contentsOfFile: filePath)!)
-            }, option: opt)
-        }
-        
-        if var data = data {
-            //进行格式转换
-            if data.imageFormat == .unknown {
-                let imageRep = NSBitmapImageRep(data: data)
-                data = (imageRep?.representation(using: .PNG, properties: ["":""]))!
-            }
-            
+        if let data = data {
             let fileName = getDateString() + "\(timeInterval())" + "\(arc())" + data.imageFormat.rawValue
             upManager.put(data, key: fileName, token: token, complete: { (info, key, resp) in
                 hanlder(info, key, resp, NSImage(data: data)!)
