@@ -9,13 +9,9 @@
 
 <p align="center">
 
-
-<a href="LICENSE"><img src="pic/20170226148808586452511.png"></a>
-
-
-<img src="pic/20170226148808590364636.png">
-
-<img src="pic/20170226148808595720897.png">
+<img src="https://img.shields.io/badge/language-swift-red.svg" >
+<img src="https://img.shields.io/badge/platform-mac%20os-lightgrey.svg" >
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-373737.svg" ></a>
 
 
 </p>
