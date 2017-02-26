@@ -39,6 +39,8 @@ class ImageService: NSObject {
             data = (imageRep?.representation(using: .PNG, properties: ["":""]))!
         }
         
+        
+//        SMMSService.shared.uploadImage(data!)
         QNService.shared.QiniuSDKUpload(data)
         
     }
