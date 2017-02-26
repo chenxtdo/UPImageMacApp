@@ -3,19 +3,19 @@
 
 <p align="center">
 
-<img src="http://oj9hmf3lg.bkt.clouddn.com/2017022646287Icon_128x128@2x.png" alt="PicU" title="PicU" width="100" height="100"/>
+<img src="pic/2017022646287Icon_128x128@2x.png" alt="PicU" title="PicU" width="100" height="100"/>
 
 </p>
 
 <p align="center">
 
 
-<a href="LICENSE"><img src="https://img.shields.io/cocoapods/l/Kingfisher.svg?style=flat"></a>
+<a href="LICENSE"><img src="pic/20170226148808586452511.png"></a>
 
 
-<img src="https://img.shields.io/badge/language-swift-red.svg">
+<img src="pic/20170226148808590364636.png">
 
-<img src="https://img.shields.io/badge/platform-mac%20os-lightgrey.svg">
+<img src="pic/20170226148808595720897.png">
 
 
 </p>
