@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,7 +13,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="U图床" customModuleProvider="target">
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="PicU" customModuleProvider="target">
             <connections>
                 <outlet property="MarkdownItem" destination="jTH-pG-yA9" id="ivg-YL-QoO"/>
                 <outlet property="autoUpItem" destination="zra-zw-k7S" id="Kcb-px-S7r"/>
@@ -675,7 +677,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="480" height="114"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="114"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -690,6 +692,7 @@
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSM-Fk-syn">
                         <rect key="frame" x="147" y="77" width="121" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="亲，有新的版本哦！" id="jXS-Gy-Kfj">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -698,6 +701,7 @@
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mo5-Ca-jtD">
                         <rect key="frame" x="146" y="44" width="160" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="旨在，更新一切实用的功能!" id="jPq-wP-9j6">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -705,7 +709,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="gjp-hU-jUx">
-                        <rect key="frame" x="139" y="3" width="79" height="32"/>
+                        <rect key="frame" x="139" y="3" width="80" height="32"/>
                         <buttonCell key="cell" type="push" title="去下载" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Rxx-fr-Yho">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -715,7 +719,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="oms-TV-wr1">
-                        <rect key="frame" x="241" y="3" width="66" height="32"/>
+                        <rect key="frame" x="242" y="3" width="67" height="32"/>
                         <buttonCell key="cell" type="push" title="取消" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jUl-ey-K8V">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -769,13 +773,6 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="KdW-8y-Z4B"/>
-                <menuItem title="使用说明" tag="4" id="fgO-Bp-tzH">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="statusMenuClicked:" target="Voe-Tx-rLC" id="aXA-i8-8L5"/>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="Haq-Ry-Fhj"/>
                 <menuItem title="退出" tag="3" id="RwN-h5-tla">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
