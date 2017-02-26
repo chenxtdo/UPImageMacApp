@@ -37,7 +37,7 @@
 		DD373A5F1E4A0AD0002CC39F /* QNConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNConfig.swift; sourceTree = "<group>"; };
 		DD373A611E4A13ED002CC39F /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		DD4DB49B1D35EDF600FCD47C /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
-		DD7B7E5C1D322CC700B68805 /* U图床.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "U图床.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD7B7E5C1D322CC700B68805 /* PicU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7B7E5F1D322CC700B68805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD7B7E611D322CC700B68805 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD7B7E661D322CC700B68805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		DD7B7E761D322D2200B68805 /* ImagePreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreferencesViewController.swift; sourceTree = "<group>"; };
 		DD7B7E771D322D2200B68805 /* ImagePreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagePreferencesViewController.xib; sourceTree = "<group>"; };
 		DD7B7E7A1D322D7200B68805 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		DDA29F581D39FD2300C9F885 /* U图床.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "U图床.entitlements"; sourceTree = "<group>"; };
+		DDA29F581D39FD2300C9F885 /* PicU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PicU.entitlements; sourceTree = "<group>"; };
 		DDB6C2301E120378009B7EDD /* QNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNService.swift; sourceTree = "<group>"; };
 		DDC182E91D5C1A6600D40AA3 /* OC-birdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OC-birdge.h"; sourceTree = "<group>"; };
 		DDC266061E5419B30061F5DA /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		DD7B7E531D322CC700B68805 = {
 			isa = PBXGroup;
 			children = (
-				DDA29F581D39FD2300C9F885 /* U图床.entitlements */,
+				DDA29F581D39FD2300C9F885 /* PicU.entitlements */,
 				DD7B7E5E1D322CC700B68805 /* UPImage */,
 				DD7B7E5D1D322CC700B68805 /* Products */,
 				8678AFDE00AA4AA14BB417A0 /* Pods */,
@@ -90,7 +90,7 @@
 		DD7B7E5D1D322CC700B68805 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DD7B7E5C1D322CC700B68805 /* U图床.app */,
+				DD7B7E5C1D322CC700B68805 /* PicU.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,9 +131,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DD7B7E5B1D322CC700B68805 /* U图床 */ = {
+		DD7B7E5B1D322CC700B68805 /* PicU */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DD7B7E691D322CC700B68805 /* Build configuration list for PBXNativeTarget "U图床" */;
+			buildConfigurationList = DD7B7E691D322CC700B68805 /* Build configuration list for PBXNativeTarget "PicU" */;
 			buildPhases = (
 				6A8B62D9AF77E000A69C2630 /* [CP] Check Pods Manifest.lock */,
 				DD7B7E581D322CC700B68805 /* Sources */,
@@ -146,9 +146,9 @@
 			);
 			dependencies = (
 			);
-			name = "U图床";
+			name = PicU;
 			productName = UPImage;
-			productReference = DD7B7E5C1D322CC700B68805 /* U图床.app */;
+			productReference = DD7B7E5C1D322CC700B68805 /* PicU.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -177,7 +177,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DD7B7E571D322CC700B68805 /* Build configuration list for PBXProject "U图床" */;
+			buildConfigurationList = DD7B7E571D322CC700B68805 /* Build configuration list for PBXProject "PicU" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -190,7 +190,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DD7B7E5B1D322CC700B68805 /* U图床 */,
+				DD7B7E5B1D322CC700B68805 /* PicU */,
 			);
 		};
 /* End PBXProject section */
@@ -377,7 +377,7 @@
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenxt.upi;
-				PRODUCT_NAME = "U图床";
+				PRODUCT_NAME = PicU;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "UPImage/OC-birdge.h";
 				SWIFT_VERSION = 3.0;
@@ -399,7 +399,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenxt.upi;
-				PRODUCT_NAME = "U图床";
+				PRODUCT_NAME = PicU;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "UPImage/OC-birdge.h";
 				SWIFT_VERSION = 3.0;
@@ -409,7 +409,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DD7B7E571D322CC700B68805 /* Build configuration list for PBXProject "U图床" */ = {
+		DD7B7E571D322CC700B68805 /* Build configuration list for PBXProject "PicU" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DD7B7E671D322CC700B68805 /* Debug */,
@@ -418,7 +418,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DD7B7E691D322CC700B68805 /* Build configuration list for PBXNativeTarget "U图床" */ = {
+		DD7B7E691D322CC700B68805 /* Build configuration list for PBXNativeTarget "PicU" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DD7B7E6A1D322CC700B68805 /* Debug */,
