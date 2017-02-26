@@ -10,12 +10,14 @@
 <p align="center">
 
 
-<a href="LICENSE"><img src="pic/20170226148808586452511.png"></a>
 
 
-<img src="pic/20170226148808590364636.png">
+<img src="pic/20170226148808586452511.png" width="95" height="17">
 
-<img src="pic/20170226148808595720897.png">
+
+<img src="pic/20170226148808590364636.png" width="100" height="17">
+
+<a href="LICENSE"><img src="pic/20170226148808595720897.png" width="79" height="17"></a>
 
 
 </p>
