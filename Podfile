@@ -7,6 +7,6 @@ def pods
    pod 'TMCache'
 end
 
-target ‘U图床’ do
+target ‘PicU’ do
     pods
 end

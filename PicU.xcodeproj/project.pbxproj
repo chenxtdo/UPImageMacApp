@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A4BF54F701FBCE2EA077E1F /* Pods_U__.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E82128049C12F67B731AF4D /* Pods_U__.framework */; };
+		B44A47A2256D8DA0B03F8237 /* Pods_PicU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E05A0A741EE20D2780C8F6A /* Pods_PicU.framework */; };
 		DD0386E71E123C3E00864E9C /* AppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0386E61E123C3E00864E9C /* AppCache.swift */; };
 		DD369FDB1D3CA0310080C369 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD369FD91D3CA0310080C369 /* GeneralViewController.swift */; };
 		DD369FDC1D3CA0310080C369 /* GeneralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */; };
@@ -29,8 +30,11 @@
 		1616B4D0FDD7348645DB5419 /* Pods-UPImage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UPImage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UPImage/Pods-UPImage.debug.xcconfig"; sourceTree = "<group>"; };
 		2A56BA38A7BE9D5457A18131 /* Pods-U图床.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-U图床.release.xcconfig"; path = "Pods/Target Support Files/Pods-U图床/Pods-U图床.release.xcconfig"; sourceTree = "<group>"; };
 		3BA9D9564996CAE5BE948F11 /* Pods-UPImage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UPImage.release.xcconfig"; path = "Pods/Target Support Files/Pods-UPImage/Pods-UPImage.release.xcconfig"; sourceTree = "<group>"; };
+		3E05A0A741EE20D2780C8F6A /* Pods_PicU.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PicU.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E82128049C12F67B731AF4D /* Pods_U__.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_U__.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7472013CBB30ECD5BCCCD68D /* Pods-U图床.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-U图床.debug.xcconfig"; path = "Pods/Target Support Files/Pods-U图床/Pods-U图床.debug.xcconfig"; sourceTree = "<group>"; };
+		88A8CB4247904D1AAE55DF35 /* Pods-PicU.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicU.release.xcconfig"; path = "Pods/Target Support Files/Pods-PicU/Pods-PicU.release.xcconfig"; sourceTree = "<group>"; };
+		CE95451D6911349713F6C020 /* Pods-PicU.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicU.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PicU/Pods-PicU.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0386E61E123C3E00864E9C /* AppCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCache.swift; sourceTree = "<group>"; };
 		DD369FD91D3CA0310080C369 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		DD369FDA1D3CA0310080C369 /* GeneralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralViewController.xib; sourceTree = "<group>"; };
@@ -59,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A4BF54F701FBCE2EA077E1F /* Pods_U__.framework in Frameworks */,
+				B44A47A2256D8DA0B03F8237 /* Pods_PicU.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +77,8 @@
 				3BA9D9564996CAE5BE948F11 /* Pods-UPImage.release.xcconfig */,
 				7472013CBB30ECD5BCCCD68D /* Pods-U图床.debug.xcconfig */,
 				2A56BA38A7BE9D5457A18131 /* Pods-U图床.release.xcconfig */,
+				CE95451D6911349713F6C020 /* Pods-PicU.debug.xcconfig */,
+				88A8CB4247904D1AAE55DF35 /* Pods-PicU.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -124,6 +131,7 @@
 			children = (
 				F2B212080ECE2120F8728E6D /* Pods_UPImage.framework */,
 				6E82128049C12F67B731AF4D /* Pods_U__.framework */,
+				3E05A0A741EE20D2780C8F6A /* Pods_PicU.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -222,7 +230,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-U图床/Pods-U图床-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PicU/Pods-PicU-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		50EC8073D39A9D4A030E7A35 /* [CP] Embed Pods Frameworks */ = {
@@ -237,7 +245,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-U图床/Pods-U图床-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PicU/Pods-PicU-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6A8B62D9AF77E000A69C2630 /* [CP] Check Pods Manifest.lock */ = {
@@ -363,7 +371,7 @@
 		};
 		DD7B7E6A1D322CC700B68805 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7472013CBB30ECD5BCCCD68D /* Pods-U图床.debug.xcconfig */;
+			baseConfigurationReference = CE95451D6911349713F6C020 /* Pods-PicU.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "U图床.entitlements";
@@ -386,7 +394,7 @@
 		};
 		DD7B7E6B1D322CC700B68805 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A56BA38A7BE9D5457A18131 /* Pods-U图床.release.xcconfig */;
+			baseConfigurationReference = 88A8CB4247904D1AAE55DF35 /* Pods-PicU.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "U图床.entitlements";
