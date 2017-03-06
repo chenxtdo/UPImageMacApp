@@ -48,8 +48,8 @@
 		DDB6C2301E120378009B7EDD /* QNService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QNService.swift; sourceTree = "<group>"; };
 		DDC182E91D5C1A6600D40AA3 /* OC-birdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OC-birdge.h"; sourceTree = "<group>"; };
 		DDC266061E5419B30061F5DA /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		DDD7F02D1E6D433700B685D8 /* PicU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PicU.entitlements; sourceTree = "<group>"; };
 		DDE7BB1E1D3F4295009031F3 /* PasteboardObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardObserver.swift; sourceTree = "<group>"; };
-		DDF4BDE81E6327E6006E0382 /* PicU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PicU.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 		DD7B7E531D322CC700B68805 = {
 			isa = PBXGroup;
 			children = (
-				DDF4BDE81E6327E6006E0382 /* PicU.entitlements */,
+				DDD7F02D1E6D433700B685D8 /* PicU.entitlements */,
 				DD7B7E5E1D322CC700B68805 /* UPImage */,
 				DD7B7E5D1D322CC700B68805 /* Products */,
 				8678AFDE00AA4AA14BB417A0 /* Pods */,
@@ -367,6 +367,7 @@
 			baseConfigurationReference = CE95451D6911349713F6C020 /* Pods-PicU.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PicU.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -389,6 +390,7 @@
 			baseConfigurationReference = 88A8CB4247904D1AAE55DF35 /* Pods-PicU.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PicU.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
