@@ -71,6 +71,12 @@ func NotificationMessage(_ message: String, informative: String? = nil, isSucces
     
 }
 
+func arc() -> UInt32 { return arc4random() % 100000 }
+
+func timeInterval() -> Int {
+    
+    return Int(Date(timeIntervalSinceNow: 0).timeIntervalSince1970)
+}
 
 func getDateString() -> String {
 	let dateformatter = DateFormatter()

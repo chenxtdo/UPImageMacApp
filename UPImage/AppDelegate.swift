@@ -134,7 +134,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		case 7:
             sender.state = 1 - sender.state
             AppCache.shared.appConfig.linkType = LinkType(rawValue: sender.state)!
-            guard let imagesCache = AppCache.shared.imagesCacheArr.first else {
+            guard let imagesCache = AppCache.shared.imagesCacheArr.last else {
                 return
             }
             let picUrl = imagesCache["url"] as! String

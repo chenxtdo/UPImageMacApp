@@ -39,7 +39,12 @@ class ImageService: NSObject {
             data = (imageRep?.representation(using: .PNG, properties: ["":""]))!
         }
         
-        QNService.shared.QiniuSDKUpload(data)
+        if AppCache.shared.appConfig.useDefServer{
+            SMMSService.shared.uploadImage(data!)
+        }else{
+            QNService.shared.QiniuSDKUpload(data)
+        }
+       //
         
     }
 

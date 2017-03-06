@@ -46,8 +46,8 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
 		
 	}
 	@IBAction func setDefault(_ sender: AnyObject) {
-//		AppCache.shared.appConfig.useDefServer = true
-//		statusLabel.cell?.title = "目前使用默认图床"
+		AppCache.shared.appConfig.useDefServer = true
+		statusLabel.cell?.title = "目前使用默认图床"
 //		statusLabel.textColor = .red
 //        AppCache.shared.appConfig.setInCache("appConfig")
 		

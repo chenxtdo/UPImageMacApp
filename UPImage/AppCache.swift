@@ -14,10 +14,12 @@ protocol DiskCache {
 }
 extension DiskCache where Self : NSCoding{
     func setInCache(_ key:String){
-        TMCache.shared().setObject(self, forKey: key);
+        let cacheDir = NSHomeDirectory() + "/Documents";
+        TMCache(name: "picCache", rootPath: cacheDir).setObject(self, forKey: key);
     }
     static func getInCahce(_ key:String)->Self?{
-        return  TMCache.shared().object(forKey: key) as? Self;
+         let cacheDir = NSHomeDirectory() + "/Documents";
+        return  TMCache(name: "picCache", rootPath: cacheDir).object(forKey: key) as? Self;
     }
 }
 

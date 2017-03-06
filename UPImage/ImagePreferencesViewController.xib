@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ImagePreferencesViewController" customModule="U图床" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ImagePreferencesViewController" customModule="PicU" customModuleProvider="target">
             <connections>
                 <outlet property="QNZonePopButton" destination="zgK-jM-epN" id="4GR-8j-RTI"/>
                 <outlet property="accessKeyTextField" destination="rjs-X7-kUH" id="17Y-Lr-rYx"/>
@@ -106,7 +106,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NvL-nQ-2Dg">
-                    <rect key="frame" x="134" y="88" width="94" height="32"/>
+                    <rect key="frame" x="52" y="88" width="94" height="32"/>
                     <buttonCell key="cell" type="push" title="验证配置" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="Bip-WS-tbq">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -123,7 +123,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sDc-Ui-cx9">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sDc-Ui-cx9">
                     <rect key="frame" x="216" y="88" width="94" height="32"/>
                     <buttonCell key="cell" type="push" title="使用默认" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="SOn-Nb-evr">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -213,7 +213,7 @@
                 <constraint firstItem="Tfv-O9-NT9" firstAttribute="height" secondItem="9QQ-vX-btJ" secondAttribute="height" id="pf6-zf-uSj"/>
                 <constraint firstAttribute="trailing" secondItem="rjs-X7-kUH" secondAttribute="trailing" constant="40" id="qqu-0p-AZ5"/>
                 <constraint firstItem="Ia4-2v-PGs" firstAttribute="leading" secondItem="9QQ-vX-btJ" secondAttribute="leading" id="sXD-AQ-DL5"/>
-                <constraint firstItem="NvL-nQ-2Dg" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="uU2-82-vSF"/>
+                <constraint firstItem="NvL-nQ-2Dg" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" constant="-82" id="uU2-82-vSF"/>
                 <constraint firstItem="Tfv-O9-NT9" firstAttribute="width" secondItem="9QQ-vX-btJ" secondAttribute="width" id="vvI-oi-pPN"/>
                 <constraint firstItem="vOc-On-5ul" firstAttribute="leading" secondItem="spj-8n-oHx" secondAttribute="leading" id="wRK-dh-enN"/>
                 <constraint firstItem="c7a-xx-UQA" firstAttribute="centerY" secondItem="vOc-On-5ul" secondAttribute="centerY" id="wfZ-x1-Cq3"/>
