@@ -35,7 +35,7 @@ PicU is a  tool for Mac, that can easily upload picture to [QNServer](http://www
 
 ## Download
 
-[Demo](http://lzqup.com)
+[Releases](https://github.com/chenxtdo/UPImageMacApp/releases)
 
 
 
