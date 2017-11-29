@@ -35,7 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	lazy var preferencesWindowController: NSWindowController = {
 		let imageViewController = ImagePreferencesViewController()
 		let generalViewController = GeneralViewController()
-		let controllers = [generalViewController, imageViewController]
+		let controllers = [imageViewController]
 		let wc = MASPreferencesWindowController(viewControllers: controllers, title: "设置")
 		imageViewController.window = wc?.window
 		return wc!
