@@ -27,6 +27,7 @@ PicU is a  tool for Mac, that can easily upload picture to [QNServer](http://www
 - [x] Save five pictures of historical links.
 - [x] Markdown link or common http link.
 - [x] Custom QNServer.
+- [x] Default sm.ms Server
 
 ## Next Steps
 
