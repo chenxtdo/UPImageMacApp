@@ -8,7 +8,6 @@
 
 import Cocoa
 import AFNetworking
-import Alamofire
 
 class SMMSService: NSObject {
     static let shared = SMMSService()
