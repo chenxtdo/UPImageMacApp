@@ -27,20 +27,21 @@ class QNService: NSObject {
     
     class func initQNManager(_ zoneType : Int) -> QNUploadManager {
             let config = QNConfiguration.build({ (builder: QNConfigurationBuilder?) in
-                var zone : QNZone!
+                var zone : QNFixedZone!
                 switch zoneType {
                 case 1:
-                    zone = QNZone.zone0() //华东
+                    zone = QNFixedZone.zone0() //华东
                 case 2:
-                    zone = QNZone.zone1() //华北
+                    zone = QNFixedZone.zone1() //华北
                 case 3:
-                    zone = QNZone.zone2() //华南
+                    zone = QNFixedZone.zone2() //华南
                 case 4:
-                    zone = QNZone.zoneNa0() //北美
+                    zone = QNFixedZone.zoneNa0() //北美
                 default:
-                    zone = QNZone.zone0()
+                    zone = QNFixedZone.zone0()
                 }
                 builder?.setZone(zone);
+        
             })
             
             let manager = QNUploadManager(configuration: config);
@@ -94,7 +95,7 @@ class QNService: NSObject {
     public func verifyQNConfig(zone:Int? ,completion: @escaping (Result<AnyObject?>) -> Void){
         upManager = QNService.initQNManager(zone ?? 1);
         
-        upManager.put("1".data(using: .utf8), key: nil, token: QNToken, complete: { (info, key, resp) in
+        upManager.put("Hello, World!".data(using: .utf8), key: "Hello", token: QNToken, complete: { (info, key, resp) in
             guard let _ = info, let _ = resp else {
                 completion(.failure(nil))
                 return

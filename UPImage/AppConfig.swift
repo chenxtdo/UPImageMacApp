@@ -32,8 +32,16 @@ class AppConfig: NSObject ,NSCoding ,DiskCache{
     func encode(with aCoder: NSCoder) {
         
         aCoder.encode(linkType.rawValue.description, forKey: "linkType")
-        aCoder.encode(autoUp.hashValue.description, forKey: "autoUp")
-        aCoder.encode(useDefServer.hashValue.description, forKey: "useDefServer")
+        if autoUp {
+            aCoder.encode("1", forKey: "autoUp")
+        } else {
+            aCoder.encode("0", forKey: "autoUp")
+        }
+        if useDefServer {
+            aCoder.encode("1", forKey: "useDefServer")
+        } else {
+            aCoder.encode("0", forKey: "useDefServer")
+        }
      
     }
     

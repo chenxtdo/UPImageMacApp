@@ -1,27 +1,27 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - HappyDNS (0.3.10)
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - HappyDNS (0.3.14)
   - MASPreferences (1.1.4)
-  - Qiniu (7.1.4):
-    - AFNetworking (~> 3)
+  - Qiniu (7.2.4):
     - HappyDNS (~> 0.3)
   - TMCache (2.1.0)
 
 DEPENDENCIES:
+  - AFNetworking
   - MASPreferences
-  - Qiniu
+  - Qiniu (~> 7.2)
   - TMCache
 
 SPEC REPOS:
@@ -33,12 +33,12 @@ SPEC REPOS:
     - TMCache
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  HappyDNS: dc6a164ee81979093123c241c6353bcf0218add6
   MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
-  Qiniu: a4c962782035ee25b9da3e195181d8c384bb75be
+  Qiniu: 65384bca1cdb0480a68d9b9b8f54db53418c0355
   TMCache: 95ebcc9b3c7e90fb5fd8fc3036cba3aa781c9bed
 
-PODFILE CHECKSUM: 67254f85860b4a1ca52413c2991e390d206f5656
+PODFILE CHECKSUM: 118dcfb5abd42130dde389f59bb2b387ee43dbb4
 
 COCOAPODS: 1.5.2
