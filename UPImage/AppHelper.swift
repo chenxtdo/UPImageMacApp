@@ -86,9 +86,11 @@ func getDateString() -> String {
 }
 
 func checkImageFile(_ pboard: NSPasteboard) -> Bool {
-    
-    let files: NSArray = pboard.propertyList(forType: NSFilenamesPboardType) as! NSArray
-    let image = NSImage(contentsOfFile: files.firstObject as! String)
+     guard let pasteboard = pboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
+                 let path = pasteboard[0] as? String
+           else { return false }
+
+    let image = NSImage(contentsOfFile: path)
     guard let _ = image else {
         return false
     }

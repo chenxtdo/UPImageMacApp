@@ -134,11 +134,11 @@ extension QNService{
                 return
             }
             NotificationMessage("上传图片成功", isSuccess: true)
-            NSPasteboard.general().clearContents()
-            NSPasteboard.general()
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general
             let picUrl = self.picUrlPrefix + key!
             let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.appConfig.linkType);
-            NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
+            NSPasteboard.general.setString(picUrlS, forType: NSPasteboard.PasteboardType.string)
             let cacheDic: [String: AnyObject] = ["image": image, "url": picUrl as AnyObject]
             AppCache.shared.adduploadImageToCache(cacheDic)
         }

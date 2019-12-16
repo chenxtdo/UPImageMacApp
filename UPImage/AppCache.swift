@@ -46,11 +46,11 @@ class AppCache: NSObject{
     func adduploadImageToCache(_ dic: [String: AnyObject]) {
         if imagesCacheArr.count < 5 {
             imagesCacheArr.append(dic)
-            TMCache.shared().setObject(imagesCacheArr as NSCoding!, forKey: "imageCache")
+            TMCache.shared().setObject(imagesCacheArr as NSCoding?, forKey: "imageCache")
         } else {
             imagesCacheArr.remove(at: 0)
             imagesCacheArr.append(dic)
-            TMCache.shared().setObject(imagesCacheArr as NSCoding!, forKey: "imageCache")
+            TMCache.shared().setObject(imagesCacheArr as NSCoding?, forKey: "imageCache")
         }
     }
 

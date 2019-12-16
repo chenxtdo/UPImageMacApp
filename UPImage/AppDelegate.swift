@@ -37,8 +37,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		let generalViewController = GeneralViewController()
 		let controllers = [imageViewController]
 		let wc = MASPreferencesWindowController(viewControllers: controllers, title: "设置")
-		imageViewController.window = wc?.window
-		return wc!
+        imageViewController.window = wc.window
+        return wc
 	}()
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -49,9 +49,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func initApp()  {
         switch AppCache.shared.appConfig.linkType {
         case .markdown:
-            MarkdownItem.state = 1
+            MarkdownItem.state = NSControl.StateValue(rawValue: 1)
         case .url:
-            MarkdownItem.state = 0
+            MarkdownItem.state = NSControl.StateValue(rawValue: 0)
         }
         
         
@@ -60,13 +60,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if AppCache.shared.appConfig.autoUp {
             pasteboardObserver.startObserving()
-            autoUpItem.state = 1
+            autoUpItem.state = NSControl.StateValue(rawValue: 1)
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(notification), name: NSNotification.Name(rawValue: "MarkdownState"), object: nil)
         window.center()
         appDelegate = self
-        statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         let statusBarButton = DragDestinationView(frame: (statusItem.button?.bounds)!)
         statusItem.button?.superview?.addSubview(statusBarButton, positioned: .below, relativeTo: statusItem.button)
         let iconImage = NSImage(named: "StatusIcon")
@@ -76,8 +76,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.button?.target = self
     }
 	
-	func notification(_ notification: Notification) {
-			MarkdownItem.state = Int((notification.object as AnyObject) as! NSNumber)
+    @objc func notification(_ notification: Notification) {
+        MarkdownItem.state = NSControl.StateValue(rawValue: Int(truncating: (notification.object as AnyObject) as! NSNumber))
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
@@ -85,9 +85,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           AppCache.shared.appConfig.setInCache("appConfig")
 	}
 	
-	func showMenu() {
-		let pboard = NSPasteboard.general()
-		let files: NSArray? = pboard.propertyList(forType: NSFilenamesPboardType) as? NSArray
+    @objc func showMenu() {
+        let pboard = NSPasteboard.general
+        let files: NSArray? = pboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray
 		if let files = files {
 			let i = NSImage(contentsOfFile: files.firstObject as! String)
 			i?.scalingImage()
@@ -109,7 +109,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		switch sender.tag {
 			// 上传
 		case 1:
-			let pboard = NSPasteboard.general()
+            let pboard = NSPasteboard.general
 			ImageService.shared.uploadImg(pboard)
 			// 设置
 		case 2:
@@ -120,25 +120,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			// 退出
 			NSApp.terminate(nil)
 			//帮助
-		case 4:
-			NSWorkspace.shared().open(URL(string: "http://lzqup.com")!)
 		case 5:
 			break
 			//自动上传
 		case 6:
-            sender.state = 1 - sender.state;
-            AppCache.shared.appConfig.autoUp =  sender.state == 1 ? true : false
+            sender.state = NSControl.StateValue(rawValue: 1 - sender.state.rawValue);
+            AppCache.shared.appConfig.autoUp =  sender.state.rawValue == 1 ? true : false
             AppCache.shared.appConfig.autoUp ? pasteboardObserver.startObserving() : pasteboardObserver.stopObserving()
            AppCache.shared.appConfig.setInCache("appConfig")
            //切换markdown
 		case 7:
-            sender.state = 1 - sender.state
-            AppCache.shared.appConfig.linkType = LinkType(rawValue: sender.state)!
+            sender.state = NSControl.StateValue(rawValue: 1 - sender.state.rawValue)
+            AppCache.shared.appConfig.linkType = LinkType(rawValue: sender.state.rawValue)!
             guard let imagesCache = AppCache.shared.imagesCacheArr.last else {
                 return
             }
             let picUrl = imagesCache["url"] as! String
-            NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSStringPboardType)
+            NSPasteboard.general.setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSPasteboard.PasteboardType.string)
             AppCache.shared.appConfig.setInCache("appConfig")
 		default:
 			break
@@ -149,7 +147,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func btnClick(_ sender: NSButton) {
 		switch sender.tag {
 		case 1:
-			NSWorkspace.shared().open(URL(string: "http://blog.lzqup.com/tools/2016/07/10/Tools-UPImage.html")!)
+            NSWorkspace.shared.open(URL(string: "http://blog.lzqup.com/tools/2016/07/10/Tools-UPImage.html")!)
 			self.window.close()
 		case 2:
 			self.window.close()
@@ -178,10 +176,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		return menu
 	}
 	
-	func cacheImageClick(_ sender: NSMenuItem) {
-		NSPasteboard.general().clearContents()
+    @objc func cacheImageClick(_ sender: NSMenuItem) {
+        NSPasteboard.general.clearContents()
 		let picUrl = AppCache.shared.imagesCacheArr[sender.tag]["url"] as! String
-		NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSStringPboardType)
+        NSPasteboard.general.setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSPasteboard.PasteboardType.string)
 		NotificationMessage("图片链接获取成功", isSuccess: true)
 	}
 	
@@ -228,7 +226,7 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
 			GetEventParameter(theEvent, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout<EventHotKeyID>.size, nil, &hkCom)
 			switch hkCom.id {
 			case UInt32(kVK_ANSI_U):
-				let pboard = NSPasteboard.general()
+                let pboard = NSPasteboard.general
 				ImageService.shared.uploadImg(pboard)
 			case UInt32(kVK_ANSI_M):
                 
@@ -238,9 +236,9 @@ extension AppDelegate: NSUserNotificationCenterDelegate, PasteboardObserverSubsc
                 guard let imagesCache = AppCache.shared.imagesCacheArr.last else {
                     return 33
                 }
-                NSPasteboard.general().clearContents()
+                NSPasteboard.general.clearContents()
                 let picUrl = imagesCache["url"] as! String
-                NSPasteboard.general().setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSStringPboardType)
+                NSPasteboard.general.setString(LinkType.getLink(path: picUrl, type: AppCache.shared.appConfig.linkType), forType: NSPasteboard.PasteboardType.string)
   
                 
 			default:

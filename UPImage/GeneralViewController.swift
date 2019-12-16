@@ -11,10 +11,9 @@ import MASPreferences
 
 
 class GeneralViewController: NSViewController, MASPreferencesViewController {
-	
-	override var identifier: String? { get { return "general" } set { super.identifier = newValue } }
+    var viewIdentifier: String = "general"
 	var toolbarItemLabel: String? { get { return "基本" } }
-	var toolbarItemImage: NSImage? { get { return NSImage(named: NSImageNamePreferencesGeneral) } }
+    var toolbarItemImage: NSImage? { get { return NSImage(named: NSImage.preferencesGeneralName) } }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

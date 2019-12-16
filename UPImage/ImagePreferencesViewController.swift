@@ -10,10 +10,9 @@ import Cocoa
 import MASPreferences
 
 class ImagePreferencesViewController: NSViewController, MASPreferencesViewController {
-	
-	override var identifier: String? { get { return "image" } set { super.identifier = newValue } }
+	var viewIdentifier: String = "image"
 	var toolbarItemLabel: String? { get { return "图床" } }
-	var toolbarItemImage: NSImage? { get { return NSImage(named: NSImageNameUser) } }
+    var toolbarItemImage: NSImage? { get { return NSImage(named: NSImage.userName) } }
 	var window: NSWindow?
 	@IBOutlet weak var statusLabel: NSTextField!
 	@IBOutlet weak var accessKeyTextField: NSTextField!
@@ -63,10 +62,10 @@ class ImagePreferencesViewController: NSViewController, MASPreferencesViewContro
     
     
 	@IBAction func setQiniuConfig(_ sender: AnyObject) {
-		if (accessKeyTextField.cell?.title.characters.count == 0 ||
-			secretKeyTextField.cell?.title.characters.count == 0 ||
-			bucketTextField.cell?.title.characters.count == 0 ||
-			urlPrefixTextField.cell?.title.characters.count == 0) {
+        if (accessKeyTextField.cell?.title.count == 0 ||
+			secretKeyTextField.cell?.title.count == 0 ||
+			bucketTextField.cell?.title.count == 0 ||
+			urlPrefixTextField.cell?.title.count == 0) {
 				showAlert("有配置信息未填写", informative: "请仔细填写")
 				return
 		}

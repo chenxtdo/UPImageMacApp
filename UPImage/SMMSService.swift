@@ -46,11 +46,11 @@ class SMMSService: NSObject {
                 return
             }
             NotificationMessage("上传图片成功", isSuccess: true)
-            NSPasteboard.general().clearContents()
-            NSPasteboard.general()
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general
             let picUrl = url;
             let picUrlS  = LinkType.getLink(path:picUrl,type:AppCache.shared.appConfig.linkType);
-            NSPasteboard.general().setString(picUrlS, forType: NSStringPboardType)
+            NSPasteboard.general.setString(picUrlS, forType: NSPasteboard.PasteboardType.string)
             let cacheDic: [String: AnyObject] = ["image": NSImage(data: data)!, "url": picUrl as AnyObject]
             AppCache.shared.adduploadImageToCache(cacheDic)
         }) { (URLSessionDataTask, error) in

@@ -21,7 +21,7 @@ enum PasteboardObserverState {
 }
 
 class PasteboardObserver: NSObject {
-	var pasteboard: NSPasteboard = NSPasteboard.general()
+    var pasteboard: NSPasteboard = NSPasteboard.general
 	
 	var subscribers: NSMutableSet = NSMutableSet()
 	var serialQueue: DispatchQueue = DispatchQueue(label: "org.okolodev.PrettyPasteboard", attributes: [])

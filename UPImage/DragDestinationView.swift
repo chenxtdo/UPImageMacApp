@@ -19,7 +19,7 @@ class DragDestinationView: NSView {
 	override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
 		// 注册接受文件拖入的类型
-		register(forDraggedTypes: [NSFilenamesPboardType])
+        registerForDraggedTypes([kUTTypeFileURL as NSPasteboard.PasteboardType])
 		
 	}
 	
@@ -28,7 +28,7 @@ class DragDestinationView: NSView {
 	}
 	
 	override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-		let pboard = sender.draggingPasteboard()
+        let pboard = sender.draggingPasteboard
 		
 		if checkImageFile(pboard) {
 			statusItem.button?.image = NSImage(named: "upload")
@@ -46,12 +46,12 @@ class DragDestinationView: NSView {
 	}
 	
 	override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
-		let pboard = sender.draggingPasteboard()
+        let pboard = sender.draggingPasteboard
 		return checkImageFile(pboard)
 	}
 	
 	override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-		let pboard = sender.draggingPasteboard()
+        let pboard = sender.draggingPasteboard
 		ImageService.shared.uploadImg(pboard)
 		return true
 	}

@@ -13,7 +13,7 @@ PODS:
   - AFNetworking/Security (3.2.1)
   - AFNetworking/Serialization (3.2.1)
   - HappyDNS (0.3.14)
-  - MASPreferences (1.1.4)
+  - MASPreferences (1.3)
   - Qiniu (7.2.4):
     - HappyDNS (~> 0.3)
   - TMCache (2.1.0)
@@ -25,7 +25,7 @@ DEPENDENCIES:
   - TMCache
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - HappyDNS
     - MASPreferences
@@ -35,10 +35,10 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   HappyDNS: dc6a164ee81979093123c241c6353bcf0218add6
-  MASPreferences: 7bdcfe891d7840453cf48f95fa866c3e152ace7a
+  MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
   Qiniu: 65384bca1cdb0480a68d9b9b8f54db53418c0355
   TMCache: 95ebcc9b3c7e90fb5fd8fc3036cba3aa781c9bed
 
 PODFILE CHECKSUM: 118dcfb5abd42130dde389f59bb2b387ee43dbb4
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.8.4

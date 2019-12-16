@@ -11,7 +11,7 @@ import Cocoa
 class ImageService: NSObject {
     static let shared = ImageService()
     public func uploadImg(_ pboard: NSPasteboard) {
-        let files: NSArray? = pboard.propertyList(forType: NSFilenamesPboardType) as? NSArray
+        let files: NSArray? = pboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray
         var data : Data?
         statusItem.button?.image = NSImage(named: "loading-\(0)")
         statusItem.button?.image?.isTemplate = true
@@ -25,9 +25,10 @@ class ImageService: NSObject {
             guard let type = pboard.pasteboardItems?.first?.types.first else {
                 return
             }
-            guard ["public.tiff","public.png"].contains(type) else {
-                return
-            }
+            
+//            guard ["public.tiff","public.png"].contains(type as! String) else {
+//                return
+//            }
             data = (pboard.pasteboardItems?.first?.data(forType: type))
             guard let _ = NSImage(data: data!) else {
                 return
@@ -36,7 +37,9 @@ class ImageService: NSObject {
         //进行格式转换
         if data?.imageFormat == .unknown {
             let imageRep = NSBitmapImageRep(data: data!)
-            data = (imageRep?.representation(using: .PNG, properties: ["":""]))!
+            
+            data = imageRep?.representation(using: .png, properties: [NSBitmapImageRep.PropertyKey.compressionMethod: ""])
+//            data = (imageRep?.representation(using: .PNG, properties: ["":""]))!
         }
         
         if AppCache.shared.appConfig.useDefServer{
